@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <h1 class="text-red-500">Hello world</h1>
+  <h1>Landing Page</h1>
 </template>
 
 <style scoped>

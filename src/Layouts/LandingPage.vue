@@ -1,9 +1,51 @@
 <script setup lang="ts">
-
+ import LandingPageNavBarVue from "../components/LandingPageNavBar.vue";
 </script>
 
 <template>
-  <h1>Landing Page</h1>
+  <LandingPageNavBarVue/>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+
+  <div>hi</div><div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+  <div>hi</div>
+
+
+
+
+
+  <div>hi</div>
 </template>
 
 <style scoped>

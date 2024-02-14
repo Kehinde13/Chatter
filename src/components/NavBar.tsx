@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function NavBar() {
   return (
     <nav className="sticky top-0 z-50 ">
@@ -10,18 +12,18 @@ function NavBar() {
           <p>Blogs</p>
         </div>
         <div className="flex justify-between md:gap-10 gap-3 md:font-bold">
-          <button
+          <Link to="LoginPage"
             className="md:py-2 md:px-10 p-1 border border-blue-500 rounded-md
                              hover:bg-blue-500 hover:text-white"
           >
             Log in
-          </button>
-          <button
+          </Link >
+          <Link to="SignUp"
             className="md:py-2 md:px-10 p-1 bg-blue-500 rounded-md text-white
                              hover:bg-white border border-blue-500 hover:text-black"
           >
             Sign up
-          </button>
+          </Link>
         </div>
       </div>
     </nav>

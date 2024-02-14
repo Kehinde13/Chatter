@@ -11,6 +11,11 @@ nav{
   background-size: cover;
 }
 
+.Auth {
+  background-image: url('./assets/AuthImg.png');
+  
+}
+
 .header-overlay {
   background: rgba(0, 0, 0, 0.4);
   height: 100%;

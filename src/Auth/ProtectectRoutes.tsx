@@ -1,7 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
 
+type Props = {
+    isLoggedIn: boolean;
+}
 
-const ProtectedRoutes = ({isLoggedIn}) => {
+const ProtectedRoutes = ({isLoggedIn}: Props) => {
   return isLoggedIn ? <Outlet /> : <Navigate to={'/LoginPage'} />;
 };
 

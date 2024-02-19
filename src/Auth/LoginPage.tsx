@@ -6,7 +6,8 @@ import { database } from "./firebase";
 function LoginPage() {
   const history = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    
     e.preventDefault();
     //gets user email and password from the input
     const email = e.target.userEmail.value;
@@ -55,7 +56,7 @@ function LoginPage() {
           </div>
           <h1 className="text-3xl font-bold text-center">Welcome Back</h1>
           <form action=""
-           onSubmit={e => handleSubmit(e)}
+           onSubmit={handleSubmit}
           >
             <div className="my-5">
               <div>

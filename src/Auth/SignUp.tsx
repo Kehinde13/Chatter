@@ -1,31 +1,40 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { database } from "./firebase";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
+import { database, provider } from "./firebase";
+import { useState } from "react";
+
 
 function SignUp() {
+  const [userEmail, setUserEmail] = useState<string>("")
+  const [userPassword, setUserPassword] = useState<string>("")
 
   const history = useNavigate()
  
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     alert('hey');
     
     e.preventDefault();
     //gets user email and password from the input
-    const email = e.target.userEmail.value;
-    const password = e.target.password.value;
+    const email = userEmail;
+    const password = userPassword;
     
-    
-
     //Creates a new user account associated with the specified email address and password.
     createUserWithEmailAndPassword(database, email, password).then(() => {
       alert('Signed up Successfully')
+      history('/HomePage')
     }).catch((err)=> {
         alert(err.code)
-    }).finally(() => {
+    })
+  };
+
+  function SignUpwithGoogle(){
+    const auth = getAuth()
+    signInWithRedirect(auth, provider).then(() => {
+      alert('Signed up Successfully')
       history('/HomePage')
     });
-  };
+  }
 
 
   return (
@@ -76,6 +85,8 @@ function SignUp() {
                   id="firstName"
                   className="border border-gray-300 py-2 px-2 rounded-md w-full"
                   placeholder="John"
+                  value={userEmail}
+                  onChange={(e) => setUserEmail(e.target.value)}
                 />
               </div>
               <div>

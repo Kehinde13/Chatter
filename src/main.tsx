@@ -5,6 +5,7 @@ import './index.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faAngleLeft, faXmark, faEnvelope} from '@fortawesome/free-solid-svg-icons'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
+import Context from './Context/Context.tsx'
 
 
 
@@ -12,6 +13,8 @@ library.add(faAngleLeft, faXmark, faGoogle, faEnvelope)
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <Context>
+     <App />
+    </Context>
   </React.StrictMode>,
 )

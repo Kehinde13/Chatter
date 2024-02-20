@@ -7,11 +7,12 @@ import AuthLayout from "./Auth/AuthLayout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPages from "./Pages/ErrorPage";
 import HomePage from "./Pages/HomePage";
+import { Blog } from "./Context/Context";
 
-import { useState } from "react";
+
 
 function App() {
-  const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
+  const { currentUser } = Blog();
 
   const router = createBrowserRouter([
     {
@@ -20,7 +21,7 @@ function App() {
       errorElement: <ErrorPages />
     },
     {
-      element: <ProtectedRoutes isLoggedIn={isLoggedIn} />,
+      element: <ProtectedRoutes currentUser={currentUser} />,
       errorElement: <ErrorPages />,
       children: [
         {

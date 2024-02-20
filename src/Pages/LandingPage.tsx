@@ -9,6 +9,7 @@ import AuthModal from '../Auth/AuthModal'
 
 function LandingPage() {
   const [modal, setModal] = useState<boolean>(false)
+  const [modalText, setModalText] = useState<string>("")
 
   useEffect(() => {
    if(modal){
@@ -19,8 +20,8 @@ function LandingPage() {
   }, [modal])
   return (
     <div>
-        <AuthModal modal={modal} setModal={setModal}/>
-        <NavBar modal={modal} setModal={setModal}/>
+        <AuthModal modal={modal} setModal={setModal} text={modalText}/>
+        <NavBar modal={modal} setModal={setModal} setModalText={setModalText}/>
         <Header />
         <AboutUs />
         <WhyChatter />

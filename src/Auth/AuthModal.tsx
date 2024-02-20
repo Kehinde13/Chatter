@@ -1,11 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 type Props = {
   modal: boolean;
   setModal: (modal: boolean) => boolean;
+  text: string;
 };
 
-function AuthModal({ modal, setModal }: Props) {
+function AuthModal({ modal, setModal, text }: Props) {
   return (
     <>
       {modal && (
@@ -22,14 +24,15 @@ function AuthModal({ modal, setModal }: Props) {
               <FontAwesomeIcon 
               className="text-red-500 mr-5"
               icon="fa-brands fa-google" />
-              Sign in with Google
+              {text} with Google
             </button>
-            <button className="border border-blue-500 py-2 px-5 md:w-[50%] mx-auto rounded-md">
+            <Link to={text === 'Sign Up' ? "SignUp" : "LoginPage"}
+            className="border border-blue-500 py-2 px-5 md:w-[50%] mx-auto rounded-md text-center">
               <FontAwesomeIcon 
               className="text-blue-500 mr-5"
               icon="fa-solid fa-envelope" />
-              Sign in with Email
-            </button>
+              {text} with Email
+            </Link>
           </div>
           </div>
         </div>

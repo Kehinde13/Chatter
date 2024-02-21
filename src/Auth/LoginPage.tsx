@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { database } from "./firebase";
 
 function LoginPage() {
   const history = useNavigate()
@@ -9,18 +8,7 @@ function LoginPage() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     
     e.preventDefault();
-    //gets user email and password from the input
-    const email = e.target.userEmail.value;
-    const password = e.target.password.value;
-
-    //Asynchronously signs in using an email and password. "fails if user is not in the database"
-    signInWithEmailAndPassword(database, email, password)
-      .then(() => {
-        history("/HomePage");
-      })
-      .catch((err) => {
-        alert(err.code);
-      })
+    
   };
   return (
     <div className="h-screen">

@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
-import { database, provider } from "./firebase";
+import { createUserWithEmailAndPassword, getAuth, signInWithRedirect } from "firebase/auth";
+import { provider } from "./firebase";
 import { useState } from "react";
 
 

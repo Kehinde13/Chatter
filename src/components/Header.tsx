@@ -1,6 +1,16 @@
-import React from "react";
+import { collection, getDoc, getDocs } from "firebase/firestore";
+import React, { useEffect } from "react";
+import { db } from "../Auth/firebase";
 
 function Header() {
+
+  useEffect(()  => {
+    const getData = async () => {
+      const querySnapshot = await getDocs(collection(db, "users"))
+      console.log(querySnapshot);
+    }
+    getData()
+  }, [])
   return (
     <div className="">
       <div className="header bg-no-repeat bg-contain h-screen">

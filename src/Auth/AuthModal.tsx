@@ -1,5 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { signInWithPopup } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { auth, db, provider } from "./firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 type Props = {
   modal: boolean;
@@ -8,6 +12,38 @@ type Props = {
 };
 
 function AuthModal({ modal, setModal, text }: Props) {
+
+  const navigate = useNavigate();
+  
+  const googleAuth = async () => {
+    try {
+      const createUser = await signInWithPopup(auth, provider);
+      const newUser = createUser.user;
+      
+      const ref = doc(db, "users", newUser.uid);
+      
+      const userDoc = await getDoc(ref); 
+    
+      
+      if (!userDoc.exists()) {
+        await setDoc(ref, {
+          userId: newUser.uid,
+          username: newUser.displayName,
+          email: newUser.email,
+          userImg: newUser.photoURL,
+          bio: "",
+        });
+        console.log(userDoc);
+        
+      }
+      navigate("/HomePage");
+      toast.success("User have been Signed in");
+      setModal(!modal);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
     <>
       {modal && (
@@ -20,7 +56,9 @@ function AuthModal({ modal, setModal, text }: Props) {
             />
           </button>
           <div className="flex flex-col gap-5">
-            <button className="border border-red-500 py-2 px-5 md:w-[50%] mx-auto rounded-md">
+            <button 
+              onClick={googleAuth}
+              className="border border-red-500 py-2 px-5 md:w-[50%] mx-auto rounded-md">
               <FontAwesomeIcon 
               className="text-red-500 mr-5"
               icon="fa-brands fa-google" />

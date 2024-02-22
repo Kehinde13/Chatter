@@ -6,7 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faAngleLeft, faXmark, faEnvelope} from '@fortawesome/free-solid-svg-icons'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import Context from './Context/Context.tsx'
-
+import "react-toastify/dist/ReactToastify.css";
 
 
 library.add(faAngleLeft, faXmark, faGoogle, faEnvelope)

@@ -1,13 +1,37 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { auth } from "./firebase";
 
 function LoginPage() {
-  const history = useNavigate()
+  const navigate = useNavigate()
+  const [form, setForm] = useState({
+    userEmail: "",
+    password: ""
+  })
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({...form, [e.target.name]: e.target.value})
+    console.log(form);
     
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => { 
     e.preventDefault();
+
+    if(form[("userEmail", "password")] === ""){
+      toast.error("Input email and password")
+    }
+
+    try{
+      await signInWithEmailAndPassword(auth, form.userEmail, form.password);
+      navigate("/HomePage");
+      toast.success("User has been logged in")
+    } catch(error: unknown){
+      toast.error(error.message)
+    }
     
   };
   return (
@@ -55,6 +79,7 @@ function LoginPage() {
                   id="userEmail"
                   placeholder="johndoe@gmail.com"
                   className=" border border-gray-300 w-full py-2 rounded-md p-2"
+                  onChange={handleChange}
                 />
               </div>
               <div className="my-5">
@@ -65,6 +90,7 @@ function LoginPage() {
                   id="password"
                   placeholder="**********"
                   className=" border border-gray-300 w-full py-2 rounded-md p-2"
+                  onChange={handleChange}
                 />
               </div>
               <button className="bold md:py-2 md:px-10 p-1 bg-blue-500 rounded-md w-full text-white">
@@ -72,12 +98,6 @@ function LoginPage() {
               </button>
             </div>
           </form>
-          <button
-            className="bold md:py-2 md:px-10 p-1 my-2 border border-gray-300 rounded-md 
-                  w-full hover:bg-blue-500 hover:text-white"
-          >
-            Sign in with google
-          </button>
         </div>
       </div>
     </div>

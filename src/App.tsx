@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPages from "./Pages/ErrorPage";
 import HomePage from "./Pages/HomePage";
 import { Blog } from "./Context/Context";
+import { ToastContainer } from "react-toastify";
 
 
 
@@ -50,7 +51,13 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+       <RouterProvider router={router}  />
+       <ToastContainer />
+    </>
+  ) ;
+  
 }
 
 export default App;

@@ -1,40 +1,62 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { createUserWithEmailAndPassword, getAuth, signInWithRedirect } from "firebase/auth";
-import { provider } from "./firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "./firebase";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+
+
 
 
 function SignUp() {
-  const [userEmail, setUserEmail] = useState<string>("")
-  const [userPassword, setUserPassword] = useState<string>("")
+  const navigate = useNavigate()
+  const [form, setForm] = useState<object>({
+     firstName: "",
+     lastName: "",
+     Email: "",
+     password: "",
+     confirmPassword: "",
+  })
 
-  const history = useNavigate()
- 
-  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
-    alert('hey');
-    
-    e.preventDefault();
-    //gets user email and password from the input
-    const email = userEmail;
-    const password = userPassword;
-    
-    //Creates a new user account associated with the specified email address and password.
-    createUserWithEmailAndPassword(database, email, password).then(() => {
-      alert('Signed up Successfully')
-      history('/HomePage')
-    }).catch((err)=> {
-        alert(err.code)
-    })
-  };
-
-  function SignUpwithGoogle(){
-    const auth = getAuth()
-    signInWithRedirect(auth, provider).then(() => {
-      alert('Signed up Successfully')
-      history('/HomePage')
-    });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({...form, [e.target.name]: e.target.value})
   }
+
+  
+  const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    if(form[("firstName", "lastName", "Email", "password", "confirmPassword")] === ""){
+      toast.error("All fields are required");
+    } else if(form["password"] !== form["confirmPassword"]) {
+      toast.error("your passwords does not Match")
+      return
+    } else {
+      try {
+        const { user } = await createUserWithEmailAndPassword(auth, form.Email, form.password)
+        const docRef = doc(db, "users", user.uid);
+        
+        const userDoc = await getDoc(docRef); 
+      
+        if (!userDoc.exists()) {
+          await setDoc(docRef, {
+            userId: user.uid,
+            username: form.firstName,
+            email: form.Email,
+            userImg: "",
+            bio: "",
+          });
+          toast.success("Sign Up Succesfull");
+          navigate("/HomePage");
+        }
+      } catch (error: unknown) {
+        toast.error(error.message);
+      }
+    }
+  }
+ 
+ 
+
 
 
   return (
@@ -74,7 +96,7 @@ function SignUp() {
           </div>
           <h1 className="text-3xl font-bold">Register as a Writer/Reader</h1>
           <form action=""
-          onSubmit={(e) => handleSubmit(e)}
+          onSubmit={handleSubmit}
           >
             <div className="md:flex gap-2 my-5">
               <div>
@@ -85,8 +107,7 @@ function SignUp() {
                   id="firstName"
                   className="border border-gray-300 py-2 px-2 rounded-md w-full"
                   placeholder="John"
-                  value={userEmail}
-                  onChange={(e) => setUserEmail(e.target.value)}
+                  onChange={handleChange}
                 />
               </div>
               <div>
@@ -97,6 +118,7 @@ function SignUp() {
                   id="lastName"
                   className="border border-gray-300 p-2 rounded-md w-full"
                   placeholder="Doe"
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -115,9 +137,10 @@ function SignUp() {
               <label htmlFor="">Email Address</label> <br />
               <input
                 type="email"
-                name="userEmail"
-                id="userEmail"
+                name="Email"
+                id="Email"
                 placeholder="johndoe@gmail.com"
+                onChange={handleChange}
                 className=" border border-gray-300 w-full py-2 rounded-md p-2"
               />
             </div>
@@ -128,6 +151,7 @@ function SignUp() {
                 name="password"
                 id="password"
                 placeholder="**********"
+                onChange={handleChange}
                 className=" border border-gray-300 w-full py-2 rounded-md p-2"
               />
             </div>
@@ -138,6 +162,7 @@ function SignUp() {
                 name="confirmPassword"
                 id="confirmPassword"
                 placeholder="**********"
+                onChange={handleChange}
                 className=" border border-gray-300 w-full py-2 rounded-md p-2"
               />
             </div>

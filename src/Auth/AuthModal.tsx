@@ -20,26 +20,24 @@ function AuthModal({ modal, setModal, text }: Props) {
       const createUser = await signInWithPopup(auth, provider);
       const newUser = createUser.user;
       
-      const ref = doc(db, "users", newUser.uid);
+      const docRef = doc(db, "users", newUser.uid);
       
-      const userDoc = await getDoc(ref); 
+      const userDoc = await getDoc(docRef); 
     
       
       if (!userDoc.exists()) {
-        await setDoc(ref, {
+        await setDoc(docRef, {
           userId: newUser.uid,
           username: newUser.displayName,
           email: newUser.email,
           userImg: newUser.photoURL,
           bio: "",
         });
-        console.log(userDoc);
-        
       }
-      navigate("/HomePage");
-      toast.success("User have been Signed in");
       setModal(!modal);
-    } catch (error) {
+      toast.success("User have been Signed in");
+      navigate("/HomePage"); 
+    } catch (error: unknown) {
       toast.error(error.message);
     }
   };

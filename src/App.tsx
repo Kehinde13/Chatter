@@ -11,7 +11,6 @@ import { Blog } from "./Context/Context";
 import { ToastContainer } from "react-toastify";
 
 
-const Fallback = () => <div className="loader"></div>
 
 function App() {
   const { currentUser } = Blog();

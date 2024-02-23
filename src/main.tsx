@@ -8,14 +8,32 @@ import {
   faXmark, 
   faEnvelope,
   faMagnifyingGlass,
-  faBell
+  faBell,
+  faBookBookmark,
+  faHouseChimneyUser,
+  faPeopleGroup,
+  faEnvelopeOpen, 
+  faChartLine,
+  faUser
 } from '@fortawesome/free-solid-svg-icons'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import Context from './Context/Context.tsx'
 import "react-toastify/dist/ReactToastify.css";
 
 
-library.add(faAngleLeft, faXmark, faGoogle, faEnvelope, faMagnifyingGlass, faBell)
+library.add(
+  faAngleLeft, 
+  faXmark, 
+  faGoogle, 
+  faEnvelope, 
+  faMagnifyingGlass, 
+  faBell,
+  faBookBookmark,
+  faHouseChimneyUser,
+  faPeopleGroup,
+  faEnvelopeOpen, 
+  faChartLine,
+  faUser)
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

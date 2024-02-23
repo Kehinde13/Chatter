@@ -10,7 +10,7 @@ type Props = {
 }
 
 function Context({children}: Props) {
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState<object | boolean>(false)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -18,7 +18,7 @@ function Context({children}: Props) {
         if(user) {
             setCurrentUser(user)
         } else {
-            setCurrentUser(null)
+            setCurrentUser(false)
         }
         setLoading(false)
     });

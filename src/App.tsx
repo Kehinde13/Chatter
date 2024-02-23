@@ -6,11 +6,12 @@ import AuthLayout from "./Auth/AuthLayout";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPages from "./Pages/ErrorPage";
-import HomePage from "./Pages/HomePage";
+import HomePage from "./Pages/HomePage/HomePage";
 import { Blog } from "./Context/Context";
 import { ToastContainer } from "react-toastify";
 
 
+const Fallback = () => <div className="loader"></div>
 
 function App() {
   const { currentUser } = Blog();

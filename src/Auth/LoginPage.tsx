@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { auth } from "./firebase";
+import Loading from "../components/Loading";
 
 function LoginPage() {
   const navigate = useNavigate()
@@ -11,32 +12,41 @@ function LoginPage() {
     userEmail: "",
     password: ""
   })
+  const [loading, setLoading] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({...form, [e.target.name]: e.target.value})
-    console.log(form);
-    
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => { 
     e.preventDefault();
+    setLoading(true)
 
     if(form[("userEmail", "password")] === ""){
       toast.error("Input email and password")
+      setLoading(false)
     }
 
     try{
       await signInWithEmailAndPassword(auth, form.userEmail, form.password);
       navigate("/HomePage");
       toast.success("User has been logged in")
+      setLoading(false)
     } catch(error: unknown){
       toast.error(error.message)
+      setLoading(false)
     }
     
   };
   return (
     <div className="h-screen">
-      <Link to="/" className="text-white md:text-black absolute m-5 font-bold">
+      {
+        loading ?
+        <Loading />
+        :
+       (
+       <div className="h-screen">
+        <Link to="/" className="text-white md:text-black absolute m-5 font-bold">
         <FontAwesomeIcon icon="fa-solid fa-angle-left" className="mx-2" />
         Back
       </Link>
@@ -93,13 +103,17 @@ function LoginPage() {
                   onChange={handleChange}
                 />
               </div>
-              <button className="bold md:py-2 md:px-10 p-1 bg-blue-500 rounded-md w-full text-white">
+              <button 
+              className={`bold md:py-2 md:px-10 p-1 bg-blue-500 rounded-md w-full text-white`}>
                 Login
               </button>
             </div>
           </form>
         </div>
       </div>
+      </div>
+       )
+      }
     </div>
   );
 }

@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, db, provider } from "./firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
+import { useState } from "react";
+import Loading from "../components/Loading";
 
 type Props = {
   modal: boolean;
@@ -12,10 +14,12 @@ type Props = {
 };
 
 function AuthModal({ modal, setModal, text }: Props) {
+  const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate();
   
   const googleAuth = async () => {
+    setLoading(true)
     try {
       const createUser = await signInWithPopup(auth, provider);
       const newUser = createUser.user;
@@ -34,11 +38,13 @@ function AuthModal({ modal, setModal, text }: Props) {
           bio: "",
         });
       }
+      setLoading(false)
       setModal(!modal);
       toast.success("User have been Signed in");
       navigate("/HomePage"); 
     } catch (error: unknown) {
       toast.error(error.message);
+      setLoading(false)
     }
   };
 
@@ -46,6 +52,9 @@ function AuthModal({ modal, setModal, text }: Props) {
     <>
       {modal && (
         <div className="AuthModal transition-all duration-500">
+         {
+          loading ?
+          <Loading /> :
           <div className="relative w-[80%] md:w-[50%] py-10 mx-auto mt-20 bg-white rounded-md border border-black">
           <button className="absolute top-3 right-5">
             <FontAwesomeIcon
@@ -71,6 +80,7 @@ function AuthModal({ modal, setModal, text }: Props) {
             </Link>
           </div>
           </div>
+         }
         </div>
       )}
     </>

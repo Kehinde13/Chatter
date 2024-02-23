@@ -5,39 +5,49 @@ import { auth, db } from "./firebase";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-
-
-
+import Loading from "../components/Loading";
 
 function SignUp() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState<object>({
-     firstName: "",
-     lastName: "",
-     Email: "",
-     password: "",
-     confirmPassword: "",
-  })
+    firstName: "",
+    lastName: "",
+    Email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({...form, [e.target.name]: e.target.value})
-  }
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-  
   const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    if(form[("firstName", "lastName", "Email", "password", "confirmPassword")] === ""){
+    e.preventDefault();
+    setLoading(true);
+
+    if (
+      form[
+        ("firstName", "lastName", "Email", "password", "confirmPassword")
+      ] === ""
+    ) {
       toast.error("All fields are required");
-    } else if(form["password"] !== form["confirmPassword"]) {
-      toast.error("your passwords does not Match")
-      return
+      setLoading(false);
+    } else if (form["password"] !== form["confirmPassword"]) {
+      toast.error("your passwords does not Match");
+      setLoading(false);
+      return;
     } else {
       try {
-        const { user } = await createUserWithEmailAndPassword(auth, form.Email, form.password)
+        const { user } = await createUserWithEmailAndPassword(
+          auth,
+          form.Email,
+          form.password
+        );
         const docRef = doc(db, "users", user.uid);
-        
-        const userDoc = await getDoc(docRef); 
-      
+
+        const userDoc = await getDoc(docRef);
+
         if (!userDoc.exists()) {
           await setDoc(docRef, {
             userId: user.uid,
@@ -48,130 +58,136 @@ function SignUp() {
           });
           toast.success("Sign Up Succesfull");
           navigate("/HomePage");
+          setLoading(false);
         }
       } catch (error: unknown) {
         toast.error(error.message);
       }
     }
-  }
- 
- 
-
-
+  };
 
   return (
     <div className="h-screen">
-      <Link to="/" className="text-white md:text-black absolute m-5 font-bold">
-        <FontAwesomeIcon icon="fa-solid fa-angle-left" className="mx-2" />
-        Back
-      </Link>
-      <div className="md:flex gap-20 md:my-2 md:w-[70%] md:mx-auto">
-        <div className="Auth bg-no-repeat bg-cover bg-center bg-blend-multiply h-screen w-full">
-          <div className="header-overlay ">
-            <div className="w-[80%] text-white mx-auto">
-              <h1 className="font-bold text-3xl pt-56 text-center pb-5">
-                CHATTER
-              </h1>
-              <p>
-                Unleash the Power of Words, Connect with Like-minded Readers and
-                Writers
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="w-[80%] mx-auto">
-          <div className="flex justify-between border-b-2 border-transparent pb-3 mb-3 w-full">
-            <Link
-              to="/SignUp"
-              className=" border-b-[3px] border-blue-500 w-[50%] pb-5"
-            >
-              REGISTER
-            </Link>
-            <Link
-              to="/LoginPage"
-              className=" border-b-[3px] w-[50%] pb-5 text-right"
-            >
-              LOGIN
-            </Link>
-          </div>
-          <h1 className="text-3xl font-bold">Register as a Writer/Reader</h1>
-          <form action=""
-          onSubmit={handleSubmit}
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Link
+            to="/"
+            className="text-white md:text-black absolute m-5 font-bold"
           >
-            <div className="md:flex gap-2 my-5">
-              <div>
-                <label htmlFor="">First Name</label> <br />
-                <input
-                  type="text"
-                  name="firstName"
-                  id="firstName"
-                  className="border border-gray-300 py-2 px-2 rounded-md w-full"
-                  placeholder="John"
-                  onChange={handleChange}
-                />
-              </div>
-              <div>
-                <label htmlFor="">Last Name</label> <br />
-                <input
-                  type="text"
-                  name="lastName"
-                  id="lastName"
-                  className="border border-gray-300 p-2 rounded-md w-full"
-                  placeholder="Doe"
-                  onChange={handleChange}
-                />
+            <FontAwesomeIcon icon="fa-solid fa-angle-left" className="mx-2" />
+            Back
+          </Link>
+          <div className="md:flex gap-20 md:my-2 md:w-[70%] md:mx-auto">
+            <div className="Auth bg-no-repeat bg-cover bg-center bg-blend-multiply h-screen w-full">
+              <div className="header-overlay ">
+                <div className="w-[80%] text-white mx-auto">
+                  <h1 className="font-bold text-3xl pt-56 text-center pb-5">
+                    CHATTER
+                  </h1>
+                  <p>
+                    Unleash the Power of Words, Connect with Like-minded Readers
+                    and Writers
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="my-5">
-              <label htmlFor="">You are joining as?</label> <br />
-              <select
-                name="user"
-                id="user"
-                className=" border border-gray-300 w-full py-2 rounded-md"
-              >
-                <option value="writer">writer</option>
-                <option value="reader">reader</option>
-              </select>
+            <div className="w-[80%] mx-auto">
+              <div className="flex justify-between border-b-2 border-transparent pb-3 mb-3 w-full">
+                <Link
+                  to="/SignUp"
+                  className=" border-b-[3px] border-blue-500 w-[50%] pb-5"
+                >
+                  REGISTER
+                </Link>
+                <Link
+                  to="/LoginPage"
+                  className=" border-b-[3px] w-[50%] pb-5 text-right"
+                >
+                  LOGIN
+                </Link>
+              </div>
+              <h1 className="text-3xl font-bold">
+                Register as a Writer/Reader
+              </h1>
+              <form action="" onSubmit={handleSubmit}>
+                <div className="md:flex gap-2 my-5">
+                  <div>
+                    <label htmlFor="">First Name</label> <br />
+                    <input
+                      type="text"
+                      name="firstName"
+                      id="firstName"
+                      className="border border-gray-300 py-2 px-2 rounded-md w-full"
+                      placeholder="John"
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="">Last Name</label> <br />
+                    <input
+                      type="text"
+                      name="lastName"
+                      id="lastName"
+                      className="border border-gray-300 p-2 rounded-md w-full"
+                      placeholder="Doe"
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+                <div className="my-5">
+                  <label htmlFor="">You are joining as?</label> <br />
+                  <select
+                    name="user"
+                    id="user"
+                    className=" border border-gray-300 w-full py-2 rounded-md"
+                  >
+                    <option value="writer">writer</option>
+                    <option value="reader">reader</option>
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="">Email Address</label> <br />
+                  <input
+                    type="email"
+                    name="Email"
+                    id="Email"
+                    placeholder="johndoe@gmail.com"
+                    onChange={handleChange}
+                    className=" border border-gray-300 w-full py-2 rounded-md p-2"
+                  />
+                </div>
+                <div className="my-5">
+                  <label htmlFor="">Password</label> <br />
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="**********"
+                    onChange={handleChange}
+                    className=" border border-gray-300 w-full py-2 rounded-md p-2"
+                  />
+                </div>
+                <div className="my-5">
+                  <label htmlFor="">confirm Password</label> <br />
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    id="confirmPassword"
+                    placeholder="**********"
+                    onChange={handleChange}
+                    className=" border border-gray-300 w-full py-2 rounded-md p-2"
+                  />
+                </div>
+                <button className="bold md:py-2 md:px-10 p-1 bg-blue-500 rounded-md w-full text-white">
+                  Sign Up
+                </button>
+              </form>
             </div>
-            <div>
-              <label htmlFor="">Email Address</label> <br />
-              <input
-                type="email"
-                name="Email"
-                id="Email"
-                placeholder="johndoe@gmail.com"
-                onChange={handleChange}
-                className=" border border-gray-300 w-full py-2 rounded-md p-2"
-              />
-            </div>
-            <div className="my-5">
-              <label htmlFor="">Password</label> <br />
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="**********"
-                onChange={handleChange}
-                className=" border border-gray-300 w-full py-2 rounded-md p-2"
-              />
-            </div>
-            <div className="my-5">
-              <label htmlFor="">confirm Password</label> <br />
-              <input
-                type="password"
-                name="confirmPassword"
-                id="confirmPassword"
-                placeholder="**********"
-                onChange={handleChange}
-                className=" border border-gray-300 w-full py-2 rounded-md p-2"
-              />
-            </div>
-            <button className="bold md:py-2 md:px-10 p-1 bg-blue-500 rounded-md w-full text-white">
-              Sign Up
-            </button>
-          </form>
-        </div>
-      </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

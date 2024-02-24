@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom'
 
 function ErrorPages() {
   return (
-    <div className="w-full mx-auto mt-10">
+    <div className="w-full mx-auto pt-10 h-screen dark:bg-slate-800 dark:text-white">
     <div className="text-center">
-      <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-4">
+      <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-4 dark:text-white">
         &#128531;Oops! Page not found.
       </h1>
       <p className="text-xl md:text-2xl text-white mb-8">

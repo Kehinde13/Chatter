@@ -19,7 +19,7 @@ function LandingPage() {
    }
   }, [modal])
   return (
-    <div>
+    <div className='dark:bg-slate-800 dark:text-white'>
         <AuthModal modal={modal} setModal={setModal} text={modalText}/>
         <NavBar modal={modal} setModal={setModal} setModalText={setModalText}/>
         <Header />

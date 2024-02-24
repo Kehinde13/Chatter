@@ -5,6 +5,7 @@ import './index.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { 
   faAngleLeft, 
+  faAngleRight,
   faXmark, 
   faEnvelope,
   faMagnifyingGlass,
@@ -14,7 +15,7 @@ import {
   faPeopleGroup,
   faEnvelopeOpen, 
   faChartLine,
-  faUser
+  faUser,
 } from '@fortawesome/free-solid-svg-icons'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import Context from './Context/Context.tsx'
@@ -23,6 +24,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 library.add(
   faAngleLeft, 
+  faAngleRight,
   faXmark, 
   faGoogle, 
   faEnvelope, 

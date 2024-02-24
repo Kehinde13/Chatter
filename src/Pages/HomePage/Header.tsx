@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import profileImg from "../../assets/profile.jpg";
 import { useState } from "react";
+import logo from '../../assets/CHATTER.png'
 
 function Header() {
   const [searchBar, setSearchBar] = useState(false);
@@ -9,21 +10,19 @@ function Header() {
     setSearchBar(!searchBar);
   };
 
-
   return (
     <header>
-      <div className="flex gap-2 justify-between mx-3 md:mx-5 items-center h-[70px] shadow-inner">
-        <div>
-          <h1
-            className={`md:text-3xl font-bold text-blue-500 tracking-widest
-                        ${searchBar ? "text-xs" : "text-xl"}`}
-          >
-            CHATTER
-          </h1>
-        </div>
+      <div className="flex gap-2 justify-between mx-3 md:mx-5 items-center h-[70px] h-shadow-lg">
+        
+          <img
+           src={logo}
+            className={`${searchBar ? "w-[80px]" : ""}`}
+          />
         <form
-          className={`sm:flex items-center gap-2 bg-gray-100 px-2 rounded-full relative z-10 sm:w-[400px]
-                  w-[80%] ${searchBar ? "flex" : "hidden"}`}
+          className={`sm:flex sm:mb-0 items-center gap-2 bg-gray-100 px-2 rounded-full relative z-10 sm:w-[400px]
+                      duration-300  ${
+                        searchBar ? "flex" : "mb-[200px]"
+                      }`}
         >
           <button className="text-xl text-gray-400">
             <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />

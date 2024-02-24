@@ -1,4 +1,4 @@
-
+import logo from "../assets/CHATTER.png";
 
 type Props = {
   modal: boolean;
@@ -7,23 +7,24 @@ type Props = {
 };
 
 function NavBar({ modal, setModal, setModalText }: Props) {
-
   const setSignUp = () => {
-    setModal(!modal)
-    setModalText("Sign Up")
-  }
+    setModal(!modal);
+    setModalText("Sign Up");
+  };
 
   const setLogin = () => {
-    setModal(!modal)
-    setModalText("Login")
-  }
+    setModal(!modal);
+    setModalText("Login");
+  };
 
   return (
-    <nav className=" top-0 z-30">
+    <nav className=" top-0 z-30 dark:bg-slate-800 dark:text-white">
       <div className="flex justify-between mx-3 md:mx-10 items-center h-[70px] shadow-inner">
-        <h1 className="md:text-3xl text-xl font-bold text-blue-500 tracking-widest">
-          CHATTER
-        </h1>
+        <img
+          src={logo}
+          alt="logo"
+          className="w-[80px] sm:w-[150px] self-center"
+        />
         <div className="md:flex gap-10 hidden font-bold">
           <p>Home</p>
           <p>About us</p>
@@ -33,15 +34,15 @@ function NavBar({ modal, setModal, setModalText }: Props) {
         <div className="flex justify-between md:gap-10 gap-3 md:font-bold">
           <button
             onClick={setLogin}
-            className="md:py-2 md:px-10 p-1 border border-blue-500 rounded-md
-                             hover:bg-blue-500 hover:text-white"
+            className="md:py-2 md:px-10 p-1 border border-purple-500 rounded-md
+                             hover:bg-purple-500 hover:text-white"
           >
             Log in
           </button>
           <button
             onClick={setSignUp}
-            className="md:py-2 md:px-10 p-1 bg-blue-500 rounded-md text-white
-                             hover:bg-white border border-blue-500 hover:text-black"
+            className="md:py-2 md:px-10 p-1 bg-purple-500 rounded-md text-white
+                       border-purple-500 hover:bg-transparent border "
           >
             Sign up
           </button>

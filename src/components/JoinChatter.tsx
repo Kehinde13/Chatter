@@ -19,7 +19,7 @@ function JoinChetter() {
             <span className="font-bold text-xl">Adebobola Muhydeen, </span> 
             Software developer at Apple
           </p>
-          <button className="bold md:py-2 md:px-10 p-1  bg-blue-500 rounded-md self-start text-white">
+          <button className="bold md:py-2 md:px-10 p-1  bg-purple-500 rounded-md self-start text-white">
             Join Chatter
           </button>
         </div>
@@ -35,7 +35,7 @@ function JoinChetter() {
             <p>
             Share people your great ideas, and also read write-ups based on your interests. connect with people of same interests and goals  
             </p>
-            <button className="bold md:py-2 md:px-10 p-1  bg-blue-500 rounded-md self-start text-white">
+            <button className="bold md:py-2 md:px-10 p-1  bg-purple-500 rounded-md self-start text-white">
             Join Chatter
           </button>
         </div>

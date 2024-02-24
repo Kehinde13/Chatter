@@ -67,7 +67,7 @@ function SignUp() {
   };
 
   return (
-    <div className="h-screen">
+    <div className="h-screen bg-white dark:bg-slate-800 dark:text-white">
       {loading ? (
         <Loading />
       ) : (
@@ -93,17 +93,17 @@ function SignUp() {
                 </div>
               </div>
             </div>
-            <div className="w-[80%] mx-auto">
+            <div className="sm:w-[80%] p-5 mx-auto dark:bg-slate-800 dark:text-white">
               <div className="flex justify-between border-b-2 border-transparent pb-3 mb-3 w-full">
                 <Link
                   to="/SignUp"
-                  className=" border-b-[3px] border-blue-500 w-[50%] pb-5"
+                  className=" border-b-[3px] border-blue-500 w-[50%] pb-3"
                 >
                   REGISTER
                 </Link>
                 <Link
                   to="/LoginPage"
-                  className=" border-b-[3px] w-[50%] pb-5 text-right"
+                  className=" border-b-[3px] w-[50%] pb-3 text-right"
                 >
                   LOGIN
                 </Link>
@@ -136,17 +136,7 @@ function SignUp() {
                     />
                   </div>
                 </div>
-                <div className="my-5">
-                  <label htmlFor="">You are joining as?</label> <br />
-                  <select
-                    name="user"
-                    id="user"
-                    className=" border border-gray-300 w-full py-2 rounded-md"
-                  >
-                    <option value="writer">writer</option>
-                    <option value="reader">reader</option>
-                  </select>
-                </div>
+  
                 <div>
                   <label htmlFor="">Email Address</label> <br />
                   <input
@@ -180,7 +170,7 @@ function SignUp() {
                     className=" border border-gray-300 w-full py-2 rounded-md p-2"
                   />
                 </div>
-                <button className="bold md:py-2 md:px-10 p-1 bg-blue-500 rounded-md w-full text-white">
+                <button className="bold md:py-2 md:px-10 mt-3 p-1 bg-blue-500 rounded-md w-full text-white">
                   Sign Up
                 </button>
               </form>

@@ -49,13 +49,13 @@ function AuthModal({ modal, setModal, text }: Props) {
   };
 
   return (
-    <>
+    < >
       {modal && (
         <div className="AuthModal transition-all duration-500">
          {
           loading ?
           <Loading /> :
-          <div className="relative w-[80%] md:w-[50%] py-10 mx-auto mt-20 bg-white rounded-md border border-black">
+          <div className="relative w-[80%] md:w-[50%] py-10 mx-auto mt-20 bg-white dark:bg-slate-800 text-white rounded-md border border-black">
           <button className="absolute top-3 right-5">
             <FontAwesomeIcon
               onClick={() => setModal(!modal)}

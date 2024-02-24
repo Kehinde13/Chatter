@@ -39,14 +39,14 @@ function LoginPage() {
     
   };
   return (
-    <div className="h-screen">
+    <div className="h-screen bg-white dark:bg-slate-800 dark:text-white">
       {
         loading ?
         <Loading />
         :
        (
-       <div className="h-screen">
-        <Link to="/" className="text-white md:text-black absolute m-5 font-bold">
+       <div>
+        <Link to="/" className="text-white md:text-black absolute p-5 font-bold">
         <FontAwesomeIcon icon="fa-solid fa-angle-left" className="mx-2" />
         Back
       </Link>
@@ -64,7 +64,7 @@ function LoginPage() {
             </div>
           </div>
         </div>
-        <div className="w-[80%] p-5 mx-auto">
+        <div className="sm:w-[80%] p-5 mx-auto sm:mt-20 dark:bg-slate-800 dark:text-white">
           <div className="flex justify-between border-b-2 border-transparent pb-3 mb-3 w-full">
             <Link to="/SignUp" className=" border-b-[3px]  w-[50%] pb-5">
               REGISTER

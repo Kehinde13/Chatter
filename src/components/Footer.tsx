@@ -1,10 +1,14 @@
+import logo from "../assets/CHATTER.png";
+
 function Footer() {
   return (
     <div className="w-full mt-10">
       <div className="bg-[#FFEDCC80] flex md:flex-row flex-col justify-around p-10 md:p-20">
-        <h1 className="md:text-3xl text-2xl font-bold text-blue-500 tracking-widest md:mt-10">
-          CHATTER
-        </h1>
+        <img
+          src={logo}
+          alt="logo"
+          className="w-[80px] sm:w-[150px] self-center "
+        />
         <div className="md:flex gap-20">
           <div>
             <h1 className="font-bold text-xl my-7">Explore</h1>

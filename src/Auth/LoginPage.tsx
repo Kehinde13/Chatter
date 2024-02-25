@@ -29,7 +29,7 @@ function LoginPage() {
 
     try{
       await signInWithEmailAndPassword(auth, form.userEmail, form.password);
-      navigate("/HomePage");
+      navigate("/HomePage/feed");
       toast.success("User has been logged in")
       setLoading(false)
     } catch(error: unknown){
@@ -39,14 +39,14 @@ function LoginPage() {
     
   };
   return (
-    <div className="h-screen bg-white dark:bg-slate-800 dark:text-white">
+    <div className="h-screen bg-white dark:bg-slate-800 dark:text-white ">
       {
         loading ?
         <Loading />
         :
        (
        <div>
-        <Link to="/" className="text-white md:text-black absolute p-5 font-bold">
+        <Link to="/" className="text-white md:text-black absolute p-5 font-bold dark:text-white">
         <FontAwesomeIcon icon="fa-solid fa-angle-left" className="mx-2" />
         Back
       </Link>

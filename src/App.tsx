@@ -9,6 +9,8 @@ import ErrorPages from "./Pages/ErrorPage";
 import HomePage from "./Pages/HomePage/HomePage";
 import { Blog } from "./Context/Context";
 import { ToastContainer } from "react-toastify";
+import ProfilePage from "./Pages/HomePage/Profile/ProfilePage";
+import Feed from "./Pages/HomePage/Feed";
 
 
 
@@ -28,7 +30,17 @@ function App() {
         {
           path: "HomePage",
           element: <HomePage />,
-        },
+          children: [
+            {
+              path: "feed",
+              element: <Feed />,
+            },
+            {
+              path: "profile/:userId",
+              element: <ProfilePage />
+            }
+          ]
+        }, 
       ],
     },
     {

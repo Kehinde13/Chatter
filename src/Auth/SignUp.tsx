@@ -57,7 +57,7 @@ function SignUp() {
             bio: "",
           });
           toast.success("Sign Up Succesfull");
-          navigate("/HomePage");
+          navigate("/HomePage/feed");
           setLoading(false);
         }
       } catch (error: unknown) {
@@ -74,7 +74,7 @@ function SignUp() {
         <>
           <Link
             to="/"
-            className="text-white md:text-black absolute m-5 font-bold"
+            className="text-white md:text-black absolute m-5 font-bold dark:text-white"
           >
             <FontAwesomeIcon icon="fa-solid fa-angle-left" className="mx-2" />
             Back

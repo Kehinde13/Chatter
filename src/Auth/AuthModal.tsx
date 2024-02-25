@@ -41,7 +41,7 @@ function AuthModal({ modal, setModal, text }: Props) {
       setLoading(false)
       setModal(!modal);
       toast.success("User have been Signed in");
-      navigate("/HomePage"); 
+      navigate("/HomePage/feed"); 
     } catch (error: unknown) {
       toast.error(error.message);
       setLoading(false)

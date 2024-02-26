@@ -1,15 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 
 import feed from "../../assets/ftxtoken.png";
 import trending from "../../assets/eva_trending-up-outline.png";
 import { Link } from "react-router-dom";
 import { Blog } from "../../Context/Context";
 
-function SideBar() {
-  const { currentUser } = Blog();
-  const [showSideBar, setShowSideBar] = useState<boolean>(false);
+type prop= {
+ showSideBar: boolean,
+ setShowSideBar: (showSideBar: boolean) => boolean
+}
 
+function SideBar({showSideBar, setShowSideBar}: prop) {
+  const { currentUser } = Blog();
+  
   const toggleSideBar = () => {
     setShowSideBar(!showSideBar);
   };
@@ -17,7 +20,7 @@ function SideBar() {
   return (
     <aside
       className={`sticky top-0 overflow-y-auto scrollbar-hidden pb-4 flex flex-col sm:ml-0 pr-10 border-r-2
-                       duration-500 ${showSideBar ? "ml-1" : "ml-[-178px]"}`}
+                   duration-500 ${showSideBar ? "ml-1 w-full" : "ml-[-178px] border-r-0"}`}
     >
       <button
         className="border w-8 py-1 absolute sm:hidden rounded-full right-[-10px] top-64"

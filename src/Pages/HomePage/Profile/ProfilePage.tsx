@@ -10,7 +10,7 @@ import EditProfileModal from "./EditProfileModal";
 
 function ProfilePage() {
   const { currentUser, users } = Blog();
-  const { userId } = useParams()
+  const { userId } = useParams();
   const [showSideBar] = useOutletContext();
   const panels = [
     {
@@ -29,23 +29,21 @@ function ProfilePage() {
   const [currentPanel, setCurrentPanel] = useState<object>(panels[0]);
   const [modal, setModal] = useState<boolean>(false);
 
-
-  const getUserData = users.find((user) => user.id === userId);
-  console.log(users);
+  const getUserData = users.find((user: object) => user.id === userId);
   
- 
+
   return (
     <div className={`p-5 sm:block ${showSideBar ? "hidden" : "block"}`}>
-      <EditProfileModal modal={modal} setModal={setModal}/>
+      <EditProfileModal modal={modal} setModal={setModal} getUserData={getUserData}/>
       <>
         <div className="flex gap-5">
           <img
             className="w-[80px] h-[80px] object-cover rounded-full self-center"
-            src={currentUser.photoURL ? currentUser.photoURL : profileImg}
+            src={getUserData?.userImg ? getUserData?.userImg : profileImg}
             alt="profile image"
           />
           <h1 className="text-3xl sm:text-5xl font-bold self-center capitalize">
-           {getUserData?.username}
+            {getUserData?.username}
           </h1>
         </div>
         <div className="flex self-center my-3 gap-5">
@@ -54,12 +52,13 @@ function ProfilePage() {
         </div>
         <div>
           <p className="self-center">
-            "{currentUser.bio ? currentUser.bio : "I'm a mysterious user"}"
+            "{getUserData?.bio ? getUserData?.bio : "I'm a mysterious user"}"
           </p>
         </div>
-        <button 
-        onClick={() => setModal(!modal)}
-        className="bg-purple-500 my-5 py-1 px-3 rounded-md text-white">
+        <button
+          onClick={() => setModal(!modal)}
+          className="bg-purple-500 my-5 py-1 px-3 rounded-md text-white"
+        >
           Edit Your profile
         </button>
       </>
@@ -77,7 +76,7 @@ function ProfilePage() {
           </div>
         ))}
       </div>
-      <currentPanel.component />
+      <currentPanel.component getUserData={getUserData} setModal={setModal} />
     </div>
   );
 }

@@ -1,21 +1,27 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import profilePhoto from "../../../assets/profile.jpg";
+import { toast } from "react-toastify";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { db, storage } from "../../../Auth/firebase";
+import { doc, updateDoc } from "firebase/firestore";
+import Loading from "../../../components/Loading";
 
 type prop = {
   modal: boolean;
   setModal: (modal: boolean) => boolean;
+  getUserData: object
 };
 
-function EditProfileModal({ modal, setModal }: prop) {
+function EditProfileModal({ modal, setModal, getUserData }: prop) {
   const imgRef = useRef(null);
   const [profileImgUrl, setProfileImgUrl] = useState<string>("");
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<object>({
     username: "",
     userImg: "",
     bio: "",
   });
-  const [loading, setLoading] = useState<string>(false)
+  const [loading, setLoading] = useState<boolean>(false)
 
   /* openFile works on the button because a ref has been set on the input and the click event refrences it*/
   const openFile = () => {
@@ -24,8 +30,40 @@ function EditProfileModal({ modal, setModal }: prop) {
 
   const btn = "border border-green-600 py-2 px-5 rounded-full text-green-600";
 
+
+  /* save form */
+  const saveForm = async () => {
+    if (form["username"] === "" && form["bio"] === "" && form["userImg"] === "" ) {
+      toast.error("All inputs are required!!!");
+      return;
+    }
+
+    setLoading(true);
+
+    const storageRef = ref(storage, `image/${form.userImg.name}`);
+    await uploadBytes(storageRef, form?.userImg);
+
+    const imageUrl = await getDownloadURL(storageRef);
+
+    try {
+      const docRef = doc(db, "users", getUserData?.userId);
+      await updateDoc(docRef, {
+        bio: form.bio,
+        username: form.username,
+        userImg: profileImgUrl ? imageUrl : form.userImg,
+        userId: getUserData?.userId,
+      });
+      setLoading(false);
+      setModal(false);
+      toast.success("Profile has been updated");
+    } catch (error: unknown) {
+      toast.error(error.message);
+    }
+  };
+
   return (
     <div>
+      {loading && <Loading />}
       {modal && (
         <div className="AuthModal transition-all duration-500 dark:bg-slate-800 dark:text-white">
           <div className="opacity-100 relative w-[80%] md:w-[50%] py-10 px-5 mx-auto mt-20 bg-white dark:bg-slate-800 dark:text-white rounded-md border ">
@@ -47,9 +85,9 @@ function EditProfileModal({ modal, setModal }: prop) {
                       src={
                         profileImgUrl
                           ? profileImgUrl
-                          : /* : form.userImg
-                          ? form.userImg */
-                            profilePhoto
+                          : form.userImg
+                          ? form.userImg 
+                          :  profilePhoto
                       }
                       alt="profile-img"
                     />
@@ -58,7 +96,7 @@ function EditProfileModal({ modal, setModal }: prop) {
                         setProfileImgUrl(
                           URL.createObjectURL(e.target.files[0])
                         );
-                        /* setForm({ ...form, userImg: e.target.files[0] }); */
+                        setForm({ ...form, userImg: e.target.files[0] });
                       }}
                       accept="image/jpg, image/png, image/jpeg"
                       ref={imgRef}
@@ -91,12 +129,12 @@ function EditProfileModal({ modal, setModal }: prop) {
                   value={form.username}
                   type="text"
                   placeholder="username..."
-                  className="p-1 border-b border-black w-full outline-none"
+                  className="p-1 border-b border-black w-full outline-none rounded-md text-black"
                   maxLength={50}
                 />
                 <p className="text-sm  pt-2">
                   Appears on your Profile page, as your byline, and in your
-                  responses.
+                  responses. {" "}
                   {form.username.length}/50
                 </p>
                 <section className="pt-[1rem] text-sm">
@@ -108,7 +146,7 @@ function EditProfileModal({ modal, setModal }: prop) {
                     value={form.bio}
                     type="text"
                     placeholder="bio..."
-                    className="p-1 border-b border-black w-full outline-none"
+                    className="p-1 border-b border-black w-full outline-none rounded-md text-black"
                     maxLength={160}
                   />
                   <p className="text-sm  pt-2">
@@ -122,7 +160,7 @@ function EditProfileModal({ modal, setModal }: prop) {
             Cancel
           </button>
           <button
-            /* onClick={saveForm} */
+            onClick={saveForm}
             className={`${btn} bg-green-800 text-white ${
               loading ? "opacity-50" : ""
             }`}>

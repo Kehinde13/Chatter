@@ -3,17 +3,20 @@ import profileImg from "../../assets/profile.jpg";
 import { useState } from "react";
 import logo from "../../assets/CHATTER.png";
 import { Blog } from "../../Context/Context";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
 
 function Header() {
   const { currentUser, users, userLoading } = Blog();
   const [searchBar, setSearchBar] = useState(false);
+  const { userId } = useParams();
 
   const toggleSearchBar = () => {
     setSearchBar(!searchBar);
   };
 
+
+ const currentUserData = users.find((user: object) => user.id === userId);
 
   return (
     <header>
@@ -53,7 +56,7 @@ function Header() {
             <Link to={`profile/${currentUser?.uid}`}>
               <img
                 className="w-[2.3rem] h-[2.3rem] object-cover rounded-full cursor-pointer"
-                src={currentUser.photoURL ? currentUser.photoURL : profileImg}
+                src={currentUserData?.userImg ? currentUserData?.userImg : profileImg}
                 alt="profile-img"
               />
             </Link>

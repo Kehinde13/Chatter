@@ -27,7 +27,7 @@ li {
 .AuthModal {
   display: block;
     position: absolute;
-    background-color: black;
+    background-color: white;
     z-index: 50;
     top: 0px;
     bottom: 0px;
@@ -35,7 +35,7 @@ li {
     right: 0px;
     width: 100%;
     opacity: 0.9;
-    height: 100vh;
+    height: 1000px;
 }
 
 .loader {

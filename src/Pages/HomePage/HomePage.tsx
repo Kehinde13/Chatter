@@ -7,7 +7,7 @@ function HomePage() {
   const [showSideBar, setShowSideBar] = useState<boolean>(false);
 
   return (
-    <div /* className='dark:bg-slate-800 dark:text-white' */>
+    <div /* className='dark:bg-slate-800 dark:text-white ' */>
       <Header />
       <div className="flex">
         <SideBar 

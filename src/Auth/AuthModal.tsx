@@ -51,7 +51,7 @@ function AuthModal({ modal, setModal, text }: Props) {
   return (
     < >
       {modal && (
-        <div className="AuthModal transition-all duration-500">
+        <div className="AuthModal transition-all duration-500 dark:bg-slate-900 dark:text-white">
          {
           loading ?
           <Loading /> :

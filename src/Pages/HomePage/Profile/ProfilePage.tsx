@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Blog } from "../../../Context/Context";
 
 import profileImg from "../../../assets/profile.jpg";
 import About from "./About";
 import Lists from "./Lists";
 import Stories from "./Stories";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
+import EditProfileModal from "./EditProfileModal";
 
 function ProfilePage() {
-  const { currentUser } = Blog();
+  const { currentUser, users } = Blog();
+  const { userId } = useParams()
   const [showSideBar] = useOutletContext();
   const panels = [
     {
@@ -25,9 +27,16 @@ function ProfilePage() {
     },
   ];
   const [currentPanel, setCurrentPanel] = useState<object>(panels[0]);
+  const [modal, setModal] = useState<boolean>(false);
 
+
+  const getUserData = users.find((user) => user.id === userId);
+  console.log(users);
+  
+ 
   return (
     <div className={`p-5 sm:block ${showSideBar ? "hidden" : "block"}`}>
+      <EditProfileModal modal={modal} setModal={setModal}/>
       <>
         <div className="flex gap-5">
           <img
@@ -36,7 +45,7 @@ function ProfilePage() {
             alt="profile image"
           />
           <h1 className="text-3xl sm:text-5xl font-bold self-center capitalize">
-            {currentUser.displayName}
+           {getUserData?.username}
           </h1>
         </div>
         <div className="flex self-center my-3 gap-5">
@@ -48,7 +57,9 @@ function ProfilePage() {
             "{currentUser.bio ? currentUser.bio : "I'm a mysterious user"}"
           </p>
         </div>
-        <button className="bg-purple-500 my-5 py-1 px-3 rounded-md text-white">
+        <button 
+        onClick={() => setModal(!modal)}
+        className="bg-purple-500 my-5 py-1 px-3 rounded-md text-white">
           Edit Your profile
         </button>
       </>

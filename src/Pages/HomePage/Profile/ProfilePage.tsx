@@ -11,7 +11,6 @@ import EditProfileModal from "./EditProfileModal";
 function ProfilePage() {
   const { currentUser, users } = Blog();
   const { userId } = useParams();
-  const [showSideBar] = useOutletContext();
   const panels = [
     {
       title: "Stories",
@@ -28,12 +27,12 @@ function ProfilePage() {
   ];
   const [currentPanel, setCurrentPanel] = useState<object>(panels[0]);
   const [modal, setModal] = useState<boolean>(false);
+  const [showSideBar] = useOutletContext()
 
   const getUserData = users.find((user: object) => user.id === userId);
   
-
   return (
-    <div className={`p-5 sm:block ${showSideBar ? "hidden" : "block"}`}>
+    <div className={`p-1 ml-[-10px] sm:block ${showSideBar ? "hidden" : ""}`}>
       <EditProfileModal modal={modal} setModal={setModal} getUserData={getUserData}/>
       <>
         <div className="flex gap-5">

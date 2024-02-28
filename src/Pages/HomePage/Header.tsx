@@ -16,7 +16,7 @@ function Header() {
   };
 
 
- const currentUserData = users.find((user: object) => user.id === userId);
+ const currentUserData = users?.find((user) => user.id === currentUser?.uid);
 
   return (
     <header>
@@ -56,7 +56,7 @@ function Header() {
             <Link to={`profile/${currentUser?.uid}`}>
               <img
                 className="w-[2.3rem] h-[2.3rem] object-cover rounded-full cursor-pointer"
-                src={currentUserData?.userImg ? currentUserData?.userImg : profileImg}
+                src={currentUserData?.userImg || profileImg}
                 alt="profile-img"
               />
             </Link>

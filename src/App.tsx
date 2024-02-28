@@ -16,6 +16,8 @@ import Feed from "./Pages/HomePage/Feed";
 
 function App() {
   const { currentUser } = Blog();
+  
+  
 
   const router = createBrowserRouter([
     {
@@ -32,8 +34,8 @@ function App() {
           element: <HomePage />,
           children: [
             {
-              path: "feed",
               element: <Feed />,
+              index: true,
             },
             {
               path: "profile/:userId",
@@ -41,6 +43,7 @@ function App() {
             }
           ]
         }, 
+       
       ],
     },
     {

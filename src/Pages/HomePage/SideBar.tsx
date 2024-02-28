@@ -7,31 +7,18 @@ import { Blog } from "../../Context/Context";
 
 type prop= {
  showSideBar: boolean,
- setShowSideBar: (showSideBar: boolean) => boolean
 }
 
-function SideBar({showSideBar, setShowSideBar}: prop) {
+function SideBar({showSideBar}: prop) {
   const { currentUser } = Blog();
   
-  const toggleSideBar = () => {
-    setShowSideBar(!showSideBar);
-  };
+ 
 
   return (
     <aside
-      className={`sticky top-0 overflow-y-auto scrollbar-hidden pb-4 flex flex-col sm:ml-0 pr-10 border-r-2
-                   duration-500 ${showSideBar ? "ml-1 w-full" : "ml-[-178px] border-r-0"}`}
+      className={`sticky top-0 overflow-y-auto scrollbar-hidden pb-4 flex flex-col sm:ml-0 pr-10 sm:border-r-2
+                   duration-500 ${showSideBar ? "ml-1 w-full" : "ml-[-156px] border-r-0"}`}
     >
-      <button
-        className="border w-8 py-1 absolute sm:hidden rounded-full right-[-10px] top-64"
-        onClick={toggleSideBar}
-      >
-        <FontAwesomeIcon
-          icon={
-            showSideBar ? "fa-solid fa-angle-left" : "fa-solid fa-angle-right"
-          }
-        />
-      </button>
       <h1 className="font-bold text-lg ml-2">Overview</h1>
       <ul className="ml-4">
         <li className="flex gap-2">

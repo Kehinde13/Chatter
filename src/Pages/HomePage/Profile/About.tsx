@@ -8,6 +8,7 @@ type props = {
 
 const About = ({ getUserData, setModal }: props) => {
   const { currentUser } = Blog();
+  
   return (
     <div className="w-full">
       <p className="text-2xl first-letter:uppercase">

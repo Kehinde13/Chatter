@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function HomePage() {
   const [showSideBar, setShowSideBar] = useState<boolean>(false);
+  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState<string>("");
 
   const toggleSideBar = () => {
     setShowSideBar(!showSideBar);
@@ -28,7 +30,13 @@ function HomePage() {
           />
         </button>
         <SideBar showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
-        <Outlet context={[showSideBar]} />
+        <Outlet context={[
+          showSideBar, 
+          description,
+          setDescription,
+          title,
+          setTitle
+          ]} />
       </div>
     </div>
   );

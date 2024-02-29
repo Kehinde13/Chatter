@@ -1,39 +1,41 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import { Blog } from "../../../Context/Context";
-import Publish from "./Publish";
+import { Link, useOutletContext } from "react-router-dom";
 
 const Write = () => {
-  const [description, setDescription] = useState("");
-  const [title, setTitle] = useState("");
-  const { publish, setPublish } = Blog();
+  const [showSideBar] = useOutletContext();
+  const {title, setTitle, description, setDescription} = Blog()
+    
+
   return (
-    <section className="w-[90%] md:w-[90%] lg:w-[60%] mx-auto py-[3rem]">
-      <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        type="text"
-        placeholder="Title"
-        className="text-4xl outline-none w-full"
-      />
-      <ReactQuill
-        theme="snow"
-        value={description}
-        onChange={setDescription}
-        placeholder="Tell Your Story..."
-        className="write my-5"
-      />
-      <div
-        className={`${
-          publish ? "visible opacity-100" : "invisible opacity-0"
-        } transition-all duration-200`}>
-        <Publish
-          setPublish={setPublish}
-          description={description}
-          title={title}
+    <div
+      className={`sm:mx-auto mx-5 w-[80%] relative ${
+        showSideBar ? "hidden" : " "
+      }`}
+    >
+      <section className="w-full md:w-[90%] mx-auto py-[3rem]">
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          type="text"
+          placeholder="Title"
+          className="text-4xl outline-none w-full"
         />
-      </div>
-    </section>
+        <ReactQuill
+          theme="snow"
+          value={description}
+          onChange={setDescription}
+          placeholder="Share Your Story..."
+          className="write my-5"
+        />
+        <Link to="/HomePage/Publish">
+          <button className="bg-purple-500 p-2 rounded-full text-white">
+            Publish
+          </button>
+        </Link>
+      </section>
+    </div>
   );
 };
 

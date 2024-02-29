@@ -34,7 +34,7 @@ function Feed() {
           <p>Explore different content you’d love </p>
         </div>
         <Link to="TextEditor">
-          <button className="sm:py-2 sm:px-3 p-1  bg-purple-500 self-start text-white rounded-full">
+          <button className="sm:py-2 sm:px-3 p-2  bg-purple-500 self-start text-white rounded-full">
             Write
           </button>
         </Link>

@@ -1,27 +1,85 @@
-import { useRef, useState } from "react";
-import { Link, useOutletContext, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { Blog } from "../../../Context/Context";
 import ReactQuill from "react-quill";
 import TagsInput from "react-tagsinput";
+import { toast } from "react-toastify";
+import { db, storage } from "../../../Auth/firebase";
+import { addDoc, collection } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 function Publish() {
   const [showSideBar] = useOutletContext();
   const { userId } = useParams();
-  const { users } = Blog();
+  const { users, title, description, currentUser } = Blog();
   const imgRef = useRef(null);
   const [tags, setTags] = useState([]);
   const [newPostImage, setnewPostImage] = useState<string>("");
+  const [desc, setDesc] = useState<string>("")
+  const [preview, setPreview] = useState({
+    title: "",
+    photo: "",
+  });
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const SubmitImage = () => {
-    imgRef.current.click();
+    imgRef.current.click();  
+  };
+
+  useEffect(() => {
+    if (title || description) {
+      setPreview({ ...preview, title: title });
+      setDesc(description);
+    } else {
+      setPreview({ ...preview, title: "" });
+      setDesc("");
+    }
+  }, [title, description]);
+
+  const publishPost = async () => {
+    setLoading(true);
+    try {
+      if (preview.title === "" || desc === "" || tags.length === 0) {
+        toast.error("All fields are required!!!");
+        return;
+      }
+
+      const collections = collection(db, "posts");
+
+      let url;
+      if (newPostImage) {
+        const storageRef = ref(storage, `image/${preview.photo.name}`);
+        await uploadBytes(storageRef, preview?.photo);
+
+        url = await getDownloadURL(storageRef);
+      }
+
+      await addDoc(collections, {
+        userId: currentUser?.uid,
+        title: preview.title,
+        desc,
+        tags,
+        postImg: url || "",
+        created: Date.now(),
+        pageViews: 0,
+      });
+      toast.success("Post has been added");
+      navigate("/HomePage");
+      setPreview({
+        title: "",
+        photo: "",
+      });
+    } catch (error: unknown) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const getUserData = users.find((user: object) => user.id === userId);
   return (
     <div className={`sm:mx-auto mx-5 w-[80%] ${showSideBar ? "hidden" : " "}`}>
-      <button className="sm:py-2 sm:px-3 p-1  bg-purple-500 self-start text-white rounded-full">
-        Write
-      </button>
       <div className="mt-10 flex flex-col md:flex-row gap-10">
         <div className="flex-[1]">
           <h3>Story Preview</h3>
@@ -36,7 +94,7 @@ function Publish() {
           <input
             onChange={(e) => {
               setnewPostImage(URL.createObjectURL(e.target.files[0]));
-              /* setPreview({ ...preview, photo: e.target.files[0] }) */
+              setPreview({ ...preview, photo: e.target.files[0] })
             }}
             ref={imgRef}
             type="file"
@@ -46,15 +104,15 @@ function Publish() {
             type="text"
             placeholder="Title"
             className="outline-none w-full border-b border-gray-300 py-2"
-            /* value={preview.title}
+            value={preview.title}
               onChange={(e) =>
                 setPreview({ ...preview, title: e.target.value })
-              } */
+              }
           />
           <ReactQuill
             theme="snow"
-            /* value={desc}
-              onChange={setDesc} */
+            value={desc}
+            onChange={setDesc}
             placeholder="Share your story..."
             className="p-1 border-b border-gray-300"
           />
@@ -69,10 +127,10 @@ function Publish() {
           <p>Add up to 5 Tags that relate to your story</p>
           <TagsInput value={tags} onChange={setTags} />
           <button
-            /* onClick={handleSubmit} */
+            onClick={publishPost}
             className="btn bg-purple-500 w-fit text-white rounded-full p-2"
           >
-            {/* {loading ? "Submitting..." : "Publish Now"} */}Publish Now
+            {loading ? "Publishing..." : "Publish Now"}
           </button>
         </div>
       </div>

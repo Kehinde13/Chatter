@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import ProfilePage from "./Pages/HomePage/Profile/ProfilePage";
 import Feed from "./Pages/HomePage/Feed/Feed";
 import TextEditor from "./Pages/HomePage/Publish/TextEditor";
+import Publish from "./Pages/HomePage/Publish/Publish";
 
 
 
@@ -45,6 +46,10 @@ function App() {
             {
               path: "TextEditor",
               element: <TextEditor />
+            },
+            {
+              path: "Publish",
+              element: <Publish />
             }
           ]
         }, 

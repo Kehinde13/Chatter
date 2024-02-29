@@ -20,6 +20,8 @@ import {
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import Context from './Context/Context.tsx'
 import "react-toastify/dist/ReactToastify.css";
+import 'react-quill/dist/quill.snow.css';
+import "react-tagsinput/react-tagsinput.css";
 
 
 library.add(

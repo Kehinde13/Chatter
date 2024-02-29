@@ -10,7 +10,8 @@ import HomePage from "./Pages/HomePage/HomePage";
 import { Blog } from "./Context/Context";
 import { ToastContainer } from "react-toastify";
 import ProfilePage from "./Pages/HomePage/Profile/ProfilePage";
-import Feed from "./Pages/HomePage/Feed";
+import Feed from "./Pages/HomePage/Feed/Feed";
+import TextEditor from "./Pages/HomePage/Publish/TextEditor";
 
 
 
@@ -40,6 +41,10 @@ function App() {
             {
               path: "profile/:userId",
               element: <ProfilePage />
+            },
+            {
+              path: "TextEditor",
+              element: <TextEditor />
             }
           ]
         }, 

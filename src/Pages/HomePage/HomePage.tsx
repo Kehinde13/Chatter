@@ -9,11 +9,10 @@ function HomePage() {
 
   const toggleSideBar = () => {
     setShowSideBar(!showSideBar);
-    console.log(showSideBar);
   };
 
   return (
-    <div className='dark:bg-slate-800 dark:text-white '>
+    <div /* className='dark:bg-slate-800 dark:text-white ' */>
       <Header />
       <div className="flex">
         <button

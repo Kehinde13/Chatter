@@ -15,6 +15,8 @@ function Context({children}: Props) {
   const [loading, setLoading] = useState<boolean>(true)
   const [userLoading, setUserLoading] = useState<boolean>(true);
   const [users, setUsers] = useState([])
+  const [description, setDescription] = useState<string>("");
+  const [publish, setPublish] = useState<boolean>(false);
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
@@ -45,7 +47,14 @@ function Context({children}: Props) {
   }, []);
 
   return (
-    <BlogContext.Provider value={{ currentUser, setCurrentUser, users, userLoading}}>
+    <BlogContext.Provider value={{ currentUser, 
+    setCurrentUser, 
+    users, 
+    userLoading, 
+    publish, 
+    setPublish, 
+    description, 
+    setDescription}}>
         {loading ? <Loading /> : children}
     </BlogContext.Provider>
   )

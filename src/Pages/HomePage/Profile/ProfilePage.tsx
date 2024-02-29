@@ -32,7 +32,7 @@ function ProfilePage() {
   const getUserData = users.find((user: object) => user.id === userId);
   
   return (
-    <div className={`p-1 ml-[-10px] sm:block ${showSideBar ? "hidden" : ""}`}>
+    <div className={`p-1 ml-[-10px] sm:ml-5 sm:block ${showSideBar ? "hidden" : ""}`}>
       <EditProfileModal modal={modal} setModal={setModal} getUserData={getUserData}/>
       <>
         <div className="flex gap-5">
@@ -61,10 +61,10 @@ function ProfilePage() {
           Edit Your profile
         </button>
       </>
-      <div className="flex items-center gap-5 my-3 border-b border-purple-200 md:w-[500px]">
+      <div className="flex items-center gap-5 my-3 border-b border-purple-200 md:w-[700px] text-center font-bold">
         {panels.map((item, index) => (
           <div
-            className={`py-1 ${
+            className={`py-1 w-full ${
               item.title === currentPanel.title
                 ? "border-b-2 border-purple-500"
                 : ""

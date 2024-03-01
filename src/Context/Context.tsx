@@ -1,8 +1,9 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
-import { auth, db } from '../Auth/firebase';
+import { auth } from '../Auth/firebase';
 import Loading from '../components/Loading';
-import { collection, onSnapshot, query } from 'firebase/firestore';
+import GetUsers from '../hooks/GetUsers';
+import GetPosts from '../hooks/GetPosts';
 
 const BlogContext = createContext();
 
@@ -13,11 +14,11 @@ type Props = {
 function Context({children}: Props) {
   const [currentUser, setCurrentUser] = useState<object | boolean>(false)
   const [loading, setLoading] = useState<boolean>(true)
-  const [userLoading, setUserLoading] = useState<boolean>(true);
-  const [users, setUsers] = useState([])
   const [description, setDescription] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [markdownText, setMarkdownText] = useState<string>("")
+  const {users, userLoading} = GetUsers("users")
+  const {posts, postLoading} = GetPosts("posts")
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
@@ -31,21 +32,6 @@ function Context({children}: Props) {
      return () => unSubscribe();
   }, [currentUser])
 
-  useEffect(() => {
-    const getUsers = () => {
-      const userRef = query(collection(db, "users"));
-      onSnapshot(userRef, (snapshot) => {
-        setUsers(
-          snapshot.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-          }))
-        );
-        setUserLoading(false);
-      });
-    };
-    getUsers();
-  }, []);
 
   return (
     <BlogContext.Provider value={{ currentUser, 
@@ -57,7 +43,9 @@ function Context({children}: Props) {
     title, 
     setTitle,
     markdownText,
-    setMarkdownText
+    setMarkdownText,
+    posts,
+    postLoading
     }}>
         {loading ? <Loading /> : children}
     </BlogContext.Provider>

@@ -1,5 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate, useOutletContext, useParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useOutletContext,
+  useParams,
+} from "react-router-dom";
 import { Blog } from "../../../Context/Context";
 import ReactQuill from "react-quill";
 import TagsInput from "react-tagsinput";
@@ -7,15 +12,19 @@ import { toast } from "react-toastify";
 import { db, storage } from "../../../Auth/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { Remarkable } from "remarkable";
+import "./Markdown.css"
+
+const md = new Remarkable();
 
 function Publish() {
   const [showSideBar] = useOutletContext();
   const { userId } = useParams();
-  const { users, title, description, currentUser } = Blog();
+  const { users, title, description, currentUser, markdownText } = Blog();
   const imgRef = useRef(null);
   const [tags, setTags] = useState([]);
   const [newPostImage, setnewPostImage] = useState<string>("");
-  const [desc, setDesc] = useState<string>("")
+  const [desc, setDesc] = useState<string>("");
   const [preview, setPreview] = useState({
     title: "",
     photo: "",
@@ -24,10 +33,13 @@ function Publish() {
   const [loading, setLoading] = useState(false);
 
   const SubmitImage = () => {
-    imgRef.current.click();  
+    imgRef.current.click();
   };
 
   useEffect(() => {
+    if(markdownText > 1){
+      setDesc(markdownText)
+    }
     if (title || description) {
       setPreview({ ...preview, title: title });
       setDesc(description);
@@ -35,7 +47,7 @@ function Publish() {
       setPreview({ ...preview, title: "" });
       setDesc("");
     }
-  }, [title, description]);
+  }, [title, description, markdownText]);
 
   const publishPost = async () => {
     setLoading(true);
@@ -94,7 +106,7 @@ function Publish() {
           <input
             onChange={(e) => {
               setnewPostImage(URL.createObjectURL(e.target.files[0]));
-              setPreview({ ...preview, photo: e.target.files[0] })
+              setPreview({ ...preview, photo: e.target.files[0] });
             }}
             ref={imgRef}
             type="file"
@@ -103,19 +115,23 @@ function Publish() {
           <input
             type="text"
             placeholder="Title"
-            className="outline-none w-full border-b border-gray-300 py-2"
+            className="outline-none w-full border-b border-gray-300 py-2 text-4xl"
             value={preview.title}
-              onChange={(e) =>
-                setPreview({ ...preview, title: e.target.value })
-              }
+            onChange={(e) => setPreview({ ...preview, title: e.target.value })}
           />
-          <ReactQuill
-            theme="snow"
-            value={desc}
-            onChange={setDesc}
-            placeholder="Share your story..."
-            className="p-1 border-b border-gray-300"
-          />
+          {markdownText.length > 1 ? (
+            <div className="markdown"
+              dangerouslySetInnerHTML={{ __html: md.render(markdownText) }}
+            ></div>
+          ) : (
+            <ReactQuill
+              theme="snow"
+              value={desc}
+              onChange={setDesc}
+              placeholder="Share your story..."
+              className="p-1 border-b border-gray-300"
+            />
+          )}
         </div>
         <div className="flex-[1] flex flex-col gap-4 mb-5 md:mb-0 mt-5">
           <h3 className="text-2xl">

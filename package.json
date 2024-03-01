@@ -23,12 +23,14 @@
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.22.0",
     "react-tagsinput": "^3.20.3",
-    "react-toastify": "^10.0.4"
+    "react-toastify": "^10.0.4",
+    "remarkable": "^2.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "@types/react-tagsinput": "^3.20.5",
+    "@types/remarkable": "^2.0.8",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react": "^4.2.1",

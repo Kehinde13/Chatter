@@ -16,6 +16,7 @@ import {
   faEnvelopeOpen, 
   faChartLine,
   faUser,
+  faSave,
 } from '@fortawesome/free-solid-svg-icons'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import Context from './Context/Context.tsx'
@@ -37,7 +38,8 @@ library.add(
   faPeopleGroup,
   faEnvelopeOpen, 
   faChartLine,
-  faUser)
+  faUser,
+  faSave)
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

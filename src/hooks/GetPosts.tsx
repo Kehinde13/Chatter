@@ -6,7 +6,7 @@ import { db } from '../Auth/firebase';
 
 function GetPosts(collectionName: string) {
     const [postLoading, setPostsLoading] = useState<boolean>(true);
-    const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState<Array>([])
 
     useEffect(() => {
         const getPosts = () => {
@@ -22,7 +22,7 @@ function GetPosts(collectionName: string) {
           });
         };
         getPosts();
-      }, []);
+      }, [collectionName]);
   return {
     posts,
     postLoading

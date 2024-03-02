@@ -6,7 +6,7 @@ import { db } from '../Auth/firebase';
 
 function GetUsers(collectionName: string) {
     const [userLoading, setUserLoading] = useState<boolean>(true);
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState<Array>([])
 
     useEffect(() => {
         const getUsers = () => {

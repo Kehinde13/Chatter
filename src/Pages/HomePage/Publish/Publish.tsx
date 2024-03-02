@@ -99,7 +99,7 @@ function Publish() {
             style={{ backgroundImage: `url(${newPostImage})` }}
             onClick={SubmitImage}
             className="w-full h-[200px] object-cover bg-gray-100 my-3 grid 
-                place-items-center cursor-pointer bg-cover bg-no-repeat "
+                place-items-center cursor-pointer bg-cover bg-no-repeat dark:text-black"
           >
             {!newPostImage && "Add Image"}
           </div>
@@ -115,12 +115,12 @@ function Publish() {
           <input
             type="text"
             placeholder="Title"
-            className="outline-none w-full border-b border-gray-300 py-2 text-4xl"
+            className="outline-none w-full border-b border-gray-300 py-2 text-4xl dark:text-black p-2"
             value={preview.title}
             onChange={(e) => setPreview({ ...preview, title: e.target.value })}
           />
           {markdownText.length > 1 ? (
-            <div className="markdown"
+            <div className="markdown p-3"
               dangerouslySetInnerHTML={{ __html: md.render(markdownText) }}
             ></div>
           ) : (
@@ -129,7 +129,7 @@ function Publish() {
               value={desc}
               onChange={setDesc}
               placeholder="Share your story..."
-              className="p-1 border-b border-gray-300"
+              className="p-1 my-2 border-gray-300"
             />
           )}
         </div>

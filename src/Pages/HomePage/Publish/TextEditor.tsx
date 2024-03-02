@@ -11,7 +11,7 @@ const Write = () => {
 
   return (
     <div
-      className={`sm:mx-auto mx-5 w-[80%] relative ${
+      className={`sm:mx-auto mx-5 w-[80%] relative  ${
         showSideBar ? "hidden" : " "
       }`}
     >
@@ -24,14 +24,14 @@ const Write = () => {
             onChange={(e) => setTitle(e.target.value)}
             type="text"
             placeholder="Title"
-            className="text-4xl outline-none w-full"
+            className="text-4xl outline-none w-full dark:text-black p-2 dark:bg-gray-300"
           />
           <ReactQuill
             theme="snow"
             value={description}
             onChange={setDescription}
             placeholder="Share Your Story..."
-            className=" my-5"
+            className="dark:text-white my-5"
           />
         </section>
       )}

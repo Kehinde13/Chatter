@@ -57,7 +57,7 @@ function SignUp() {
             bio: "",
           });
           toast.success("Sign Up Succesfull");
-          navigate("/HomePage/feed");
+          navigate("/HomePage");
           setLoading(false);
         }
       } catch (error: unknown) {

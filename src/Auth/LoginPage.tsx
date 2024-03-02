@@ -29,7 +29,7 @@ function LoginPage() {
 
     try{
       await signInWithEmailAndPassword(auth, form.userEmail, form.password);
-      navigate("/HomePage/feed");
+      navigate("/HomePage");
       toast.success("User has been logged in")
       setLoading(false)
     } catch(error: unknown){

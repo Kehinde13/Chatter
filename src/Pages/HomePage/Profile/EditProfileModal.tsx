@@ -17,9 +17,9 @@ function EditProfileModal({ modal, setModal, getUserData }: prop) {
   const imgRef = useRef(null);
   const [profileImgUrl, setProfileImgUrl] = useState<string>("");
   const [form, setForm] = useState<object>({
-    username: "",
-    userImg: "",
-    bio: "",
+    username:  getUserData?.username ,
+    userImg: getUserData?.userImg,
+    bio: getUserData?.bio,
   });
   const [loading, setLoading] = useState<boolean>(false)
 

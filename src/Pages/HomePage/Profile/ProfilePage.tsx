@@ -7,6 +7,7 @@ import Lists from "./Lists";
 import Stories from "./Stories";
 import { useOutletContext, useParams } from "react-router-dom";
 import EditProfileModal from "./EditProfileModal";
+import GetSinglePost from "../../../hooks/GetSinglePost";
 
 function ProfilePage() {
   const { currentUser, users } = Blog();
@@ -30,6 +31,8 @@ function ProfilePage() {
   const [showSideBar] = useOutletContext();
 
   const getUserData = users.find((user: object) => user.id === userId);
+  const { data: following } = GetSinglePost("users", userId, "following");
+  const { data: followers } =GetSinglePost("users", userId, "followers");
 
   return (
     <div
@@ -54,20 +57,23 @@ function ProfilePage() {
           </h1>
         </div>
         <div className="flex self-center my-3 gap-5">
-          <p>Followers(0)</p>
-          <p>Following(0)</p>
+          <p>Followers({followers.length})</p>
+          <p>Following({following.length})</p>
         </div>
         <div>
           <p className="self-center">
             "{getUserData?.bio ? getUserData?.bio : "I'm a mysterious user"}"
           </p>
         </div>
-        <button
+        {
+          currentUser?.uid === getUserData?.userId &&
+          <button
           onClick={() => setModal(!modal)}
           className="bg-purple-500 my-5 py-1 px-3 rounded-md text-white"
         >
           Edit Your profile
         </button>
+        }
       </>
       <div className="flex items-center gap-5 my-3 border-b border-purple-200 md:w-[700px] text-center font-bold">
         {panels.map((item, index) => (

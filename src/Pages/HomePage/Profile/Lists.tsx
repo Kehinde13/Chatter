@@ -20,7 +20,7 @@ function Lists({getUserData}: prop) {
       {currentUser && currentUser?.uid === getUserData?.userId ? (
         <div className="flex flex-col gap-[2rem] mb-[2rem]">
           {data && data.length === 0 && (
-            <p className="text-gray-500 text-center">
+            <p className="text-2xl first-letter:uppercase">
               <span className="capitalize mr-1">{getUserData?.username}</span>{" "}
               has no saved post
             </p>
@@ -32,8 +32,8 @@ function Lists({getUserData}: prop) {
           )}
         </div>
       ) : (
-        <p className='w-full text-center mx-auto'>
-          {getUserData?.username} Bookmarked posts are Private
+        <p className='text-2xl first-letter:uppercase'>
+          {getUserData?.username}'s Bookmarked posts are Private
         </p>
       )}
     </div>

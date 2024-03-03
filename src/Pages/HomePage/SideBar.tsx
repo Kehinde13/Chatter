@@ -7,6 +7,7 @@ import { Blog } from "../../Context/Context";
 import { signOut } from "firebase/auth";
 import { auth } from "../../Auth/firebase";
 import { toast } from "react-toastify";
+import Follow from "./Features/Follow";
 
 type prop = {
   showSideBar: boolean;
@@ -28,49 +29,19 @@ function SideBar({ showSideBar }: prop) {
 
   return (
     <aside
-      className={`sticky top-0 overflow-y-auto scrollbar-hidden pb-4 flex flex-col sm:ml-0 pr-10 sm:border-r-2
+      className={`sticky top-0 overflow-y-auto scrollbar-hidden pb-4 flex flex-col sm:w-[20%] sm:ml-0 pr-10 sm:border-r-2
                    duration-500 ${
-                     showSideBar ? "ml-1 w-full" : "ml-[-156px] border-r-0"
+                     showSideBar ? "ml-1 w-full" : "ml-[-280px] border-r-0"
                    }`}
     >
-      <h1 className="font-bold text-lg ml-2">Overview</h1>
-      <ul className="ml-4">
-        <li className="flex gap-2">
-          <img src={feed} alt="" />
-          Feed
-        </li>
-        <li>
-          <FontAwesomeIcon
-            icon="fa-solid fa-book-bookmark"
-            className="mr-2 text-purple-600"
-          />
-          Bookmarks
-        </li>
-        <li>
-          <FontAwesomeIcon
-            icon="fa-solid fa-people-group"
-            className="mr-2 text-purple-600"
-          />
-          Team Blog
-        </li>
-        <li>
-          <FontAwesomeIcon
-            icon="fa-solid fa-envelope-open"
-            className="mr-2 text-purple-600"
-          />
-          Drafts
-        </li>
-        <li>
-          <FontAwesomeIcon
-            icon="fa-solid fa-chart-line"
-            className="mr-2 text-purple-600"
-          />
-          Analytics
-        </li>
-      </ul>
+      <h1 className="font-bold text-lg ml-2">Following</h1>
+      
+      <div className="ml-1">
+        <Follow />
+      </div>
 
       <div className="flex gap-2">
-        <h1 className="font-bold text-lg ml-2">Trending Tags</h1>
+        <h1 className="font-bold text-lg ml-2">Trending</h1>
         <img src={trending} alt="" />
       </div>
       <ul className="ml-4">

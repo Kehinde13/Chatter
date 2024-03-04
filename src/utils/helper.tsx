@@ -1,10 +1,10 @@
-export const secretEmail = (email) => {
+export const secretEmail = (email: string) => {
     const [username, domain] = email.split("@");
     const secretUser = username.substring(0, 2) + "*".repeat(username.length - 2);
     return `${secretUser}@${domain}`;
   };
   
-  export const readTime = (desc) => {
+  export const readTime = (desc: object) => {
     const averageReading = 225;
   
     const div = document.createElement("div");
@@ -15,7 +15,7 @@ export const secretEmail = (email) => {
     return Math.ceil(words.length / averageReading);
   };
   
-  export const formatNum = (num) => {
+  export const formatNum = (num: number) => {
     if (num >= 1e9) {
       return (num / 1e9).toFixed(1) + "B";
     } else if (num >= 1e6) {

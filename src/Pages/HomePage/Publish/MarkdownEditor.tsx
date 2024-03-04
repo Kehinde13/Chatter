@@ -1,7 +1,6 @@
 import { Remarkable } from "remarkable";
 import { Blog } from "../../../Context/Context";
 
-const md = new Remarkable();
 
 function MarkdownEditor() {
   const { title, setTitle, description, setDescription, markdownText, setMarkdownText } = Blog();

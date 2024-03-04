@@ -37,12 +37,14 @@ function Publish() {
   };
 
   useEffect(() => {
-    if(markdownText > 1){
-      setDesc(markdownText)
-    }
-    if (title || description) {
-      setPreview({ ...preview, title: title });
+    if(markdownText){
+      setDesc(md.render(markdownText))
+    } else if (description){
       setDesc(description);
+    }
+
+    if (title) {
+      setPreview({ ...preview, title: title });
     } else {
       setPreview({ ...preview, title: "" });
       setDesc("");
@@ -50,6 +52,8 @@ function Publish() {
   }, [title, description, markdownText]);
 
   const publishPost = async () => {
+    console.log(desc, preview.title, tags);
+    
     setLoading(true);
     try {
       if (preview.title === "" || desc === "" || tags.length === 0) {

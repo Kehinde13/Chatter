@@ -13,6 +13,7 @@ import ProfilePage from "./Pages/HomePage/Profile/ProfilePage";
 import Feed from "./Pages/HomePage/Feed/Feed";
 import TextEditor from "./Pages/HomePage/Publish/TextEditor";
 import Publish from "./Pages/HomePage/Publish/Publish";
+import SinglePost from "./Pages/HomePage/Feed/SinglePost";
 
 
 
@@ -50,6 +51,10 @@ function App() {
             {
               path: "Publish",
               element: <Publish />
+            },
+            {
+              path: "SinglePost/:postId",
+              element: <SinglePost />
             }
           ]
         }, 

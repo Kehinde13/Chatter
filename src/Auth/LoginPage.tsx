@@ -88,7 +88,7 @@ function LoginPage() {
                   name="userEmail"
                   id="userEmail"
                   placeholder="johndoe@gmail.com"
-                  className=" border border-gray-300 w-full py-2 rounded-md p-2"
+                  className=" border border-gray-300 w-full py-2 rounded-md p-2 dark:text-black"
                   onChange={handleChange}
                 />
               </div>
@@ -99,7 +99,7 @@ function LoginPage() {
                   name="password"
                   id="password"
                   placeholder="**********"
-                  className=" border border-gray-300 w-full py-2 rounded-md p-2"
+                  className=" border border-gray-300 w-full py-2 rounded-md p-2 dark:text-black"
                   onChange={handleChange}
                 />
               </div>

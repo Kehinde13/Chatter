@@ -119,7 +119,7 @@ function SignUp() {
                       type="text"
                       name="firstName"
                       id="firstName"
-                      className="border border-gray-300 py-2 px-2 rounded-md w-full"
+                      className="border border-gray-300 py-2 px-2 rounded-md w-full dark:text-black"
                       placeholder="John"
                       onChange={handleChange}
                     />
@@ -130,7 +130,7 @@ function SignUp() {
                       type="text"
                       name="lastName"
                       id="lastName"
-                      className="border border-gray-300 p-2 rounded-md w-full"
+                      className="border border-gray-300 p-2 rounded-md w-full dark:text-black"
                       placeholder="Doe"
                       onChange={handleChange}
                     />
@@ -145,7 +145,7 @@ function SignUp() {
                     id="Email"
                     placeholder="johndoe@gmail.com"
                     onChange={handleChange}
-                    className=" border border-gray-300 w-full py-2 rounded-md p-2"
+                    className=" border border-gray-300 w-full py-2 rounded-md p-2 dark:text-black"
                   />
                 </div>
                 <div className="my-5">
@@ -156,7 +156,7 @@ function SignUp() {
                     id="password"
                     placeholder="**********"
                     onChange={handleChange}
-                    className=" border border-gray-300 w-full py-2 rounded-md p-2"
+                    className=" border border-gray-300 w-full py-2 rounded-md p-2 dark:text-black"
                   />
                 </div>
                 <div className="my-5">
@@ -167,7 +167,7 @@ function SignUp() {
                     id="confirmPassword"
                     placeholder="**********"
                     onChange={handleChange}
-                    className=" border border-gray-300 w-full py-2 rounded-md p-2"
+                    className=" border border-gray-300 w-full py-2 rounded-md p-2 dark:text-black"
                   />
                 </div>
                 <button className="bold md:py-2 md:px-10 mt-3 p-1 bg-blue-500 rounded-md w-full text-white">

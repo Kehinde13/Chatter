@@ -34,6 +34,8 @@ function ProfilePage() {
   const { data: following } = GetSinglePost("users", userId, "following");
   const { data: followers } =GetSinglePost("users", userId, "followers");
 
+  
+
   return (
     <div
       className={`p-1 ml-[-10px] sm:ml-5 sm:block w-[80%] ${

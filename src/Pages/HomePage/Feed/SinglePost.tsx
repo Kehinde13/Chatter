@@ -8,6 +8,11 @@ import FollowBtn from '../Features/FollowBtn';
 import moment from 'moment';
 import Loading from '../../../components/Loading';
 import { readTime } from "../../../utils/helper.tsx";
+import Like from '../Features/Like.tsx';
+import Comment from '../Features/Comment.tsx';
+import Actions from '../Features/Actions.tsx';
+import Bookmark from '../Features/Bookmark.tsx';
+import SharePost from '../Features/SharePost.tsx';
 
 function SinglePost() {
 const [showSideBar] = useOutletContext()
@@ -77,19 +82,19 @@ const { postId } = useParams();
                 </p>
               </div>
             </div>
-            {/* <div className="flex items-center justify-between border-b border-t border-gray-200 py-[0.5rem]">
+            <div className="flex items-center justify-between border-b border-t border-gray-200 py-[0.5rem]">
               <div className="flex items-center gap-5">
                 <Like postId={postId} />
                 <Comment />
               </div>
               <div className="flex items-center pt-2 gap-5">
-                {post && <SavedPost post={post} />}
+                {post && <Bookmark post={post} />}
                 <SharePost />
                 {currentUser && currentUser?.uid === post?.userId && (
                   <Actions postId={postId} title={title} desc={desc} />
                 )}
               </div>
-            </div> */}
+            </div>
             <div className="mt-[3rem]">
               {postImg && (
                 <img

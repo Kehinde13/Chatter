@@ -18,8 +18,12 @@ import {
   faUser,
   faSave,
   faEllipsis,
+  faHeart,
+  faComment,
+  faUpRightFromSquare,
+  faCopy,
 } from '@fortawesome/free-solid-svg-icons'
-import { faGoogle } from '@fortawesome/free-brands-svg-icons'
+import { faFacebook, faGoogle, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import Context from './Context/Context.tsx'
 import "react-toastify/dist/ReactToastify.css";
 import 'react-quill/dist/quill.snow.css';
@@ -27,6 +31,7 @@ import "react-tagsinput/react-tagsinput.css";
 
 
 library.add(
+  faCopy,
   faAngleLeft, 
   faAngleRight,
   faXmark, 
@@ -41,7 +46,13 @@ library.add(
   faChartLine,
   faUser,
   faSave,
-  faEllipsis)
+  faEllipsis,
+  faHeart,
+  faComment,
+  faUpRightFromSquare,
+  faFacebook,
+  faTwitter,
+  faLinkedin  )
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

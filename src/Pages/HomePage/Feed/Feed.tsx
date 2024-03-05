@@ -12,7 +12,7 @@ function Feed() {
       component: ForYou,
     },
     {
-      title: "Featured",
+      title: "Recomended",
       component: Featured,
     },
     {

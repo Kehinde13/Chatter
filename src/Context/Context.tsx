@@ -4,6 +4,7 @@ import { auth } from '../Auth/firebase';
 import Loading from '../components/Loading';
 import GetUsers from '../hooks/GetUsers';
 import GetPosts from '../hooks/GetPosts';
+import GetRecentPost from '../hooks/GetRecentPost';
 
 const BlogContext = createContext();
 
@@ -19,6 +20,7 @@ function Context({children}: Props) {
   const [markdownText, setMarkdownText] = useState<string>("")
   const {users, userLoading} = GetUsers("users")
   const {posts, postLoading} = GetPosts("posts")
+  const {recentPosts, recentLoading} = GetRecentPost("posts")
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
@@ -45,7 +47,9 @@ function Context({children}: Props) {
     markdownText,
     setMarkdownText,
     posts,
-    postLoading
+    postLoading,
+    recentPosts,
+    recentLoading
     }}>
         {loading ? <Loading /> : children}
     </BlogContext.Provider>

@@ -50,7 +50,7 @@ const FollowBtn = ({ userId }) => {
     }
   };
 
-  /* const { pathname } = useLocation(); */
+ 
 
   return (
     <>

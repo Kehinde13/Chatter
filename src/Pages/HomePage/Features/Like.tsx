@@ -25,16 +25,17 @@ function Like({postId, post}) {
       try {
         if (currentUser) {
           const likeRef = doc(db, "posts", postId, "likes", currentUser?.uid);
-          const userLikesRef = doc(db, "users", currentUser?.uid, "likes", post);
+          const userLikesRef = doc(db, "users", currentUser?.uid, "likes", ...post.tags);
           if (Like) {
             await deleteDoc(likeRef);
+            await deleteDoc(userLikesRef)
           } else {
             await setDoc(likeRef, {
               userId: currentUser?.uid,
             });
-            /* await setDoc(userLikesRef, {
-              post: post
-            }); */
+            await setDoc(userLikesRef, {
+              ...post.tags
+            });
           }
         } else {
           setAuthModel(true);

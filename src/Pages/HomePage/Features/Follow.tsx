@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Blog } from "../../../Context/Context";
 import FollowBtn from "./FollowBtn";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import profilePic from '../../../assets/profile.jpg'
 
 const Follow = () => {
   const { currentUser, users } = Blog();
@@ -12,7 +13,7 @@ const Follow = () => {
       ?.slice(0, count)
       .filter((user: object) => user.userId !== currentUser?.uid);
 
-  const navigate = useNavigate();
+ 
 
   return (
     <>
@@ -25,7 +26,7 @@ const Follow = () => {
                 className="flex-1 flex items-center gap-2 cursor-pointer">
                 <img
                   className="w-[3rem] h-[3rem] object-cover gap-2 cursor-pointer rounded-full"
-                  src={userImg}
+                  src={userImg ? userImg : profilePic}
                   alt="userImg"
                 />
                 <div className="flex flex-col gap-1">

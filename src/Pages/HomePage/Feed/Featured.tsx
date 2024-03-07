@@ -4,72 +4,79 @@ import moment from "moment";
 import GetPosts from "../../../hooks/GetPosts";
 import GetSinglePost from "../../../hooks/GetSinglePost";
 import { Blog } from "../../../Context/Context";
+import { Link } from "react-router-dom";
 
 function Featured() {
   const { posts } = GetPosts("posts");
   const { currentUser, users } = Blog();
 
-  const [commonTags, setCommonTags] = useState<Array>([]);
-  const getUserData = users.find((user: object) => user.id === userId);
+  const [commonTags, setCommonTags] = useState([]);
+  const getUserData = users.find((user: object) => user.id === currentUser?.uid);
 
-  const { data: likes } = GetSinglePost("posts", getUserData?.uid, "likes");
+  const { data: likedPost } = GetSinglePost("users", getUserData?.id, "likes");
   
 
   useEffect(() => {
     const recommendedPost: [] = [];
     posts &&
       posts.forEach((post: object) => {
-        if (post.id === singlePost.id) {
+        if (post.title === likedPost) {
           return;
         }
 
         const postTag = post.tags;
-        const commonTags = postTag.filter((tag) =>
-          singlePost?.tags?.includes(tag)
+        const sameTags: [] = postTag.filter((tag: string) =>
+          likedPost?.postTags?.includes(tag)
         );
 
         if (commonTags.length > 0) {
           recommendedPost.push({
             ...post,
-            commonTags,
+            sameTags,
           });
         }
       });
       setCommonTags(recommendedPost)
-  }, [data, singlePost]);
+      console.log(commonTags.length);
+      
+  }, [posts, likedPost]);
+
   return (
     <div>
-      return (
       <section className="bg-gray-100">
         <div className="w-[90%] md:w-[90%] lg:w-[60%] mx-auto py-[3rem]">
-          <h2 className="text-xl font-bold">Recommended from Medium</h2>
-          {commonTags.length < 0 ? (
-            <p>No recommended posts found based on your preference</p>
+          <h2 className="text-xl font-bold">Recommended Posts</h2>
+          {commonTags.length <= 0 ? (
+            <p>No recommended posts found based on your preference, please like more posts</p>
           ) : (
             <div className="grid grid-cols-card gap-[2rem] my-[3rem]">
-              {commonTags.map((post) => (
+              {commonTags.map((post: object) => (
                 <Post post={post} key={post.id} />
               ))}
             </div>
           )}
         </div>
       </section>
-      );
     </div>
   );
 }
 
 export default Featured;
 
-const Post = ({ post }) => {
+type prop ={
+  post: object
+}
+
+const Post = ({ post }: prop) => {
   const { title, desc, created, postImg, id: postId, userId } = post;
   const { posts } = GetPosts("users");
 
   const { username, userImg } =
     posts && posts.find((user: object) => user?.id === userId);
   return (
+    
     <div
-      /* onClick={() => navigate(`/post/${postId}`)} */
+     
       className="w-full cursor-pointer"
     >
       {postImg && (

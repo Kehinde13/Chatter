@@ -13,6 +13,7 @@ import Comment from '../Features/Comment.tsx';
 import Actions from '../Features/Actions.tsx';
 import Bookmark from '../Features/Bookmark.tsx';
 import SharePost from '../Features/SharePost.tsx';
+import CommentSection from '../Features/Comment/CommentSection.tsx';
 
 function SinglePost() {
 const [showSideBar] = useOutletContext()
@@ -85,11 +86,10 @@ const { postId } = useParams();
             <div className="flex items-center justify-between border-b border-t border-gray-200 py-[0.5rem]">
               <div className="flex items-center gap-5">
                 <Like postId={postId} post={post} />
-                <Comment />
+                <SharePost />
               </div>
               <div className="flex items-center pt-2 gap-5">
                 {post && <Bookmark post={post} />}
-                <SharePost />
                 {currentUser && currentUser?.uid === post?.userId && (
                   <Actions postId={postId} title={title} desc={desc} />
                 )}
@@ -108,6 +108,7 @@ const { postId } = useParams();
                 dangerouslySetInnerHTML={{ __html: desc }}
               />
             </div>
+            <CommentSection postId={postId} />
           </section>
         )}
     </div>

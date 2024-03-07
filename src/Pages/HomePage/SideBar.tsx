@@ -1,6 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import feed from "../../assets/ftxtoken.png";
 import trending from "../../assets/eva_trending-up-outline.png";
 import { Link, useNavigate } from "react-router-dom";
 import { Blog } from "../../Context/Context";
@@ -51,24 +49,6 @@ function SideBar({ showSideBar }: prop) {
         <li>Technology</li>
         <li>Politics</li>
         <li>See All</li>
-      </ul>
-
-      <h1 className="font-bold text-lg ml-2">Personal</h1>
-      <ul className="ml-4">
-        <Link to={`profile/${currentUser?.uid}`}>
-          <li>
-            <FontAwesomeIcon icon="fa-solid fa-user" className="mr-2" />
-            Account
-          </li>
-        </Link>
-        <li>
-          <FontAwesomeIcon icon="fa-solid fa-bell" className="mr-2 " />
-          Notification
-        </li>
-        <li className="text-red-500 cursor-pointer"
-            onClick={logout}>
-          Log Out
-        </li>
       </ul>
     </aside>
   );

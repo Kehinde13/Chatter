@@ -21,6 +21,7 @@ function Context({children}: Props) {
   const {users, userLoading} = GetUsers("users")
   const {posts, postLoading} = GetPosts("posts")
   const {recentPosts, recentLoading} = GetRecentPost("posts")
+  const [commentLength, setCommentLength] = useState(0);
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
@@ -49,7 +50,9 @@ function Context({children}: Props) {
     posts,
     postLoading,
     recentPosts,
-    recentLoading
+    recentLoading,
+    commentLength,
+    setCommentLength
     }}>
         {loading ? <Loading /> : children}
     </BlogContext.Provider>

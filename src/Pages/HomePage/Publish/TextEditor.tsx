@@ -31,7 +31,7 @@ const Write = () => {
             value={description}
             onChange={setDescription}
             placeholder="Share Your Story..."
-            className="dark:text-white my-5"
+            className=" my-5"
           />
         </section>
       )}

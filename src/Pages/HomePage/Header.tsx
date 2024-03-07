@@ -5,18 +5,24 @@ import logo from "../../assets/CHATTER.png";
 import { Blog } from "../../Context/Context";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
+import Modal from "../../components/Modal";
+import UserModal from "../UserModal";
 
 function Header() {
   const { currentUser, users, userLoading } = Blog();
   const [searchBar, setSearchBar] = useState(false);
+  const [modal, setModal] = useState(false);
   const { userId } = useParams();
 
   const toggleSearchBar = () => {
     setSearchBar(!searchBar);
   };
 
+  const toggleModal = () => {
+    setModal(!modal);
+  };
 
- const currentUserData = users?.find((user) => user.id === currentUser?.uid);
+  const currentUserData = users?.find((user) => user.id === currentUser?.uid);
 
   return (
     <header>
@@ -53,13 +59,26 @@ function Header() {
               onClick={toggleSearchBar}
             />
             <FontAwesomeIcon icon="fa-solid fa-bell" className="self-center" />
-            <Link to={`profile/${currentUser?.uid}`}>
+            <div
+              className="flex items-center relative"
+              onClick={toggleModal}
+            >
               <img
                 className="w-[2.3rem] h-[2.3rem] object-cover rounded-full cursor-pointer"
                 src={currentUserData?.userImg || profileImg}
                 alt="profile-img"
               />
-            </Link>
+
+              <Modal modal={modal} toggleModal={toggleModal} >
+                <div
+                  className={`${
+                    modal ? "visible opacity-100%" : "invisible opacity-0"
+                  } transition-all duration-100`}
+                >
+                  <UserModal toggleModal={toggleModal} />
+                </div>
+              </Modal>
+            </div>
           </div>
         )}
       </div>

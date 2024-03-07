@@ -14,6 +14,7 @@ import Feed from "./Pages/HomePage/Feed/Feed";
 import TextEditor from "./Pages/HomePage/Publish/TextEditor";
 import Publish from "./Pages/HomePage/Publish/Publish";
 import SinglePost from "./Pages/HomePage/Feed/SinglePost";
+import ForgotPassword from "./Auth/ForgotPassword";
 
 
 
@@ -73,6 +74,10 @@ function App() {
           path: "SignUp",
           element: <SignUp />,
         },
+        {
+          path: "ForgotPassword",
+          element: <ForgotPassword />
+        }
       ],
     },
     {

@@ -29,7 +29,7 @@ function UserModal({toggleModal}: prop) {
     return (
         <section
           className="absolute w-[18rem] p-6 bg-white right-0 top-[100%]
-        shadows rounded-md z-50 text-gray-500">
+        shadows rounded-md z-50">
           {/* <div className="flex flex-col gap-4 border-b border-gray-300 pb-5">
             {userModal.map((link, i) => (
               <Link
@@ -49,10 +49,10 @@ function UserModal({toggleModal}: prop) {
         </Link>
           <button
             onClick={logout}
-            className="flex flex-col pt-5 cursor-pointer hover:text-black/70">
+            className="flex flex-col pt-5 cursor-pointer text-red-500">
             Sign Out
-            <span className="text-sm">{secretEmail(currentUser?.email)}</span>
           </button>
+          <p className="text-sm mt-2">{secretEmail(currentUser?.email)}</p>
         </section>
       );
 }

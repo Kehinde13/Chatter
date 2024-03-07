@@ -16,11 +16,11 @@ function HomePage() {
   
 
   return (
-    <div /* className='dark:bg-slate-800 dark:text-white ' */>
+    <div>
       <Header />
       <div className="flex">
         <button
-          className={`border w-8 py-1 absolute sm:hidden rounded-full top-64 z-50 ${
+          className={`border w-8 py-1 fixed sm:hidden rounded-full top-64 z-50 ${
             showSideBar ? "right-0" : "left-0"
           }`}
           onClick={toggleSideBar}

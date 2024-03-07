@@ -5,6 +5,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { auth } from "./firebase";
 import Loading from "../components/Loading";
+import GoogleSignIn from "../hooks/GoogleSignIn";
 
 function LoginPage() {
   const navigate = useNavigate()
@@ -13,6 +14,7 @@ function LoginPage() {
     password: ""
   })
   const [loading, setLoading] = useState(false)
+  const {googleAuth, googleLoading} = GoogleSignIn()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({...form, [e.target.name]: e.target.value})
@@ -39,14 +41,14 @@ function LoginPage() {
     
   };
   return (
-    <div className="h-screen bg-white dark:bg-slate-800 dark:text-white ">
+    <div className="h-screen bg-white">
       {
-        loading ?
+        loading || googleLoading ?
         <Loading />
         :
        (
        <div>
-        <Link to="/" className="text-white md:text-black absolute p-5 font-bold dark:text-white">
+        <Link to="/" className="text-white md:text-black absolute p-5 font-bold ">
         <FontAwesomeIcon icon="fa-solid fa-angle-left" className="mx-2" />
         Back
       </Link>
@@ -64,14 +66,14 @@ function LoginPage() {
             </div>
           </div>
         </div>
-        <div className="sm:w-[80%] p-5 mx-auto sm:mt-20 dark:bg-slate-800 dark:text-white">
+        <div className="sm:w-[80%] p-5 mx-auto sm:mt-20 ">
           <div className="flex justify-between border-b-2 border-transparent pb-3 mb-3 w-full">
             <Link to="/SignUp" className=" border-b-[3px]  w-[50%] pb-5">
               REGISTER
             </Link>
             <Link
               to="/LoginPage"
-              className=" border-b-[3px] border-blue-500 w-[50%] pb-5 text-right"
+              className=" border-b-[3px] border-purple-500 w-[50%] pb-5 text-right"
             >
               LOGIN
             </Link>
@@ -88,7 +90,7 @@ function LoginPage() {
                   name="userEmail"
                   id="userEmail"
                   placeholder="johndoe@gmail.com"
-                  className=" border border-gray-300 w-full py-2 rounded-md p-2 dark:text-black"
+                  className=" border border-gray-300 w-full py-2 rounded-md p-2"
                   onChange={handleChange}
                 />
               </div>
@@ -99,16 +101,29 @@ function LoginPage() {
                   name="password"
                   id="password"
                   placeholder="**********"
-                  className=" border border-gray-300 w-full py-2 rounded-md p-2 dark:text-black"
+                  className=" border border-gray-300 w-full py-2 rounded-md p-2"
                   onChange={handleChange}
                 />
+                <Link to="/ForgotPassword">
+                <p className="text-red-500 text-sm my-3 text-right">Forgot Password</p>
+                </Link>
               </div>
               <button 
-              className={`bold md:py-2 md:px-10 p-1 bg-blue-500 rounded-md w-full text-white`}>
+              className={`bold md:py-2 md:px-10 p-1 bg-purple-500 rounded-md w-full text-white`}>
                 Login
               </button>
             </div>
           </form>
+          <button
+                onClick={googleAuth}
+                className="bold md:py-2 md:px-10 mt-3 p-1 bg-purple-500 rounded-md w-full text-white"
+              >
+                <FontAwesomeIcon
+                  className="text-red-500 mr-5"
+                  icon="fa-brands fa-google"
+                />
+                Sign In with Google
+          </button>
         </div>
       </div>
       </div>

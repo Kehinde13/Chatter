@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -13,7 +13,11 @@ function Header() {
               Unleash the Power of Words, Connect with Like-minded Readers and
               Writers
             </p>
-            <button className="bold md:py-2 md:px-10 px-3  bg-purple-500 rounded-md self-start">Get Started</button>
+            <Link to="SignUp">
+              <button className="bold px-3 py-1  bg-purple-500 rounded-md self-start">
+                Get Started
+              </button>
+            </Link>
           </div>
         </div>
       </div>

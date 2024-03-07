@@ -6,6 +6,8 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import Loading from "../components/Loading";
+import { Blog } from "../Context/Context";
+import GoogleSignIn from "../hooks/GoogleSignIn";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -17,6 +19,7 @@ function SignUp() {
     password: "",
     confirmPassword: "",
   });
+  const { googleAuth, googleLoading } = GoogleSignIn();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -67,14 +70,14 @@ function SignUp() {
   };
 
   return (
-    <div className="h-screen bg-white dark:bg-slate-800 dark:text-white">
-      {loading ? (
+    <div className="h-screen bg-white">
+      {loading || googleLoading ? (
         <Loading />
       ) : (
         <>
           <Link
             to="/"
-            className="text-white md:text-black absolute m-5 font-bold dark:text-white"
+            className="text-white md:text-black absolute m-5 font-bold"
           >
             <FontAwesomeIcon icon="fa-solid fa-angle-left" className="mx-2" />
             Back
@@ -93,11 +96,11 @@ function SignUp() {
                 </div>
               </div>
             </div>
-            <div className="sm:w-[80%] p-5 mx-auto dark:bg-slate-800 dark:text-white">
+            <div className="sm:w-[80%] p-5 mx-auto ">
               <div className="flex justify-between border-b-2 border-transparent pb-3 mb-3 w-full">
                 <Link
                   to="/SignUp"
-                  className=" border-b-[3px] border-blue-500 w-[50%] pb-3"
+                  className=" border-b-[3px] border-purple-500 w-[50%] pb-3"
                 >
                   REGISTER
                 </Link>
@@ -119,7 +122,7 @@ function SignUp() {
                       type="text"
                       name="firstName"
                       id="firstName"
-                      className="border border-gray-300 py-2 px-2 rounded-md w-full dark:text-black"
+                      className="border border-gray-300 py-2 px-2 rounded-md w-full "
                       placeholder="John"
                       onChange={handleChange}
                     />
@@ -130,13 +133,13 @@ function SignUp() {
                       type="text"
                       name="lastName"
                       id="lastName"
-                      className="border border-gray-300 p-2 rounded-md w-full dark:text-black"
+                      className="border border-gray-300 p-2 rounded-md w-full"
                       placeholder="Doe"
                       onChange={handleChange}
                     />
                   </div>
                 </div>
-  
+
                 <div>
                   <label htmlFor="">Email Address</label> <br />
                   <input
@@ -170,10 +173,20 @@ function SignUp() {
                     className=" border border-gray-300 w-full py-2 rounded-md p-2 dark:text-black"
                   />
                 </div>
-                <button className="bold md:py-2 md:px-10 mt-3 p-1 bg-blue-500 rounded-md w-full text-white">
+                <button className="bold md:py-2 md:px-10 mt-3 p-1 bg-purple-500 rounded-md w-full text-white">
                   Sign Up
                 </button>
               </form>
+              <button
+                onClick={googleAuth}
+                className="bold md:py-2 md:px-10 mt-3 p-1 bg-purple-500 rounded-md w-full text-white"
+              >
+                <FontAwesomeIcon
+                  className="text-red-500 mr-5"
+                  icon="fa-brands fa-google"
+                />
+                Sign Up with Google
+              </button>
             </div>
           </div>
         </>

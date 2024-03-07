@@ -95,10 +95,10 @@ function Publish() {
 
   const getUserData = users.find((user: object) => user.id === userId);
   return (
-    <div className={`sm:mx-auto mx-5 w-[80%] ${showSideBar ? "hidden" : " "}`}>
+    <div className={`sm:mx-3 w-[80%] ${showSideBar ? "hidden" : " "}`}>
       <div className="mt-10 flex flex-col md:flex-row gap-10">
         <div className="flex-[1]">
-          <h3>Story Preview</h3>
+          <h1 className="text-2xl bold capitalize">Story Preview</h1>
           <div
             style={{ backgroundImage: `url(${newPostImage})` }}
             onClick={SubmitImage}

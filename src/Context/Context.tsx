@@ -1,4 +1,4 @@
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
 import { auth } from '../Auth/firebase';
 import Loading from '../components/Loading';
@@ -22,6 +22,7 @@ function Context({children}: Props) {
   const {posts, postLoading} = GetPosts("posts")
   const {recentPosts, recentLoading} = GetRecentPost("posts")
   const [commentLength, setCommentLength] = useState(0);
+  
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {

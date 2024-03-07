@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import profile1 from "../assets/Profile1.png";
 import profile2 from "../assets/profile2.png";
 import profile3 from "../assets/profile3.png";
@@ -16,28 +17,39 @@ function JoinChetter() {
             their ideas and engaging in thoughtful discussions.”
           </p>
           <p>
-            <span className="font-bold text-xl">Adebobola Muhydeen, </span> 
+            <span className="font-bold text-xl">Adebobola Muhydeen, </span>
             Software developer at Apple
           </p>
-          <button className="bold md:py-2 md:px-10 px-3 py-1   bg-purple-500 rounded-md self-start text-white">
-            Join Chatter
-          </button>
+          <Link to="SignUp">
+            <button className="bold md:py-2 md:px-10 px-3 py-1   bg-purple-500 rounded-md self-start text-white">
+              Join Chatter
+            </button>
+          </Link>
         </div>
       </div>
       <div className="md:flex justify-between p-10 md:p-20 ">
         <div className="">
-           <img src={profile2} alt="" className="rounded-full"/>
-           <img src={profile4} alt=""  className="float-right rounded-full md:mt-[-28px] ml-20"/>
-           <img src={profile3} alt="" className="rounded-full mt-20"/>
+          <img src={profile2} alt="" className="rounded-full" />
+          <img
+            src={profile4}
+            alt=""
+            className="float-right rounded-full md:mt-[-28px] ml-20"
+          />
+          <img src={profile3} alt="" className="rounded-full mt-20" />
         </div>
         <div className="flex flex-col gap-10 my-5 md:mx-20">
-            <h1 className="text-3xl font-bold md:w-[70%]">Write, read and connect with great minds on chatter</h1>
-            <p>
-            Share people your great ideas, and also read write-ups based on your interests. connect with people of same interests and goals  
-            </p>
+          <h1 className="text-3xl font-bold md:w-[70%]">
+            Write, read and connect with great minds on chatter
+          </h1>
+          <p>
+            Share people your great ideas, and also read write-ups based on your
+            interests. connect with people of same interests and goals
+          </p>
+          <Link to="SignUp">
             <button className="bold md:py-2 md:px-10 px-3 py-1  bg-purple-500 rounded-md self-start text-white">
-            Join Chatter
-          </button>
+              Join Chatter
+            </button>
+          </Link>
         </div>
       </div>
     </div>

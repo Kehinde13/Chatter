@@ -28,7 +28,12 @@ function Header() {
     <header>
       {userLoading && <Loading />}
       <div className="flex gap-2 justify-between mx-3 md:mx-5 items-center h-[70px] h-shadow-lg">
-        <img src={logo} className={`${searchBar ? "w-[80px]" : "w-[120px]"}`} />
+        <Link to="/HomePage">
+          <img
+            src={logo}
+            className={`${searchBar ? "w-[80px]" : "w-[120px]"}`}
+          />
+        </Link>
         <form
           className={`sm:flex sm:mb-0 items-center gap-2 bg-gray-100 px-2 rounded-full relative z-10 sm:w-[300px]
                       duration-300  ${
@@ -59,17 +64,14 @@ function Header() {
               onClick={toggleSearchBar}
             />
             <FontAwesomeIcon icon="fa-solid fa-bell" className="self-center" />
-            <div
-              className="flex items-center relative"
-              onClick={toggleModal}
-            >
+            <div className="flex items-center relative" onClick={toggleModal}>
               <img
                 className="w-[2.3rem] h-[2.3rem] object-cover rounded-full cursor-pointer"
                 src={currentUserData?.userImg || profileImg}
                 alt="profile-img"
               />
 
-              <Modal modal={modal} toggleModal={toggleModal} >
+              <Modal modal={modal} toggleModal={toggleModal}>
                 <div
                   className={`${
                     modal ? "visible opacity-100%" : "invisible opacity-0"

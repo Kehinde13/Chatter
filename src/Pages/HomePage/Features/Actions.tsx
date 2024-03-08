@@ -6,22 +6,29 @@ import { toast } from "react-toastify"; */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Blog } from "../../../Context/Context";
 import DropDown from "../../../components/Dropdown";
+import { Link, useNavigate } from "react-router-dom";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { db } from "../../../Auth/firebase";
+import { toast } from "react-toastify";
 
 const Actions = ({ postId, title, desc }) => {
   const { setUpdateData, currentUser } = Blog();
   const [showDrop, setShowDrop] = useState(false);
+
+
   const handleClick = () => {
     setShowDrop(!showDrop);
   };
 
-  /* const navigate = useNavigate(null); */
+   const navigate = useNavigate(); 
 
-  /* const handleEdit = () => {
-    navigate(`/editPost/${postId}`);
+   const handleEdit = () => {
+    navigate(`EditPost/${postId}`);
     setUpdateData({ title, description: desc });
-  }; */
+  }; 
+  
 
-  /* const handleRemove = async () => {
+   const handleRemove = async () => {
     try {
       const ref = doc(db, "posts", postId);
       const likeRef = doc(db, "posts", postId, "likes", currentUser?.uid);
@@ -40,19 +47,19 @@ const Actions = ({ postId, title, desc }) => {
 
       toast.success("post has been removed");
       setShowDrop(false);
-      navigate("/");
+      navigate("/HomePage");
     } catch (error) {
       toast.success(error.message);
     }
-  }; */
+  }; 
   return (
     <div className="relative">
       <button onClick={handleClick}>
         <FontAwesomeIcon icon="fa-solid fa-ellipsis" />
       </button>
       <DropDown showDrop={showDrop} setShowDrop={setShowDrop} size="w-[7rem]">
-        <Button click="" title="Edit Story" />
-        <Button click="" title="Delete Story" />
+        <Button click={handleEdit} title="Edit Story" />
+        <Button click={handleRemove} title="Delete Story" />
       </DropDown>
     </div>
   );

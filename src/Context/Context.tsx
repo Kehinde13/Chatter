@@ -1,4 +1,4 @@
-import { onAuthStateChanged, signInWithPopup } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
 import { auth } from '../Auth/firebase';
 import Loading from '../components/Loading';
@@ -22,6 +22,9 @@ function Context({children}: Props) {
   const {posts, postLoading} = GetPosts("posts")
   const {recentPosts, recentLoading} = GetRecentPost("posts")
   const [commentLength, setCommentLength] = useState(0);
+  const [updateData, setUpdateData] = useState<object>({});
+
+  const [publish, setPublish] = useState<boolean>(false);
   
 
   useEffect(() => {
@@ -53,7 +56,11 @@ function Context({children}: Props) {
     recentPosts,
     recentLoading,
     commentLength,
-    setCommentLength
+    setCommentLength,
+    updateData,
+    setUpdateData,
+    publish,
+    setPublish
     }}>
         {loading ? <Loading /> : children}
     </BlogContext.Provider>

@@ -15,6 +15,7 @@ import TextEditor from "./Pages/HomePage/Publish/TextEditor";
 import Publish from "./Pages/HomePage/Publish/Publish";
 import SinglePost from "./Pages/HomePage/Feed/SinglePost";
 import ForgotPassword from "./Auth/ForgotPassword";
+import EditPost from "./Pages/HomePage/Publish/EditPost";
 
 
 
@@ -56,6 +57,10 @@ function App() {
             {
               path: "SinglePost/:postId",
               element: <SinglePost />
+            }, 
+            {
+              path: "EditPost/:postId",
+              element: <EditPost />
             }
           ]
         }, 

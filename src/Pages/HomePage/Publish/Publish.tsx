@@ -150,7 +150,7 @@ function Publish() {
             onClick={publishPost}
             className="btn bg-purple-500 w-fit text-white rounded-full p-2"
           >
-            {loading ? "Publishing..." : "Publish Now"}
+            {loading ? "Publishing..." : "Publish"}
           </button>
         </div>
       </div>

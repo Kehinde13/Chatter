@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useOutletContext, useParams } from 'react-router-dom'
+import { Link, useOutletContext, useParams } from 'react-router-dom'
 import { Blog } from '../../../Context/Context';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../../Auth/firebase';
@@ -64,15 +64,16 @@ const { postId } = useParams();
           <section className="w-[90%]  mx-auto py-[3rem]">
             <h2 className="text-4xl font-extrabold capitalize">{title}</h2>
             <div className="flex items-center gap-2 py-[2rem]">
+              <Link to={`/HomePage/profile/${userId}`}>
               <img
-                /* onClick={() => navigate(`/profile/${userId}`)} */
                 className="w-[3rem] h-[3rem] object-cover rounded-full cursor-pointer"
                 src={userImg}
                 alt="user-img"
               />
+              </Link>
               <div>
-                <div className="capitalize">
-                  <span>{username} .</span>
+                <div className="capitalize flex gap-5">
+                  <span className='self-center bold'>{username}</span>
                   {currentUser && currentUser?.uid !== userId && (
                     <FollowBtn userId={userId} />
                   )}

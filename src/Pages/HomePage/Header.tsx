@@ -7,6 +7,7 @@ import { Link, useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
 import Modal from "../../components/Modal";
 import UserModal from "../UserModal";
+import Search from "./Search";
 
 function Header() {
   const { currentUser, users, userLoading } = Blog();
@@ -34,28 +35,9 @@ function Header() {
             className={`${searchBar ? "w-[80px]" : "w-[120px]"}`}
           />
         </Link>
-        <form
-          className={`sm:flex sm:mb-0 items-center gap-2 bg-gray-100 px-2 rounded-full relative z-10 sm:w-[300px]
-                      duration-300  ${
-                        searchBar ? "flex " : "mb-[200px] w-[20%]"
-                      }`}
-        >
-          <button className="text-xl text-gray-400">
-            <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
-          </button>
-          <input
-            className="bg-transparent outline-none py-[0.7rem] text-sm w-full"
-            type="text"
-            placeholder="Search Chatter"
-          />
-          {searchBar && (
-            <FontAwesomeIcon
-              icon="fa-solid fa-xmark"
-              className="text-slate-800"
-              onClick={toggleSearchBar}
-            />
-          )}
-        </form>
+        
+        <Search searchBar={searchBar} toggleSearchBar={toggleSearchBar} />
+        
         {!searchBar && (
           <div className="flex gap-5">
             <FontAwesomeIcon
@@ -63,10 +45,9 @@ function Header() {
               className="self-center sm:hidden block"
               onClick={toggleSearchBar}
             />
-            <FontAwesomeIcon icon="fa-solid fa-bell" className="self-center" />
             <div className="flex items-center relative" onClick={toggleModal}>
               <img
-                className="w-[2.3rem] h-[2.3rem] object-cover rounded-full cursor-pointer"
+                className="sm:w-[2.5rem] sm:h-[2.5rem] w-[70px] h-[35px] object-cover rounded-full cursor-pointer"
                 src={currentUserData?.userImg || profileImg}
                 alt="profile-img"
               />

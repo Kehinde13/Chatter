@@ -29,7 +29,6 @@ const { postId } = useParams();
       try {
         const postRef = doc(db, "posts", postId);
         const getPost = await getDoc(postRef);
-
         if (getPost.exists()) {
           const postData = getPost.data();
           if (postData?.userId) {

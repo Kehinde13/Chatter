@@ -22,6 +22,7 @@ import {
   faComment,
   faUpRightFromSquare,
   faCopy,
+  faBars,
 } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faGoogle, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import Context from './Context/Context.tsx'
@@ -52,7 +53,8 @@ library.add(
   faUpRightFromSquare,
   faFacebook,
   faTwitter,
-  faLinkedin  )
+  faLinkedin,
+  faBars  )
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

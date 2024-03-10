@@ -1,19 +1,27 @@
-import trending from "../../assets/eva_trending-up-outline.png";
+import { Link } from "react-router-dom";
 import Follow from "./Features/Follow";
 
 type prop = {
   showSideBar: boolean;
+  setShowSideBar: (showSideBar: boolean) => boolean
 };
 
-function SideBar({ showSideBar }: prop) {
-
- 
+function SideBar({ showSideBar, setShowSideBar }: prop) {
+  const topics = [
+    "Programming",
+    "Data Science",
+    "Machine Learning",
+    "Technology",
+    "Politics",
+    "markdown",
+    "Updates",
+  ];
 
   return (
     <aside
-      className={`sticky top-0 overflow-y-auto scrollbar-hidden pb-4 flex flex-col sm:w-[20%] sm:ml-0 pr-10 sm:border-r-2
+      className={`sticky top-0 overflow-y-scroll pb-4 flex flex-col sm:w-[20%] sm:ml-0 pr-10 sm:border-r-2
                    duration-500 ${
-                     showSideBar ? "ml-1 w-full" : "ml-[-250px] border-r-0"
+                     showSideBar ? "ml-1 w-full" : "ml-[-260px] border-r-0"
                    }`}
     >
       <h1 className="font-bold text-lg ml-2">Following</h1>
@@ -23,16 +31,15 @@ function SideBar({ showSideBar }: prop) {
       </div>
 
       <div className="flex gap-2">
-        <h1 className="font-bold text-lg ml-2">Trending</h1>
-        <img src={trending} alt="" />
+        <h1 className="font-bold text-lg ml-2 text-center">Discover</h1>
       </div>
-      <ul className="ml-4">
-        <li>Programming</li>
-        <li>Data Science</li>
-        <li>Machine Learning</li>
-        <li>Technology</li>
-        <li>Politics</li>
-        <li>See All</li>
+      <ul className="ml-5">
+        {topics.map((topic, i) => (
+          <Link to={`/HomePage/FilteredPosts/${topic}`} key={i}
+                onClick={(e) => setShowSideBar(false)}>
+            <li className="p-2">{topic}</li>
+          </Link>
+        ))}
       </ul>
     </aside>
   );

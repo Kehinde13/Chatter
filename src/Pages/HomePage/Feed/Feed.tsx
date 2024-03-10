@@ -1,8 +1,8 @@
 import { Link, useOutletContext } from "react-router-dom";
-import Featured from "./Featured";
 import ForYou from "./ForYou";
 import Recent from "./Recent";
 import { useState } from "react";
+import Trending from "./Trending";
 
 function Feed() {
   const [showSideBar] = useOutletContext();
@@ -12,8 +12,8 @@ function Feed() {
       component: ForYou,
     },
     {
-      title: "Recomended",
-      component: Featured,
+      title: "Trending",
+      component: Trending,
     },
     {
       title: "Recent",

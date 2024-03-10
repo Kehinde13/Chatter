@@ -23,8 +23,12 @@ const Actions = ({ postId, title, desc }) => {
    const navigate = useNavigate(); 
 
    const handleEdit = () => {
-    navigate(`EditPost/${postId}`);
+    navigate(`/HomePage/EditPost/${postId}`);
     setUpdateData({ title, description: desc });
+  }; 
+
+  const Analytics = () => {
+    navigate(`/HomePage/Analytics/${postId}`);
   }; 
   
 
@@ -60,6 +64,7 @@ const Actions = ({ postId, title, desc }) => {
       <DropDown showDrop={showDrop} setShowDrop={setShowDrop} size="w-[7rem]">
         <Button click={handleEdit} title="Edit Story" />
         <Button click={handleRemove} title="Delete Story" />
+        <Button click={Analytics} title="Analytics" />
       </DropDown>
     </div>
   );

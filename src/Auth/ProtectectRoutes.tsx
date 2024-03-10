@@ -8,10 +8,7 @@ type Props = {
 
 
 const ProtectedRoutes = ({currentUser}: Props) => {
-  useEffect(() => {
-  console.log(currentUser);
-})
-  return currentUser ? <Outlet /> : <Navigate to={'/LoginPage'} />;
+  return currentUser ? <Outlet /> : <Navigate to={'/SignUp'} />;
 };
 
 export default ProtectedRoutes;

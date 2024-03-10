@@ -1,4 +1,5 @@
-import LandingPage from "./Pages/LandingPage";
+import { lazy, Suspense } from "react";
+const LandingPage = lazy(() => import("./Pages/LandingPage"));
 import LoginPage from "./Auth/LoginPage";
 import SignUp from "./Auth/SignUp";
 import ProtectedRoutes from "./Auth/ProtectectRoutes";
@@ -16,7 +17,15 @@ import Publish from "./Pages/HomePage/Publish/Publish";
 import SinglePost from "./Pages/HomePage/Feed/SinglePost";
 import ForgotPassword from "./Auth/ForgotPassword";
 import EditPost from "./Pages/HomePage/Publish/EditPost";
+import FilteredPosts from "./Pages/HomePage/FilteredPosts";
+import Contact from "./Pages/Contact";
+import Blogs from "./Pages/Blogs";
+import Analytics from "./Pages/Analytics";
+import Loading from "./components/Loading";
 
+
+
+const Fallback = () => <Loading />
 
 
 function App() {
@@ -61,6 +70,14 @@ function App() {
             {
               path: "EditPost/:postId",
               element: <EditPost />
+            },
+            {
+              path: "FilteredPosts/:tag",
+              element: <FilteredPosts/>
+            },
+            {
+              path: "Analytics/:postId",
+              element: <Analytics />
             }
           ]
         }, 
@@ -82,6 +99,14 @@ function App() {
         {
           path: "ForgotPassword",
           element: <ForgotPassword />
+        },
+        {
+          path: "Contact",
+          element: <Contact />
+        },
+        {
+          path: "Blogs",
+          element: <Blogs />
         }
       ],
     },
@@ -92,10 +117,10 @@ function App() {
   ]);
 
   return (
-    <>
+    <Suspense fallback={<Fallback />}>
        <RouterProvider router={router}  />
        <ToastContainer />
-    </>
+    </Suspense>
   ) ;
   
 }

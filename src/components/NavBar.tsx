@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/CHATTER.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaBars } from "react-icons/fa";
+import { MdOutlineCancel } from "react-icons/md";
 import { useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
 
-type Props = {
+type NavBarProps = {
   modal: boolean;
-  setModal: (modal: boolean) => boolean;
-  setModalText: (text: string) => string;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalText: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function NavBar({ modal, setModal, setModalText }: Props) {
+function NavBar({ modal, setModal, setModalText }: NavBarProps) {
   const [dropdown, setDropdown] = useState<boolean>(false);
 
   const toggleDropdown = () => {
@@ -35,8 +36,7 @@ function NavBar({ modal, setModal, setModalText }: Props) {
           alt="logo"
           className="w-[80px] sm:w-[150px] self-center"
         />
-        <FontAwesomeIcon
-          icon="fa-solid fa-bars"
+        <FaBars
           className="block md:hidden"
           onClick={toggleDropdown}
         />
@@ -75,8 +75,7 @@ function NavBar({ modal, setModal, setModalText }: Props) {
       </div>
       {dropdown && (
         <div className="bg-white fixed inset-0 z-10 h-screen flex flex-col gap-5">
-          <FontAwesomeIcon
-            icon="fa-solid fa-xmark"
+          <MdOutlineCancel
             className="self-end m-5 sm:hidden block"
             onClick={toggleDropdown}
           />

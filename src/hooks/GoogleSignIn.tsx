@@ -1,9 +1,10 @@
 import { signInWithPopup } from 'firebase/auth';
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { auth, db, provider } from '../Auth/firebase';
 import { useNavigate } from 'react-router-dom';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
+import { FirebaseError } from 'firebase/app';
 
 function GoogleSignIn() {
     const [googleLoading, setGoogleLoading] = useState<boolean>(false)
@@ -34,7 +35,9 @@ function GoogleSignIn() {
       toast.success("User have been Signed in");
       navigate("/HomePage"); 
     } catch (error: unknown) {
-      toast.error(error.message);
+      if(error instanceof FirebaseError){
+        toast.error(error.message);
+      }
       setGoogleLoading(false)
     }
   };

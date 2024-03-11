@@ -1,9 +1,8 @@
-import React from "react";
 import { Blog } from "../../../Context/Context";
 
 type props = {
   getUserData: object;
-  setModal: (modal: boolean) => boolean;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const About = ({ getUserData, setModal }: props) => {

@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 type Props = {
-    currentUser: boolean;
+    currentUser: object | boolean;
 }
 
 

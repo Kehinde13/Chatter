@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ReactQuill from "react-quill";
 import { Blog } from "../../../Context/Context";
 import { Link, useOutletContext } from "react-router-dom";
 import MarkdownEditor from "./MarkdownEditor";
 
 const Write = () => {
-  const [showSideBar] = useOutletContext();
+  const [showSideBar]: [boolean] = useOutletContext();
   const { title, setTitle, description, setDescription } = Blog();
   const [markdown, setMarkdown] = useState<boolean>(false);
+
+
+  const toggleMarkdown = () => {
+    setMarkdown(!markdown)
+  }
 
   return (
     <div
@@ -39,14 +44,14 @@ const Write = () => {
       <div className="flex justify-between w-full md:w-[90%] mx-auto">
         {!markdown ? (
           <button
-            onClick={(e) => setMarkdown(true)}
+            onClick={toggleMarkdown}
             className="bg-purple-500 p-2 rounded-full text-white"
           >
             Markdown Editor
           </button>
         ) : (
           <button
-            onClick={(e) => setMarkdown(false)}
+            onClick={toggleMarkdown}
             className="bg-purple-500 p-2 rounded-full text-white"
           >
             Text Editor

@@ -1,18 +1,26 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaGoogle } from "react-icons/fa";
+import { IoIosArrowBack } from "react-icons/io";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "./firebase";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import Loading from "../components/Loading";
-import { Blog } from "../Context/Context";
 import GoogleSignIn from "../hooks/GoogleSignIn";
+
+interface FormState {
+  firstName: string;
+  lastName: string;
+  Email: string;
+  password: string;
+  confirmPassword: string;
+}
 
 function SignUp() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState<object>({
+  const [form, setForm] = useState<FormState>({
     firstName: "",
     lastName: "",
     Email: "",
@@ -25,47 +33,47 @@ function SignUp() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
-    if (
-      form[
-        ("firstName", "lastName", "Email", "password", "confirmPassword")
-      ] === ""
-    ) {
+    if (Object.values(form).some((field) => field === "")) {
       toast.error("All fields are required");
       setLoading(false);
-    } else if (form["password"] !== form["confirmPassword"]) {
-      toast.error("your passwords does not Match");
+      return;
+    }
+
+    if (form.password !== form.confirmPassword) {
+      toast.error("Your passwords do not match");
       setLoading(false);
       return;
-    } else {
-      try {
-        const { user } = await createUserWithEmailAndPassword(
-          auth,
-          form.Email,
-          form.password
-        );
-        const docRef = doc(db, "users", user.uid);
+    }
 
-        const userDoc = await getDoc(docRef);
+    try {
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        form.Email,
+        form.password
+      );
+      const docRef = doc(db, "users", user.uid);
 
-        if (!userDoc.exists()) {
-          await setDoc(docRef, {
-            userId: user.uid,
-            username: form.firstName,
-            email: form.Email,
-            userImg: "",
-            bio: "",
-          });
-          toast.success("Sign Up Succesfull");
-          navigate("/HomePage");
-          setLoading(false);
-        }
-      } catch (error: unknown) {
-        toast.error(error.message);
+      const userDoc = await getDoc(docRef);
+
+      if (!userDoc.exists()) {
+        await setDoc(docRef, {
+          userId: user.uid,
+          username: form.firstName,
+          email: form.Email,
+          userImg: "",
+          bio: "",
+        });
+        toast.success("Sign Up Successful");
+        navigate("/HomePage");
+        setLoading(false);
       }
+    } catch (error) {
+      toast.error((error as Error).message);
+      setLoading(false);
     }
   };
 
@@ -77,9 +85,11 @@ function SignUp() {
         <>
           <Link
             to="/"
-            className="text-white md:text-black absolute m-5 font-bold"
+            className="text-white md:text-black absolute m-5 font-bold flex"
           >
-            <FontAwesomeIcon icon="fa-solid fa-angle-left" className="mx-2" />
+            <IoIosArrowBack
+              className="mx-2 self-center"
+            />
             Back
           </Link>
           <div className="md:flex gap-20 md:my-2 md:w-[70%] md:mx-auto">
@@ -179,11 +189,10 @@ function SignUp() {
               </form>
               <button
                 onClick={googleAuth}
-                className="bold md:py-2 md:px-10 mt-3 p-1 bg-purple-500 rounded-md w-full text-white"
+                className="bold md:py-2 md:px-10 mt-3 p-1 bg-purple-500 rounded-md w-full text-white flex justify-around"
               >
-                <FontAwesomeIcon
-                  className="text-red-500 mr-5"
-                  icon="fa-brands fa-google"
+                <FaGoogle
+                  className="text-red-500 mr-5 text-xl"
                 />
                 Sign Up with Google
               </button>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Blog } from "../../../Context/Context";
 
 import profileImg from "../../../assets/profile.jpg";
@@ -28,7 +28,7 @@ function ProfilePage() {
   ];
   const [currentPanel, setCurrentPanel] = useState<object>(panels[0]);
   const [modal, setModal] = useState<boolean>(false);
-  const [showSideBar] = useOutletContext();
+  const [showSideBar]: [boolean] = useOutletContext();
 
   const getUserData = users.find((user: object) => user.id === userId);
   const { data: following } = GetSinglePost("users", userId, "following");

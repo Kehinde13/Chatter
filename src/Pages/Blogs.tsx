@@ -1,21 +1,39 @@
-import React from "react";
 import { Blog } from "../Context/Context";
 import { readTime } from "../utils/helper";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 
+interface Post {
+  id: number;
+  title: string;
+  desc: string;
+  created: string;
+  postImg: string;
+  username: string;
+  pageViews: number;
+}
+
+
 function Blogs() {
   const { posts } = Blog();
-  const getTrending =
-    posts && posts?.sort((a: object, b: object) => b.pageViews - a.pageViews);
+  const getTrending: Post[] = posts ? posts.map((post: any) => ({
+    id: post.id,
+    title: post.title,
+    desc: post.desc,
+    created: post.created,
+    postImg: post.postImg,
+    username: post.username,
+    pageViews: post.pageViews 
+  })).sort((a: Post, b: Post) => b.pageViews - a.pageViews) : [];
+
   return (
     <div>
-      <h1 className="text-3xl font-bold border-b-2 border-purple-500 m-5 pb-3 w-[20%] mx-auto text-center">
+      <h1 className="text-3xl font-bold border-b-2 border-purple-500 m-5 pb-3 sm:w-[20%] mx-auto text-center">
         Trending Posts
       </h1>
       {getTrending ? (
-        getTrending?.map((post: object, i: number) => (
+        getTrending.map((post: Post, i: number) => (
           <BlogCard post={post} key={i} />
         ))
       ) : (
@@ -25,13 +43,14 @@ function Blogs() {
   );
 }
 
+
 export default Blogs;
 
-type prop = {
-  post: object;
+type BlogCardProps = {
+  post: Post;
 };
 
-const BlogCard = ({ post }: prop) => {
+const BlogCard = ({ post }: BlogCardProps) => {
   const { title, desc, created, postImg, id: postId, username } = post;
 
   return (

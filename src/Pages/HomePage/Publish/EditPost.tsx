@@ -5,9 +5,12 @@ import { Blog } from '../../../Context/Context';
 import { doc, updateDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { db } from '../../../Auth/firebase';
+import { FirebaseError } from 'firebase/app';
+
+
 
 function EditPost() {
-    const [showSideBar] = useOutletContext();
+    const [showSideBar]: [boolean] = useOutletContext();
     const { updateData, title, setTitle, description, setDescription } = Blog();
     const [loading, setLoading] = useState<boolean>(false)
     const { pathname } = useLocation();
@@ -26,8 +29,10 @@ function EditPost() {
           });  
           navigate(`/HomePage`);
           toast.success("Post has been updated");
-        } catch (error) {
-          toast.error(error.message)
+        } catch (error: unknown) {
+          if(error instanceof FirebaseError){
+            toast.error(error.message)
+          }
         } finally {
           setLoading(false);
         }

@@ -1,4 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { MdOutlineCancel } from "react-icons/md";
+import { FaGoogle } from "react-icons/fa";
+import { MdOutlineEmail } from "react-icons/md";
 import { signInWithPopup } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db, provider } from "./firebase";
@@ -6,10 +8,11 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import Loading from "../components/Loading";
+import { FirebaseError } from "firebase/app";
 
 type Props = {
   modal: boolean;
-  setModal: (modal: boolean) => boolean;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
   text: string;
 };
 
@@ -43,9 +46,13 @@ function AuthModal({ modal, setModal, text }: Props) {
       toast.success("User have been Signed in");
       navigate("/HomePage"); 
     } catch (error: unknown) {
-      toast.error(error.message);
-      setLoading(false)
-    }
+      if (error instanceof FirebaseError) {
+          toast.error(error.message);
+      } else {
+          // Handle other types of errors
+          toast.error("An error occurred");
+      }
+  }
   };
 
   return (
@@ -59,26 +66,26 @@ function AuthModal({ modal, setModal, text }: Props) {
           <Loading /> :
           <div className="relative w-[80%] md:w-[50%] py-10 mx-auto mt-20 bg-white z-50 rounded-md border border-black">
           <button className="absolute top-3 right-5">
-            <FontAwesomeIcon
+          <MdOutlineCancel 
+          className="text-xl"
               onClick={() => setModal(!modal)}
-              icon="fa-solid fa-xmark"
-            />
+          />
           </button>
           <div className="flex flex-col gap-5">
             <button 
               onClick={googleAuth}
-              className="border border-red-500 py-2 px-5 md:w-[50%] mx-auto rounded-md">
-              <FontAwesomeIcon 
-              className="text-red-500 mr-5"
-              icon="fa-brands fa-google" />
-              {text} with Google
+              className="border border-red-500 py-2 px-5 md:w-[50%] mx-auto rounded-md flex  justify-around">
+              <FaGoogle 
+              className="text-red-500 text-2xl self-center"
+              />
+              <p>{text} with Google</p>
             </button>
             <Link to={text === 'Sign Up' ? "SignUp" : "LoginPage"}
-            className="border border-blue-500 py-2 px-5 md:w-[50%] mx-auto rounded-md text-center">
-              <FontAwesomeIcon 
-              className="text-blue-500 mr-5"
-              icon="fa-solid fa-envelope" />
-              {text} with Email
+            className="border border-blue-500 py-2 px-5 md:w-[50%] mx-auto rounded-md text-center flex justify-around">
+              <MdOutlineEmail 
+              className="text-blue-500 text-2xl self-center"
+               />
+               <p>{text} with Email</p>
             </Link>
           </div>
           </div>

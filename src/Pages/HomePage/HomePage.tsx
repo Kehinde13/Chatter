@@ -2,7 +2,8 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import SideBar from "./SideBar";
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaAngleLeft } from "react-icons/fa6";
+import { FaAngleRight } from "react-icons/fa6";
 
 function HomePage() {
   const [showSideBar, setShowSideBar] = useState<boolean>(false);
@@ -12,8 +13,6 @@ function HomePage() {
   const toggleSideBar = () => {
     setShowSideBar(!showSideBar);
   };
-
-  
 
   return (
     <div>
@@ -25,11 +24,12 @@ function HomePage() {
           }`}
           onClick={toggleSideBar}
         >
-          <FontAwesomeIcon
-            icon={
-              showSideBar ? "fa-solid fa-angle-left" : "fa-solid fa-angle-right"
-            }
-          />
+          {
+            showSideBar ? (
+             <FaAngleLeft /> ):(
+              <FaAngleRight />
+            )
+          }
         </button>
         <SideBar showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
         <Outlet context={[

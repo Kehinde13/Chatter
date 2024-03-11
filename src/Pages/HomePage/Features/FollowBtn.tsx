@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Blog } from "../../../Context/Context";
 import { toast } from "react-toastify";
-import { useLocation } from "react-router-dom";
 import GetSinglePost from "../../../hooks/GetSinglePost";
 import { db } from "../../../Auth/firebase";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
+import { FirebaseError } from "firebase/app";
 
 const FollowBtn = ({ userId }) => {
   const [isFollowed, setIsFollowed] = useState(false);
   const { currentUser } = Blog();
 
-  const { data, loading } = GetSinglePost(
+  const { data } = GetSinglePost(
     "users",
     currentUser?.uid,
     "following"
@@ -46,7 +46,9 @@ const FollowBtn = ({ userId }) => {
         }
       }
     } catch (error: unknown) {
-      toast.error(error.message);
+      if(error instanceof FirebaseError){
+        toast.error(error.message);
+      }
     }
   };
 

@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IoIosArrowBack } from "react-icons/io";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
@@ -8,12 +8,17 @@ import { auth } from "./firebase";
 
 function ForgotPassword() {
   const navigate = useNavigate()
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [email, setEmail] = useState<string>("")
 
-  const handleReset = (e) => {
+  const handelEmail = () => {
+    setEmail(email)
+  }
+
+  const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true)
-    const userEmail = e.target.Email.value;
+    const userEmail = email
     if(userEmail === ""){
         toast.error("input Your Email")
         setLoading(false)
@@ -39,7 +44,7 @@ function ForgotPassword() {
             to="/"
             className="text-white md:text-black absolute m-5 font-bold"
           >
-            <FontAwesomeIcon icon="fa-solid fa-angle-left" className="mx-2" />
+            <IoIosArrowBack  className="mx-2" />
             Back
           </Link>
           <div className="md:flex gap-20 md:my-2 md:w-[70%] md:mx-auto">
@@ -67,6 +72,8 @@ function ForgotPassword() {
                   type="email"
                   placeholder="Email"
                   name="Email"
+                  value={email}
+                  onChange={handelEmail}
                 />
                 <button className="bg-purple-500 w-[150px] py-2 rounded-md mx-auto text-white">
                   Reset Password

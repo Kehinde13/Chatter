@@ -3,17 +3,19 @@ import Loading from '../../components/Loading';
 import { useOutletContext, useParams } from 'react-router-dom';
 import { Blog } from '../../Context/Context';
 
+
+
 function FilteredPosts() {
     const { tag } = useParams();
     const { posts, postLoading } = Blog();
-    const [showSideBar]= useOutletContext()
+    const [showSideBar]: [boolean]= useOutletContext()
   
     const filteredData = posts.filter((post: object) => post.tags.includes(tag));
   
     return (
       <section className={`sm:mx-3 w-[80%] ${showSideBar ? "hidden" : " "}`}>
         <div>
-          <h3 className="text-3xl pb-6 border-b border-purple-500 mb-[3rem] text-center">
+          <h3 className="text-3xl pb-6 border-b border-purple-500 mb-[3rem] ">
             {filteredData.length
               ? "Your Filtered Posts "
               : "There are no post with this tag"}

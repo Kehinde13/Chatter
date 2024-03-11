@@ -1,11 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IoIosArrowBack } from "react-icons/io";
+import { FaGoogle } from "react-icons/fa";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { auth } from "./firebase";
 import Loading from "../components/Loading";
 import GoogleSignIn from "../hooks/GoogleSignIn";
+import { FirebaseError } from "firebase/app";
 
 function LoginPage() {
   const navigate = useNavigate()
@@ -24,7 +26,7 @@ function LoginPage() {
     e.preventDefault();
     setLoading(true)
 
-    if(form[("userEmail", "password")] === ""){
+    if(form[("userEmail")] === "" || form[("password")] === ""){
       toast.error("Input email and password")
       setLoading(false)
     }
@@ -35,7 +37,9 @@ function LoginPage() {
       toast.success("User has been logged in")
       setLoading(false)
     } catch(error: unknown){
-      toast.error(error.message)
+      if(error instanceof FirebaseError){
+        toast.error(error.message)
+      }
       setLoading(false)
     }
     
@@ -48,8 +52,8 @@ function LoginPage() {
         :
        (
        <div>
-        <Link to="/" className="text-white md:text-black absolute p-5 font-bold ">
-        <FontAwesomeIcon icon="fa-solid fa-angle-left" className="mx-2" />
+        <Link to="/" className="text-white md:text-black absolute p-5 font-bold flex">
+        <IoIosArrowBack  className="mx-2 self-center" />
         Back
       </Link>
       <div className="md:flex gap-20 md:my-2 md:w-[70%] md:mx-auto">
@@ -116,11 +120,10 @@ function LoginPage() {
           </form>
           <button
                 onClick={googleAuth}
-                className="bold md:py-2 md:px-10 mt-3 p-1 bg-purple-500 rounded-md w-full text-white"
+                className="bold md:py-2 md:px-10 mt-3 p-1 bg-purple-500 rounded-md w-full flex justify-around text-white"
               >
-                <FontAwesomeIcon
-                  className="text-red-500 mr-5"
-                  icon="fa-brands fa-google"
+                <FaGoogle
+                  className="text-red-500 mr-5 text-xl"
                 />
                 Sign In with Google
           </button>

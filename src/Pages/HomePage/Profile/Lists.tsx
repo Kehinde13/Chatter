@@ -1,4 +1,3 @@
-import React from 'react'
 import { Blog } from '../../../Context/Context';
 import GetSinglePost from '../../../hooks/GetSinglePost';
 import Loading from '../../../components/Loading';

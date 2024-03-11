@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { MdOutlineCancel } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
 import profilePhoto from "../../../assets/profile.jpg";
 import { toast } from "react-toastify";
@@ -9,7 +9,7 @@ import Loading from "../../../components/Loading";
 
 type prop = {
   modal: boolean;
-  setModal: (modal: boolean) => boolean;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
   getUserData: object
 };
 
@@ -61,6 +61,7 @@ function EditProfileModal({ modal, setModal, getUserData }: prop) {
     }
   };
 
+
   return (
     <div>
       {loading && <Loading />}
@@ -68,9 +69,9 @@ function EditProfileModal({ modal, setModal, getUserData }: prop) {
         <div className="AuthModal transition-all duration-500 dark:bg-slate-800 dark:text-white">
           <div className="opacity-100 relative w-[80%] md:w-[50%] py-10 px-5 mx-auto mt-20 bg-white dark:bg-slate-800 dark:text-white rounded-md border ">
             <button className="absolute top-3 right-5">
-              <FontAwesomeIcon
+              <MdOutlineCancel
+                className="text-2xl"
                 onClick={() => setModal(!modal)}
-                icon="fa-solid fa-xmark"
               />
             </button>
             <div className="flex flex-col gap-5">

@@ -15,7 +15,7 @@ import SharePost from '../Features/SharePost.tsx';
 import CommentSection from '../Features/Comment/CommentSection.tsx';
 
 function SinglePost() {
-const [showSideBar] = useOutletContext()
+const [showSideBar]: [boolean] = useOutletContext()
 const { postId } = useParams();
   const [post, setPost] = useState("");
   const [loading, setLoading] = useState(false);

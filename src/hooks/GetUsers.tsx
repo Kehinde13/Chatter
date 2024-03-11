@@ -2,11 +2,18 @@ import { collection, onSnapshot, query } from 'firebase/firestore';
 import  { useEffect, useState } from 'react'
 import { db } from '../Auth/firebase';
 
-
+interface User {
+  id: string,
+  userId: string,
+  username: string,
+  email: string,
+  userImg: string,
+  bio: string,
+}
 
 function GetUsers(collectionName: string) {
     const [userLoading, setUserLoading] = useState<boolean>(true);
-    const [users, setUsers] = useState<Array>([])
+    const [users, setUsers] = useState<User[]>([])
 
     useEffect(() => {
         const getUsers = () => {
@@ -16,13 +23,13 @@ function GetUsers(collectionName: string) {
               snapshot.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
-              }))
+              })) as User[]
             );
             setUserLoading(false);
           });
         };
         getUsers();
-      }, []);
+      }, [collectionName]);
   return {
     users,
     userLoading

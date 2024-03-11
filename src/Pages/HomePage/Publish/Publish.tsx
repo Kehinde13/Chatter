@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  Link,
   useNavigate,
   useOutletContext,
   useParams,
@@ -18,7 +17,7 @@ import "./Markdown.css"
 const md = new Remarkable();
 
 function Publish() {
-  const [showSideBar] = useOutletContext();
+  const [showSideBar]: [boolean] = useOutletContext();
   const { userId } = useParams();
   const { users, title, description, currentUser, markdownText } = Blog();
   const imgRef = useRef(null);
@@ -49,7 +48,7 @@ function Publish() {
       setPreview({ ...preview, title: "" });
       setDesc("");
     }
-  }, [title, description, markdownText]);
+  }, [title, description, markdownText, preview]);
 
   const publishPost = async () => {
     console.log(desc, preview.title, tags);

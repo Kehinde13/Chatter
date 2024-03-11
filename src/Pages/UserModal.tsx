@@ -1,60 +1,53 @@
-import React from 'react'
 import { secretEmail } from '../utils/helper';
 import { signOut } from 'firebase/auth';
 import { auth } from '../Auth/firebase';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import { Blog } from '../Context/Context';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FaUserAstronaut } from "react-icons/fa";
+import { FirebaseError } from 'firebase/app';
 
-type prop = {
-    toggleModal: (modal: boolean) => boolean
+type Props = {
+  toggleModal: () => void
 }
 
-function UserModal({toggleModal}: prop) {
-
+function UserModal({ toggleModal }: Props) {
     const { currentUser } = Blog();
+    const navigate = useNavigate();
 
-    const navigate = useNavigate(null);
     const logout = async () => {
-      try {
-        await signOut(auth);
-        navigate("/");
-        toast.success("User has be logged out");
-      } catch (error) {
-        toast.error(error.message);
+        try {
+            await signOut(auth);
+            navigate("/");
+            toast.success("User has been logged out");
+        } catch (error: unknown) {
+          if (error instanceof FirebaseError) {
+              toast.error(error.message);
+          } else {
+              toast.error("An error occurred");
+          }
       }
     };
 
+    
+    const user = currentUser as { uid?: string, email?: string };
+
     return (
-        <section
-          className="absolute w-[18rem] p-6 bg-white right-0 top-[100%]
-        shadows rounded-md z-50">
-          {/* <div className="flex flex-col gap-4 border-b border-gray-300 pb-5">
-            {userModal.map((link, i) => (
-              <Link
-                onClick={() => setModal(false)}
-                className="flex items-center gap-2 text-gray-500 hover:text-black/70"
-                key={i}
-                to={link.path}>
-                <span className="text-2xl">{link.icon}</span>
-                <h2 className="text-md">{link.title}</h2>
-              </Link>
-            ))}
-          </div> */}
-          <Link to={`profile/${currentUser?.uid}`}
-                onClick={toggleModal}>
-            <FontAwesomeIcon icon="fa-solid fa-user" className="mr-2" />
-            Account
-        </Link>
-          <button
-            onClick={logout}
-            className="flex flex-col pt-5 cursor-pointer text-red-500">
-            Sign Out
-          </button>
-          <p className="text-sm mt-2">{secretEmail(currentUser?.email)}</p>
+        <section className="absolute w-[18rem] p-6 bg-white right-0 top-[100%] shadows rounded-md z-50">
+            {user && user.uid  && ( 
+                <>
+                    <Link to={`profile/${user.uid}`} onClick={toggleModal} className='flex'>
+                        <FaUserAstronaut className="mr-2" />
+                        <p className='self-center'>Account</p>
+                    </Link>
+                    <button onClick={logout} className="flex flex-col pt-5 cursor-pointer text-red-500">
+                        Sign Out
+                    </button>
+                    {user && user.email && <p className="text-sm mt-2">{secretEmail(user.email)}</p>}
+                </>
+            )}
         </section>
-      );
+    );
 }
 
-export default UserModal
+export default UserModal;

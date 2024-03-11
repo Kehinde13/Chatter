@@ -3,10 +3,22 @@ import  { useEffect, useState } from 'react'
 import { db } from '../Auth/firebase';
 
 
+interface Post {
+  id: string;
+  userId: string,
+  title: string,
+  desc: string,
+  tags: string,
+  postImg: string,
+  created: string,
+  pageViews: number,
+}
+
+
 
 function GetRecentPost(collectionName: string) {
     const [recentLoading, setRecentLoading] = useState<boolean>(true);
-    const [recentPosts, setRecentPosts] = useState<Array>([])
+    const [recentPosts, setRecentPosts] = useState<Post[]>([])
 
     useEffect(() => {
         const getRecentPost = () => {
@@ -16,7 +28,7 @@ function GetRecentPost(collectionName: string) {
               snapshot.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
-              }))
+              })) as Post[]
             );
             setRecentLoading(false);
           });

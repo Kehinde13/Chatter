@@ -5,11 +5,16 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../Auth/firebase";
 import Loading from "../components/Loading";
 
+interface PostData {
+  postViews: string;
+  postImage: string;
+  postTitle: string;
+}
+
 function Analytics() {
-  const [showSideBar] = useOutletContext();
+  const [showSideBar]: [boolean] = useOutletContext();
   const [loading, setLoading] = useState<boolean>(false);
-  /* const [views, setViews] = useState<string>("0"); */
-  const [postData, setPostData] = useState<object>({
+  const [postData, setPostData] = useState<PostData>({
     postViews: "",
     postImage: "",
     postTitle: "",
@@ -23,18 +28,23 @@ function Analytics() {
   useEffect(() => {
     setLoading(true);
     const getSingleData = async () => {
-      const docRef = doc(db, "posts", postId);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setPostData({
-          postViews: docSnap.data().pageViews,
-          postImage: docSnap.data().postImg,
-          postTitle: docSnap.data().title,
-        });
+      try {
+        const docRef = doc(db, "posts", postId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setPostData({
+            postViews: docSnap.data()?.pageViews || "",
+            postImage: docSnap.data()?.postImg || "",
+            postTitle: docSnap.data()?.title || "",
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching post data:", error);
+      } finally {
+        setLoading(false);
       }
     };
     getSingleData();
-    setLoading(false);
   }, [postId]);
 
   return (

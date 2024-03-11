@@ -4,8 +4,9 @@ import Recent from "./Recent";
 import { useState } from "react";
 import Trending from "./Trending";
 
+
 function Feed() {
-  const [showSideBar] = useOutletContext();
+  const [showSideBar]: [boolean] = useOutletContext();
   const panels = [
     {
       title: "For You",

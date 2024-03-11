@@ -24,14 +24,13 @@ import Analytics from "./Pages/Analytics";
 import Loading from "./components/Loading";
 
 
-
 const Fallback = () => <Loading />
 
 
 function App() {
   const { currentUser } = Blog();
   
-  
+
 
   const router = createBrowserRouter([
     {

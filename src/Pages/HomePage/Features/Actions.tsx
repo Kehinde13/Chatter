@@ -1,38 +1,38 @@
-import React, { useState } from "react";
-
-/* import { deleteDoc, doc } from "firebase/firestore";
-import { db } from "../../../../firebase/firebase";
-import { toast } from "react-toastify"; */
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+import { FaEllipsisH } from "react-icons/fa";
 import { Blog } from "../../../Context/Context";
 import DropDown from "../../../components/Dropdown";
-import { Link, useNavigate } from "react-router-dom";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../../Auth/firebase";
 import { toast } from "react-toastify";
+import { FirebaseError } from "firebase/app";
 
-const Actions = ({ postId, title, desc }) => {
+type ActionsProps = {
+  postId: string;
+  title: string;
+  desc: string;
+};
+
+const Actions = ({ postId, title, desc }: ActionsProps) => {
   const { setUpdateData, currentUser } = Blog();
   const [showDrop, setShowDrop] = useState(false);
-
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setShowDrop(!showDrop);
   };
 
-   const navigate = useNavigate(); 
-
-   const handleEdit = () => {
+  const handleEdit = () => {
     navigate(`/HomePage/EditPost/${postId}`);
     setUpdateData({ title, description: desc });
-  }; 
+  };
 
-  const Analytics = () => {
+  const handleAnalytics = () => {
     navigate(`/HomePage/Analytics/${postId}`);
-  }; 
-  
+  };
 
-   const handleRemove = async () => {
+  const handleRemove = async () => {
     try {
       const ref = doc(db, "posts", postId);
       const likeRef = doc(db, "posts", postId, "likes", currentUser?.uid);
@@ -49,22 +49,25 @@ const Actions = ({ postId, title, desc }) => {
       await deleteDoc(commentRef);
       await deleteDoc(savedPostRef);
 
-      toast.success("post has been removed");
+      toast.success("Post has been removed");
       setShowDrop(false);
       navigate("/HomePage");
-    } catch (error) {
-      toast.success(error.message);
+    } catch (error: unknown) {
+      if(error instanceof FirebaseError){
+        toast.error(error.message);
+      }
     }
-  }; 
+  };
+
   return (
     <div className="relative">
       <button onClick={handleClick}>
-        <FontAwesomeIcon icon="fa-solid fa-ellipsis" />
+        <FaEllipsisH />
       </button>
       <DropDown showDrop={showDrop} setShowDrop={setShowDrop} size="w-[7rem]">
         <Button click={handleEdit} title="Edit Story" />
         <Button click={handleRemove} title="Delete Story" />
-        <Button click={Analytics} title="Analytics" />
+        <Button click={handleAnalytics} title="Analytics" />
       </DropDown>
     </div>
   );
@@ -72,13 +75,19 @@ const Actions = ({ postId, title, desc }) => {
 
 export default Actions;
 
-const Button = ({ click, title }) => {
+type ButtonProps = {
+  click: () => void;
+  title: string;
+};
+
+const Button = ({ click, title }: ButtonProps) => {
   return (
     <button
       onClick={click}
-      className={`p-2 hover:bg-gray-100 hover:text-black/80 w-full text-sm text-left
-    ${title === "Delete Story" ? "text-red-600" : ""}
-    `}>
+      className={`p-2 hover:bg-gray-100 hover:text-black/80 w-full text-sm text-left ${
+        title === "Delete Story" ? "text-red-600" : ""
+      }`}
+    >
       {title}
     </button>
   );

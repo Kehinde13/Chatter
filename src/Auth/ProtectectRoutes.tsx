@@ -1,7 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom";
+import {  User as FirebaseUser } from 'firebase/auth';
 
 type Props = {
-    currentUser: object | boolean;
+    currentUser: FirebaseUser | null;
 }
 
 

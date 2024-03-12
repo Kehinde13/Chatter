@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Blog } from "../../../Context/Context";
 import FollowBtn from "./FollowBtn";
 import { Link } from "react-router-dom";
@@ -6,19 +5,18 @@ import profilePic from '../../../assets/profile.jpg'
 
 const Follow = () => {
   const { currentUser, users } = Blog();
-  const [count, setCount] = useState(5);
+  /* const [count, setCount] = useState<number>(5); */
+  const count = 5
   const allUsers =
     users &&
     users
       ?.slice(0, count)
-      .filter((user: object) => user.userId !== currentUser?.uid);
-
- 
+      .filter((user: { userId: string }) => user.userId !== currentUser?.uid);
 
   return (
     <>
       {users &&
-        allUsers?.map((user: object, i: number) => {
+        allUsers?.map((user: { username: string; bio: string; userImg: string; userId: string }, i: number) => {
           const { username, bio, userImg, userId } = user;
           return (
             <div key={i} className="flex items-start gap-2 my-4">
@@ -42,9 +40,9 @@ const Follow = () => {
         })}
       {users?.length > 5 && (
         <button
-          onClick={() =>
+          /* onClick={() =>
             setCount((prev) => allUsers.length < users?.length && prev + 3)
-          }
+          } */
           className="mb-3 text-green-900 text-sm hover:underline">
           Load more users
         </button>
@@ -54,4 +52,3 @@ const Follow = () => {
 };
 
 export default Follow;
- 

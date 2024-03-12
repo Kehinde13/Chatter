@@ -1,16 +1,20 @@
 import { collection, onSnapshot, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '../Auth/firebase';
+import { Comment } from '../Pages/HomePage/Features/Comment/Comments';
 
-interface Post {
+
+
+export interface Post {
   id: string;
   userId: string,
   title: string,
   desc: string,
-  tags: string,
+  tags: string[],
   postImg: string,
   created: string,
   pageViews: number,
+  comments?: Comment[] 
 }
 
 function GetPosts(collectionName: string) {

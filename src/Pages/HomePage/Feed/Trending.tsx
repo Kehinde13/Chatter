@@ -1,10 +1,11 @@
 import { Blog } from '../../../Context/Context';
+import { Post } from '../../../hooks/GetPosts';
 import PostsCard from './PostsCard';
 
 function Trending() {
   const { posts } = Blog();
   const getTrending =
-    posts && posts?.sort((a: object, b: object) => b.pageViews - a.pageViews);
+    posts && posts?.sort((a: Post, b: Post) => b.pageViews - a.pageViews);
   return (
     <div >
       {

@@ -1,18 +1,15 @@
-import { useEffect, useRef, useState } from "react";
-import {
-  useNavigate,
-  useOutletContext,
-  useParams,
-} from "react-router-dom";
-import { Blog } from "../../../Context/Context";
-import ReactQuill from "react-quill";
-import TagsInput from "react-tagsinput";
-import { toast } from "react-toastify";
-import { db, storage } from "../../../Auth/firebase";
-import { addDoc, collection } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { Remarkable } from "remarkable";
-import "./Markdown.css"
+import { useEffect, useRef, useState } from 'react';
+import ReactQuill from 'react-quill';
+import TagsInput from 'react-tagsinput';
+import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
+import { Blog } from '../../../Context/Context';
+import { addDoc, collection } from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { toast } from 'react-toastify';
+import { db, storage } from '../../../Auth/firebase';
+import { FirebaseError } from 'firebase/app';
+import { Remarkable } from 'remarkable';
+import './Markdown.css';
 
 const md = new Remarkable();
 
@@ -20,53 +17,50 @@ function Publish() {
   const [showSideBar]: [boolean] = useOutletContext();
   const { userId } = useParams();
   const { users, title, description, currentUser, markdownText } = Blog();
-  const imgRef = useRef(null);
-  const [tags, setTags] = useState([]);
-  const [newPostImage, setnewPostImage] = useState<string>("");
-  const [desc, setDesc] = useState<string>("");
+  const imgRef = useRef<HTMLInputElement>(null);
+  const [tags, setTags] = useState<string[]>([]);
+  const [newPostImage, setNewPostImage] = useState<string>('');
+  const [desc, setDesc] = useState<string>('');
   const [preview, setPreview] = useState({
-    title: "",
-    photo: "",
+    title: '',
+    photo: '',
   });
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const SubmitImage = () => {
-    imgRef.current.click();
+    imgRef.current?.click();
   };
 
   useEffect(() => {
-    if(markdownText){
-      setDesc(md.render(markdownText))
-    } else if (description){
+    if (markdownText) {
+      setDesc(md.render(markdownText));
+    } else if (description) {
       setDesc(description);
     }
 
     if (title) {
       setPreview({ ...preview, title: title });
     } else {
-      setPreview({ ...preview, title: "" });
-      setDesc("");
+      setPreview({ ...preview, title: '' });
+      setDesc('');
     }
   }, [title, description, markdownText, preview]);
 
   const publishPost = async () => {
-    console.log(desc, preview.title, tags);
-    
     setLoading(true);
     try {
-      if (preview.title === "" || desc === "" || tags.length === 0) {
-        toast.error("All fields are required!!!");
+      if (preview.title === '' || desc === '' || tags.length === 0) {
+        toast.error('All fields are required!!!');
         return;
       }
 
-      const collections = collection(db, "posts");
+      const collections = collection(db, 'posts');
 
-      let url;
+      let url = '';
       if (newPostImage) {
         const storageRef = ref(storage, `image/${preview.photo.name}`);
-        await uploadBytes(storageRef, preview?.photo);
-
+        await uploadBytes(storageRef, preview.photo);
         url = await getDownloadURL(storageRef);
       }
 
@@ -75,26 +69,28 @@ function Publish() {
         title: preview.title,
         desc,
         tags,
-        postImg: url || "",
+        postImg: url,
         created: Date.now(),
         pageViews: 0,
       });
-      toast.success("Post has been added");
-      navigate("/HomePage");
+      toast.success('Post has been added');
+      navigate('/HomePage');
       setPreview({
-        title: "",
-        photo: "",
+        title: '',
+        photo: '',
       });
     } catch (error: unknown) {
-      toast.error(error.message);
+      if (error instanceof FirebaseError) {
+        toast.error(error.message);
+      }
     } finally {
       setLoading(false);
     }
   };
 
-  const getUserData = users.find((user: object) => user.id === userId);
+  const getUserData = users.find((user: any) => user.id === userId);
   return (
-    <div className={`sm:mx-3 w-[80%] ${showSideBar ? "hidden" : " "}`}>
+    <div className={`sm:mx-3 w-[80%] ${showSideBar ? 'hidden' : ''}`}>
       <div className="mt-10 flex flex-col md:flex-row gap-10">
         <div className="flex-[1]">
           <h1 className="text-2xl bold capitalize">Story Preview</h1>
@@ -104,11 +100,11 @@ function Publish() {
             className="w-full h-[200px] object-cover bg-gray-100 my-3 grid 
                 place-items-center cursor-pointer bg-cover bg-no-repeat dark:text-black"
           >
-            {!newPostImage && "Add Image"}
+            {!newPostImage && 'Add Image'}
           </div>
           <input
             onChange={(e) => {
-              setnewPostImage(URL.createObjectURL(e.target.files[0]));
+              setNewPostImage(URL.createObjectURL(e.target.files[0]));
               setPreview({ ...preview, photo: e.target.files[0] });
             }}
             ref={imgRef}
@@ -123,7 +119,8 @@ function Publish() {
             onChange={(e) => setPreview({ ...preview, title: e.target.value })}
           />
           {markdownText.length > 1 ? (
-            <div className="markdown p-3"
+            <div
+              className="markdown p-3"
               dangerouslySetInnerHTML={{ __html: md.render(markdownText) }}
             ></div>
           ) : (
@@ -139,17 +136,16 @@ function Publish() {
         <div className="flex-[1] flex flex-col gap-4 mb-5 md:mb-0 mt-5">
           <h3 className="text-2xl">
             Publishing to:
-            <span className="font-bold capitalize">
-              {getUserData?.username}
-            </span>
+            <span className="font-bold capitalize">{getUserData?.username}</span>
           </h3>
           <p>Add up to 5 Tags that relate to your story</p>
           <TagsInput value={tags} onChange={setTags} />
           <button
             onClick={publishPost}
             className="btn bg-purple-500 w-fit text-white rounded-full p-2"
+            disabled={loading}
           >
-            {loading ? "Publishing..." : "Publish"}
+            {loading ? 'Publishing...' : 'Publish'}
           </button>
         </div>
       </div>

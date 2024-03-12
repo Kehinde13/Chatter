@@ -5,8 +5,9 @@ import { toast } from 'react-toastify';
 import moment from 'moment';
 import DropDown from '../../../../components/Dropdown';
 import { Blog } from '../../../../Context/Context';
+import { FirebaseError } from 'firebase/app';
 
-interface Comment {
+export interface Comment {
   userId: string;
   commentText: string;
   created: number;
@@ -21,9 +22,9 @@ interface UserData {
 }
 
 interface Props {
-  comment: Comment;
+  comment?: Comment;
   postId: string;
-  item: any; 
+  item: Comment; 
 }
 
 function Comments({ item: comment, postId }: Props) {
@@ -43,8 +44,10 @@ function Comments({ item: comment, postId }: Props) {
       await deleteDoc(ref);
       setDrop(false);
       toast.success('Comment has been removed');
-    } catch (error: any) {
-      toast.error(error.message);
+    } catch (error: unknown) {
+      if(error instanceof FirebaseError){
+        toast.error(error.message);
+      }
     }
   };
 
@@ -65,12 +68,15 @@ function Comments({ item: comment, postId }: Props) {
       setIsEdit(false);
       setDrop(false);
       toast.success('Comment has been updated');
-    } catch (error: any) {
-      toast.error(error.message);
+    } catch (error: unknown) {
+      if(error instanceof FirebaseError){
+        toast.error(error.message);
+      }
     } finally {
       setLoading(false);
     }
   };
+
 
   return (
     <section className="border-b">

@@ -2,7 +2,7 @@ import { collection, onSnapshot, query } from 'firebase/firestore';
 import  { useEffect, useState } from 'react'
 import { db } from '../Auth/firebase';
 
-interface User {
+export interface User {
   id: string,
   userId: string,
   username: string,

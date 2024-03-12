@@ -1,5 +1,5 @@
 import { addDoc, collection } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { db } from "../../../../Auth/firebase";
 import GetSinglePost from "../../../../hooks/GetSinglePost";
@@ -7,20 +7,33 @@ import { Blog } from "../../../../Context/Context";
 import profilePic from '../../../../assets/profile.jpg'
 import Loading from "../../../../components/Loading";
 import Comments from "./Comments";
+import { Post } from "../../../../hooks/GetPosts";
+import { FirebaseError } from "firebase/app";
 
 type prop = {
   postId: string
 }
 
+interface User {
+  id: string,
+  userId: string,
+  username: string,
+  email: string,
+  userImg: string,
+  bio: string,
+}
+
+
+
 function CommentSection({ postId }: prop) {
   const {
     currentUser,
     users,
-    setCommentLength,
+    /* setCommentLength, */
   } = Blog();
   const [comment, setComment] = useState<string>("");
 
-  const getUserData = users.find((user: object) => user.id === currentUser?.uid);
+  const getUserData = users.find((user: User) => user.id === currentUser?.uid);
 
   const { data, loading } = GetSinglePost("posts", postId, "comments");
 
@@ -39,19 +52,20 @@ function CommentSection({ postId }: prop) {
       toast.success("Comment has been added");
       setComment("");
     } catch (error: unknown) {
-      toast.error(error.message);
+      if(error instanceof FirebaseError){
+        toast.error(error.message);
+      }
     }
   };
 
   useEffect(() => {
-    if (data) {
-      setCommentLength(data.length);
-    }
+    console.log(data);
+    
   }, [data]);
     
   return (
     <div>
-      <h3 className="text-xl font-bold mt-5">Comments {/* ({data.length}) */}</h3>
+      <h3 className="text-xl font-bold mt-5">Comments ({data.length})</h3>
       {/* comment form  */}
       {currentUser && (
           <div className="shadows p-3 my-5 overflow-hidden">
@@ -85,11 +99,12 @@ function CommentSection({ postId }: prop) {
         ) : (
           <div className="border-t py-4 mt-8 flex flex-col gap-8">
             {data &&
-              data.map((item: object, i: number) =>
+              data.map((item: Post, i: number) =>
                 loading ? (
                   <Loading />
                 ) : (
                   <Comments item={item} postId={postId} key={i} />
+                  
                 )
               )}
           </div>

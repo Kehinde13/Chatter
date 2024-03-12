@@ -1,7 +1,8 @@
 import { Blog } from "../../../Context/Context";
+import { User } from "../../../hooks/GetUsers";
 
 type props = {
-  getUserData: object;
+  getUserData: User;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 

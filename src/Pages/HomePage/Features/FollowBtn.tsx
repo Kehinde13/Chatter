@@ -6,59 +6,54 @@ import { db } from "../../../Auth/firebase";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
 
-const FollowBtn = ({ userId }) => {
-  const [isFollowed, setIsFollowed] = useState(false);
+interface FollowBtnProps {
+  userId: string;
+}
+
+const FollowBtn = ({ userId }: FollowBtnProps) => {
+  const [isFollowed, setIsFollowed] = useState<boolean>(false);
   const { currentUser } = Blog();
 
-  const { data } = GetSinglePost(
-    "users",
-    currentUser?.uid,
-    "following"
-  );
+  const protectedUser = currentUser!
+
+  const { data } = GetSinglePost("users", protectedUser.uid, "following");
 
   useEffect(() => {
-    setIsFollowed(data && data?.findIndex((item: object) => item.id === userId) !== -1);
-  }, [data]);
+    setIsFollowed(data && data.findIndex((item: { id: string }) => item.id === userId) !== -1);
+  }, [data, setIsFollowed, userId]);
 
   const handleFollow = async () => {
     try {
       if (currentUser) {
         const followRef = doc(db, "users", currentUser?.uid, "following", userId);
-        const followerRef = doc(
-          db,
-          "users",
-          userId,
-          "followers",
-          currentUser?.uid
-        );
+        const followerRef = doc(db, "users", userId, "followers", currentUser?.uid);
         if (isFollowed) {
           await deleteDoc(followRef);
           await deleteDoc(followerRef);
-          toast.success("User unFollowed");
+          toast.success("User Unfollowed");
         } else {
           await setDoc(followRef, {
             userId: userId,
           });
           await setDoc(followerRef, {
-            userId: userId,
+            userId: currentUser?.uid,
           });
           toast.success("User is Followed");
         }
       }
     } catch (error: unknown) {
-      if(error instanceof FirebaseError){
+      if (error instanceof FirebaseError) {
         toast.error(error.message);
       }
     }
   };
 
- 
-
   return (
     <>
       <button
         onClick={handleFollow}
-        className={`text-white bg-purple-500 p-1 rounded-md`}>
+        className={`text-white bg-purple-500 p-1 rounded-md`}
+      >
         {isFollowed ? "Unfollow" : "Follow"}
       </button>
     </>

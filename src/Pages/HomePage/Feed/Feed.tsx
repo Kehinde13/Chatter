@@ -1,34 +1,34 @@
-import { Link, useOutletContext } from "react-router-dom";
-import ForYou from "./ForYou";
-import Recent from "./Recent";
-import { useState } from "react";
-import Trending from "./Trending";
+import { Link, useOutletContext } from 'react-router-dom';
+import ForYou from './ForYou';
+import Recent from './Recent';
+import { useState } from 'react';
+import Trending from './Trending';
 
+interface Panel {
+  title: string;
+  component: React.ComponentType;
+}
 
 function Feed() {
   const [showSideBar]: [boolean] = useOutletContext();
-  const panels = [
+  const panels: Panel[] = [
     {
-      title: "For You",
+      title: 'For You',
       component: ForYou,
     },
     {
-      title: "Trending",
+      title: 'Trending',
       component: Trending,
     },
     {
-      title: "Recent",
+      title: 'Recent',
       component: Recent,
     },
   ];
-  const [currentPanel, setCurrentPanel] = useState<object>(panels[0]);
-  
+  const [currentPanel, setCurrentPanel] = useState<Panel>(panels[0]);
+
   return (
-    <div
-      className={`w-[80%] sm:px-16 py-10 sm:block ${
-        showSideBar ? "hidden" : ""
-      }`}
-    >
+    <div className={`w-[80%] sm:px-16 py-10 sm:block ${showSideBar ? 'hidden' : ''}`}>
       <div className="flex justify-between">
         <div className="flex flex-col gap-10">
           <h1 className="text-2xl sm:text-4xl font-bold">FEED</h1>
@@ -44,9 +44,7 @@ function Feed() {
         {panels.map((item, index) => (
           <div
             className={`py-1 w-full ${
-              item.title === currentPanel.title
-                ? "border-b-2 border-purple-500"
-                : ""
+              item.title === currentPanel.title ? 'border-b-2 border-purple-500' : ''
             }`}
             key={index}
           >
@@ -55,7 +53,6 @@ function Feed() {
         ))}
       </div>
       <currentPanel.component />
-      
     </div>
   );
 }

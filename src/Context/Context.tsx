@@ -5,12 +5,23 @@ import Loading from '../components/Loading';
 import GetUsers from '../hooks/GetUsers';
 import GetPosts from '../hooks/GetPosts';
 import GetRecentPost from '../hooks/GetRecentPost';
+import {  User as FirebaseUser } from 'firebase/auth';
+
+interface User {
+  id: string,
+  userId: string,
+  username: string,
+  email: string,
+  userImg: string,
+  bio: string,
+}
+
 
 // Define the type for the context value
 type BlogContextType = {
-    currentUser: object | boolean;
-    setCurrentUser: (user: object | boolean) => void;
-    users: object[]; 
+    currentUser: FirebaseUser | null;
+    setCurrentUser: (user: FirebaseUser | null) => void;
+    users: User[]; 
     userLoading: boolean;
     description: string;
     setDescription: (description: string) => void;
@@ -33,7 +44,7 @@ type BlogContextType = {
 };
 
 const BlogContext = createContext<BlogContextType>({
-    currentUser: false,
+    currentUser: null,
     setCurrentUser: () => {},
     users: [],
     userLoading: true,
@@ -62,7 +73,7 @@ type Props = {
 }
 
 function Context({ children }: Props) {
-    const [currentUser, setCurrentUser] = useState<object | boolean>(false);
+    const [currentUser, setCurrentUser] = useState<FirebaseUser | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [description, setDescription] = useState<string>("");
     const [title, setTitle] = useState<string>("");
@@ -75,12 +86,14 @@ function Context({ children }: Props) {
     const [publish, setPublish] = useState<boolean>(false);
     const [authModel, setAuthModel] = useState<boolean>(false);
 
+    
+
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setCurrentUser(user);
             } else {
-                setCurrentUser(false);
+                setCurrentUser(null);
             }
             setLoading(false);
         });

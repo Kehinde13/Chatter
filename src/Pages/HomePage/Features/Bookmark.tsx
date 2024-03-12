@@ -1,14 +1,13 @@
 import { FaRegBookmark } from "react-icons/fa6";
 import { deleteDoc, doc, setDoc } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import { db } from '../../../Auth/firebase';
 import { Blog } from '../../../Context/Context';
 import GetSinglePost from '../../../hooks/GetSinglePost';
+import { Post } from "../../../hooks/GetPosts";
 
-type Post = {
-  id: string;
-};
+type PostWithIdandUserId = Pick<Post, "id" | "userId">
 
 type BookmarkProps = {
   post: Post;
@@ -20,7 +19,7 @@ function Bookmark({ post }: BookmarkProps) {
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsSaved(data && data.find((item: Post) => item.id === post.id) ? true : false);
+    setIsSaved(data && data.find((item: PostWithIdandUserId) => item.id === post.id) ? true : false);
   }, [data, post?.id]);
 
   const handleSave = async () => {

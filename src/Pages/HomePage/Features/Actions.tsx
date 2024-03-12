@@ -15,7 +15,7 @@ type ActionsProps = {
 };
 
 const Actions = ({ postId, title, desc }: ActionsProps) => {
-  const { setUpdateData, currentUser } = Blog();
+  const { setUpdateData } = Blog();
   const [showDrop, setShowDrop] = useState(false);
   const navigate = useNavigate();
 
@@ -35,19 +35,7 @@ const Actions = ({ postId, title, desc }: ActionsProps) => {
   const handleRemove = async () => {
     try {
       const ref = doc(db, "posts", postId);
-      const likeRef = doc(db, "posts", postId, "likes", currentUser?.uid);
-      const commentRef = doc(db, "posts", postId, "comments", currentUser?.uid);
-      const savedPostRef = doc(
-        db,
-        "users",
-        currentUser?.uid,
-        "savedPost",
-        postId
-      );
       await deleteDoc(ref);
-      await deleteDoc(likeRef);
-      await deleteDoc(commentRef);
-      await deleteDoc(savedPostRef);
 
       toast.success("Post has been removed");
       setShowDrop(false);

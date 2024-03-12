@@ -17,7 +17,7 @@ interface Post {
 
 function Blogs() {
   const { posts } = Blog();
-  const getTrending: Post[] = posts ? posts.map((post: any) => ({
+  const getTrending = posts ? posts.map((post: any) => ({
     id: post.id,
     title: post.title,
     desc: post.desc,

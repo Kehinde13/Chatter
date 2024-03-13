@@ -1,5 +1,5 @@
 import { addDoc, collection } from "firebase/firestore";
-import {  useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { db } from "../../../../Auth/firebase";
 import GetSinglePost from "../../../../hooks/GetSinglePost";
@@ -58,10 +58,6 @@ function CommentSection({ postId }: prop) {
     }
   };
 
-  useEffect(() => {
-    console.log(data);
-    
-  }, [data]);
     
   return (
     <div>

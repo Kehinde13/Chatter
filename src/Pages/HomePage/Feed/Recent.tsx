@@ -1,6 +1,7 @@
 import { Blog } from '../../../Context/Context';
 import PostsCard from './PostsCard';
 import Loading from '../../../components/Loading';
+import { Post } from '../../../hooks/GetPosts';
 
 function Recent() {
   const {recentPosts, recentLoading} = Blog()
@@ -10,7 +11,7 @@ function Recent() {
         <Loading />
       ) : (
         recentPosts &&
-        recentPosts?.map((post: object, i: number) => <PostsCard post={post} key={i} />)
+        recentPosts?.map((post: Post, i: number) => <PostsCard post={post} key={i} />)
       )}
     </section>
   );

@@ -19,7 +19,7 @@ function HomePage() {
       <Header />
       <div className="flex">
         <button
-          className={`border w-8 py-1 fixed sm:hidden rounded-full top-64 z-50 ${
+          className={`border p-1 py-1 fixed sm:hidden rounded-full top-64 z-50 ${
             showSideBar ? "right-0" : "left-0"
           }`}
           onClick={toggleSideBar}

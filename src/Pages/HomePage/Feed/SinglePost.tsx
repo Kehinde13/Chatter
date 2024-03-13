@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useOutletContext, useParams } from 'react-router-dom';
 import { Blog } from '../../../Context/Context';
-import { doc, getDoc, increment, updateDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, increment, updateDoc } from 'firebase/firestore';
 import { db } from '../../../Auth/firebase';
 import { toast } from 'react-toastify';
 import FollowBtn from '../Features/FollowBtn';
@@ -13,16 +13,10 @@ import Actions from '../Features/Actions';
 import Bookmark from '../Features/Bookmark';
 import SharePost from '../Features/SharePost';
 import CommentSection from '../Features/Comment/CommentSection';
+import { User } from '../../../hooks/GetUsers';
+import { Post } from '../../../hooks/GetPosts';
 
-interface PostData {
-  title: string;
-  desc: string;
-  postImg: string;
-  username: string;
-  created: string;
-  userImg: string;
-  userId: string;
-}
+type PostData = User & Post
 
 function SinglePost() {
   const [showSideBar]: [boolean] = useOutletContext();
@@ -37,8 +31,9 @@ function SinglePost() {
     if (isInitialRender.current) {
       const incrementPageView = async () => {
         try {
-          const ref = doc(db, 'posts', postId);
-          await updateDoc(ref, {
+          const ref = collection(db, 'posts');
+          const singlePostRef = doc(ref, postId)
+          await updateDoc(singlePostRef, {
             pageViews: increment(1),
           });
         } catch (error: unknown) {
@@ -54,16 +49,18 @@ function SinglePost() {
     const fetchPost = async () => {
       setLoading(true);
       try {
-        const postRef = doc(db, 'posts', postId);
-        const getPost = await getDoc(postRef);
-        if (getPost.exists()) {
-          const postData = getPost.data();
+        const postRef = collection(db, 'posts');
+        const postDoc = await getDoc(doc(postRef, postId))
+        
+        if (postDoc.exists()) {
+          const postData = postDoc.data();
           if (postData?.userId) {
             const userRef = doc(db, 'users', postData?.userId);
             const getUser = await getDoc(userRef);
             if (getUser.exists()) {
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
               const { created, ...rest } = getUser.data();
-              setPost({ ...postData, ...rest, id: postId } as PostData);
+              setPost({ ...postData as Post, ...rest as User } );
             }
           }
         }
@@ -105,25 +102,25 @@ function SinglePost() {
               {currentUser && currentUser?.uid !== userId && <FollowBtn userId={userId} />}
             </div>
             <p className="text-sm text-gray-500">
-              {readTime(desc)} min read . <span className="ml-1">{moment(created).fromNow()}</span>
+              {readTime({__html:desc})} min read . <span className="ml-1">{moment(created).fromNow()}</span>
             </p>
           </div>
         </div>
         <div className="flex items-center justify-between border-b border-t border-gray-200 py-[0.5rem]">
           <div className="flex items-center gap-5">
-            <Like postId={postId} post={post} />
+            <Like postId={postId ?? ""} post={post} />
             <SharePost />
           </div>
           <div className="flex items-center pt-2 gap-5">
             {post && <Bookmark post={post} />}
-            {currentUser && currentUser?.uid === post?.userId && <Actions postId={postId} title={title} desc={desc} />}
+            {currentUser && currentUser?.uid === post?.userId && <Actions postId={postId ?? ""} title={title} desc={desc} />}
           </div>
         </div>
         <div className="mt-[3rem]">
           {postImg && <img className="w-full h-[400px] object-cover" src={postImg} alt="post-img" />}
           <div className="mt-6" dangerouslySetInnerHTML={{ __html: desc }} />
         </div>
-        <CommentSection postId={postId} />
+        <CommentSection postId={postId ?? ""} />
       </section>
     </div>
   );

@@ -6,14 +6,16 @@ import { Blog } from "../../../Context/Context";
 import { Link } from "react-router-dom";
 import Bookmark from "../Features/Bookmark.js";
 import Actions from "../Features/Actions.js";
+import { Post } from "../../../hooks/GetPosts.tsx";
 
 type prop = {
-    post: object
+    post: Post
 }
 
 const PostsCard = ({ post }: prop) => {
   const { title, desc, created, postImg, id: postId, userId, username } = post;
   const { currentUser } = Blog();
+  
 
   
 

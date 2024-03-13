@@ -10,7 +10,7 @@ function Trending() {
     <div >
       {
         getTrending && 
-        getTrending?.map((post: object, i: number) => <PostsCard post={post} key={i} />)
+        getTrending?.map((post: Post, i: number) => <PostsCard post={post} key={i} />)
       }
     </div>
   )

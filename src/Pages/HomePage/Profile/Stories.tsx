@@ -1,9 +1,11 @@
 import { Blog } from "../../../Context/Context";
 import Loading from "../../../components/Loading";
+import { Post } from "../../../hooks/GetPosts";
+import { User } from "../../../hooks/GetUsers";
 import PostsCard from "../Feed/PostsCard";
 
 type prop = {
-  getUserData: object
+  getUserData: User
 }
 
 
@@ -11,7 +13,7 @@ const Stories = ({getUserData}: prop) => {
   const { posts, postLoading } = Blog();
   const userPost =
     posts &&
-    posts?.filter((post: object) => post?.userId === getUserData?.userId);
+    posts?.filter((post: Post) => post?.userId === getUserData?.userId);
 
   return (
     <div className="flex flex-col gap-5 mb-[4rem]">
@@ -25,7 +27,7 @@ const Stories = ({getUserData}: prop) => {
         <Loading />
       ) : (
         userPost &&
-        userPost?.map((post: object, i: number) => <PostsCard post={post} key={i} />)
+        userPost?.map((post: Post, i: number) => <PostsCard post={post} key={i} />)
       )}
     </div>
   );

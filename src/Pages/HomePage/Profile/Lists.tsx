@@ -2,16 +2,19 @@ import { Blog } from '../../../Context/Context';
 import GetSinglePost from '../../../hooks/GetSinglePost';
 import Loading from '../../../components/Loading';
 import PostsCard from '../Feed/PostsCard';
+import { User } from '../../../hooks/GetUsers';
+import { Post } from '../../../hooks/GetPosts';
 
 type prop = {
-  getUserData: object
+  getUserData: User
 }
 
 function Lists({getUserData}: prop) {
   const { currentUser } = Blog();
+  const userId = currentUser?.uid || "";
   const { data, loading } = GetSinglePost(
     "users",
-    currentUser?.uid,
+    userId,
     "BookmarkedPost"
   );
   return (
@@ -27,7 +30,7 @@ function Lists({getUserData}: prop) {
           {loading ? (
             <Loading />
           ) : (
-            data && data?.map((post: object, i: number) => <PostsCard post={post} key={i} />)
+            data && data?.map((post: Post, i: number) => <PostsCard post={post} key={i} />)
           )}
         </div>
       ) : (

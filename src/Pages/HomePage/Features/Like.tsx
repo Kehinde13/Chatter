@@ -51,8 +51,8 @@ function Like({ postId, post }: LikeProps) {
   };
 
   return (
-    <button onClick={handleLike} className="flex items-center gap-1 text-sm">
-      <CiHeart className={`text-xl ${isLiked ? 'text-red-500' : 'text-gray-500'}`} />
+    <button onClick={handleLike} className="flex  gap-1 self-start">
+      <CiHeart className={`text-2xl  ${isLiked ? 'text-red-500' : 'text-gray-500'}`} />
       <span>{formatNum(likes?.length)}</span>
     </button>
   );

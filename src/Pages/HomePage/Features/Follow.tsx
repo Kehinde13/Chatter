@@ -2,16 +2,26 @@ import { Blog } from "../../../Context/Context";
 import FollowBtn from "./FollowBtn";
 import { Link } from "react-router-dom";
 import profilePic from '../../../assets/profile.jpg'
+import { useState } from "react";
 
-const Follow = () => {
+interface SidebarProps {
+  showSideBar: boolean;
+  setShowSideBar: (showSideBar: boolean) => void; 
+}
+
+const Follow = ({ showSideBar, setShowSideBar }: SidebarProps) => {
   const { currentUser, users } = Blog();
-  /* const [count, setCount] = useState<number>(5); */
-  const count = 5
+  const [count, setCount] = useState<number | undefined>(5);
+  /* const count = 5 */
   const allUsers =
     users &&
     users
       ?.slice(0, count)
       .filter((user: { userId: string }) => user.userId !== currentUser?.uid);
+
+      const handleClick = () => {
+        setShowSideBar(false); 
+      };
 
   return (
     <>
@@ -21,6 +31,7 @@ const Follow = () => {
           return (
             <div key={i} className="flex items-start gap-2 my-4">
               <Link to={`/HomePage/profile/${userId}`}
+                onClick={handleClick}
                 className="flex-1 flex items-center gap-2 cursor-pointer">
                 <img
                   className="w-[3rem] h-[3rem] object-cover gap-2 cursor-pointer rounded-full"
@@ -40,9 +51,9 @@ const Follow = () => {
         })}
       {users?.length > 5 && (
         <button
-          /* onClick={() =>
+          onClick={() =>
             setCount((prev) => allUsers.length < users?.length && prev + 3)
-          } */
+          }
           className="mb-3 text-green-900 text-sm hover:underline">
           Load more users
         </button>

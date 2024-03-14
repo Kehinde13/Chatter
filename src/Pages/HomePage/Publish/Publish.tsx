@@ -16,7 +16,7 @@ const md = new Remarkable();
 function Publish() {
   const [showSideBar]: [boolean] = useOutletContext();
   const { userId } = useParams();
-  const { users, title, description, currentUser, markdownText } = Blog();
+  const { users, title, description, currentUser, markdownText, setDescription, setTitle } = Blog();
   const imgRef = useRef<HTMLInputElement>(null);
   const [tags, setTags] = useState<string[]>([]);
   const [newPostImage, setNewPostImage] = useState<string>('');
@@ -74,11 +74,13 @@ function Publish() {
         pageViews: 0,
       });
       toast.success('Post has been added');
-      navigate('/HomePage');
+      navigate("/HomePage");
       setPreview({
         title: '',
         photo: '',
       });
+      setDescription("")
+      setTitle("")
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
         toast.error(error.message);

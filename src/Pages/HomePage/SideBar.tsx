@@ -17,7 +17,7 @@ function SideBar({ showSideBar, setShowSideBar }: SidebarProps) {
     "Updates",
   ];
 
-  const handleLinkClick = () => {
+  const handleClick = () => {
     setShowSideBar(false); 
   };
 
@@ -31,7 +31,7 @@ function SideBar({ showSideBar, setShowSideBar }: SidebarProps) {
       <h1 className="font-bold text-lg ml-2">Following</h1>
 
       <div className="ml-1">
-        <Follow />
+        <Follow showSideBar={showSideBar} setShowSideBar={setShowSideBar}/>
       </div>
 
       <div className="flex gap-2">
@@ -40,7 +40,7 @@ function SideBar({ showSideBar, setShowSideBar }: SidebarProps) {
       <ul className="ml-5">
         {topics.map((topic, i) => (
           <li key={i} className="p-2">
-            <Link to={`/HomePage/FilteredPosts/${topic}`} onClick={handleLinkClick}>
+            <Link to={`/HomePage/FilteredPosts/${topic}`} onClick={handleClick}>
               {topic}
             </Link>
           </li>

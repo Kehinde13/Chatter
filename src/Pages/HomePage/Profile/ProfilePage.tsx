@@ -8,10 +8,13 @@ import Stories from "./Stories";
 import { useOutletContext, useParams } from "react-router-dom";
 import EditProfileModal from "./EditProfileModal";
 import GetSinglePost from "../../../hooks/GetSinglePost";
+import { User } from "../../../hooks/GetUsers";
+
+
 
 function ProfilePage() {
   const { currentUser, users } = Blog();
-  const { userId } = useParams();
+  const { userId } = useParams() ;
   const panels = [
     {
       title: "Stories",
@@ -29,10 +32,9 @@ function ProfilePage() {
   const [currentPanel, setCurrentPanel] = useState<object>(panels[0]);
   const [modal, setModal] = useState<boolean>(false);
   const [showSideBar]: [boolean] = useOutletContext();
-
-  const getUserData = users.find((user: object) => user.id === userId);
-  const { data: following } = GetSinglePost("users", userId, "following");
-  const { data: followers } =GetSinglePost("users", userId, "followers");
+  const getUserData = users.find((user: User) => user.id === userId);
+  const { data: following } = GetSinglePost("users", userId!, "following");
+  const { data: followers } =GetSinglePost("users", userId!, "followers");
 
   
 

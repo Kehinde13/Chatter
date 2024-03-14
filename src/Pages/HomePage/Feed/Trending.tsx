@@ -2,6 +2,7 @@ import { Blog } from '../../../Context/Context';
 import { Post } from '../../../hooks/GetPosts';
 import PostsCard from './PostsCard';
 
+
 function Trending() {
   const { posts } = Blog();
   const getTrending =

@@ -120,12 +120,14 @@ function LoginPage() {
           </form>
           <button
                 onClick={googleAuth}
-                className="bold md:py-2 md:px-10 mt-3 p-1 bg-purple-500 rounded-md w-full flex justify-around text-white"
+                className="bold md:py-2 md:px-10 mt-3 py-1 px-12 bg-purple-500 rounded-md w-full text-white"
               >
+                <div className="mx-auto gap-5 flex w-full">
                 <FaGoogle
-                  className="text-red-500 mr-5 text-xl"
+                  className="text-red-500 self-center text-xl"
                 />
-                Sign In with Google
+                <p>Sign In with Google</p>
+                </div>
           </button>
         </div>
       </div>

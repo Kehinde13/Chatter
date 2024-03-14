@@ -25,7 +25,7 @@ function SideBar({ showSideBar, setShowSideBar }: SidebarProps) {
     <aside
       className={`sticky top-0 overflow-y-scroll pb-4 flex flex-col sm:w-[20%] sm:ml-0 pr-10 sm:border-r-2
                    duration-500 ${
-                     showSideBar ? "ml-1 w-full" : "ml-[-270px] border-r-0"
+                     showSideBar ? "ml-1 w-full" : "ml-[-280px] border-r-0"
                    }`}
     >
       <h1 className="font-bold text-lg ml-2">Following</h1>

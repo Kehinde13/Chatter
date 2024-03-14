@@ -72,7 +72,6 @@ function Publish() {
         postImg: url,
         created: Date.now(),
         pageViews: 0,
-        username: currentUser?.username
       });
       toast.success('Post has been added');
       navigate('/HomePage');

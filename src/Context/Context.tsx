@@ -38,7 +38,7 @@ type BlogContextType = {
   setMarkdownText: (text: string) => void;
   posts: Post[];
   postLoading: boolean;
-  recentPosts: object[];
+  recentPosts: Post[];
   recentLoading: boolean;
   commentLength: number;
   setCommentLength: (length: number) => void;

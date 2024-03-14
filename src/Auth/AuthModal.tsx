@@ -81,6 +81,7 @@ function AuthModal({ modal, setModal, text }: Props) {
               <p>{text} with Google</p>
             </button>
             <Link to={text === 'Sign Up' ? "SignUp" : "LoginPage"}
+            onClick={() => setModal(!modal)}
             className="border border-blue-500 py-2 px-5 md:w-[50%] mx-auto rounded-md text-center flex justify-around">
               <MdOutlineEmail 
               className="text-blue-500 text-2xl self-center"

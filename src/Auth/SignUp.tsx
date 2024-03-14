@@ -189,12 +189,14 @@ function SignUp() {
               </form>
               <button
                 onClick={googleAuth}
-                className="bold md:py-2 md:px-10 mt-3 p-1 bg-purple-500 rounded-md w-full text-white flex justify-around"
+                className="bold md:py-2 md:px-10 mt-3 bg-purple-500 rounded-md w-full text-white  py-1 px-10"
               >
+                <div className="flex w-full gap-5 mx-auto">
                 <FaGoogle
-                  className="text-red-500 mr-5 text-xl"
+                  className="text-red-500 text-xl"
                 />
-                Sign Up with Google
+                <p>Sign Up with Google</p>
+                </div>
               </button>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import { Blog } from '../../../Context/Context';
 import PostsCard from './PostsCard';
 import Loading from '../../../components/Loading';
+import { Post } from '../../../hooks/GetPosts';
 
 function ForYou() {
   const {posts, postLoading} = Blog()
@@ -10,7 +11,7 @@ function ForYou() {
         <Loading />
       ) : (
         posts &&
-        posts?.map((post: object, i: number) => <PostsCard post={post} key={i} />)
+        posts?.map((post: Post, i: number) => <PostsCard post={post} key={i} />)
       )}
     </section>
   );

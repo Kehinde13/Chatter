@@ -3,6 +3,8 @@ import PostsCard from './PostsCard';
 import Loading from '../../../components/Loading';
 import { Post } from '../../../hooks/GetPosts';
 
+
+
 function Recent() {
   const {recentPosts, recentLoading} = Blog()
   return (

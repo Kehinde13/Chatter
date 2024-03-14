@@ -6,10 +6,11 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { db, storage } from '../../../Auth/firebase';
 import { doc, updateDoc } from 'firebase/firestore';
 import Loading from '../../../components/Loading';
+import { User } from '../../../hooks/GetUsers';
 
 interface UserData {
   username: string;
-  userImg: File | null;
+  userImg: string | null;
   bio: string;
   userId: string;
 }
@@ -17,7 +18,7 @@ interface UserData {
 type Prop = {
   modal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
-  getUserData: UserData;
+  getUserData: User ;
 };
 
 function EditProfileModal({ modal, setModal, getUserData }: Prop) {
@@ -25,7 +26,7 @@ function EditProfileModal({ modal, setModal, getUserData }: Prop) {
   const [profileImgUrl, setProfileImgUrl] = useState<string>('');
   const [form, setForm] = useState<UserData>({
     username: getUserData.username,
-    userImg: null,
+    userImg: getUserData.userImg,
     bio: getUserData.bio,
     userId: getUserData.userId,
   });
@@ -86,7 +87,7 @@ function EditProfileModal({ modal, setModal, getUserData }: Prop) {
                   <div className="w-[5rem]">
                     <img
                       className="min-h-[5rem] min-w-[5rem] object-cover border rounded-full"
-                      src={profileImgUrl || form.userImg ? URL.createObjectURL(form.userImg!) : profilePhoto}
+                      src={profileImgUrl ? profileImgUrl : form.userImg ? form.userImg! : profilePhoto}
                       alt="profile-img"
                     />
                     <input

@@ -13,11 +13,10 @@ type prop = {
 }
 
 const PostsCard = ({ post }: prop) => {
-  const { title, desc, created, postImg, id: postId, userId, username } = post;
+  const { title, desc, created, postImg, id: postId, userId } = post;
   const { currentUser } = Blog();
-  
 
-  
+
 
   return (
     <section className=" border-b my-2 pb-2">
@@ -25,7 +24,7 @@ const PostsCard = ({ post }: prop) => {
       <div
         className="flex flex-col sm:flex-row gap-4 cursor-pointer ">
         <div className="flex-[2.5]">
-          <p className="pb-2 font-semibold capitalize">{username}</p>
+          <p className="pb-2 font-semibold capitalize">{/* {username} */}</p>
           <h2 className="text-xl font-bold line-clamp-2 leading-6 capitalize">
             {title} 
           </h2>

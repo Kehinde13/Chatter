@@ -2,13 +2,12 @@ import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { db } from "../../../../Auth/firebase";
-import GetSinglePost from "../../../../hooks/GetSinglePost";
 import { Blog } from "../../../../Context/Context";
 import profilePic from '../../../../assets/profile.jpg'
 import Loading from "../../../../components/Loading";
-import Comments from "./Comments";
-import { Post } from "../../../../hooks/GetPosts";
+import Comments, { Comment } from "./Comments";
 import { FirebaseError } from "firebase/app";
+import GetComments from "../../../../hooks/GetComments";
 
 type prop = {
   postId: string
@@ -35,7 +34,8 @@ function CommentSection({ postId }: prop) {
 
   const getUserData = users.find((user: User) => user.id === currentUser?.uid);
 
-  const { data, loading } = GetSinglePost("posts", postId, "comments");
+  const { commentData, loadingComment } = GetComments("posts", postId, "comments");
+
 
   const writeComment = async () => {
     try {
@@ -61,7 +61,7 @@ function CommentSection({ postId }: prop) {
     
   return (
     <div>
-      <h3 className="text-xl font-bold mt-5">Comments ({data.length})</h3>
+      <h3 className="text-xl font-bold mt-5">Comments ({commentData.length})</h3>
       {/* comment form  */}
       {currentUser && (
           <div className="shadows p-3 my-5 overflow-hidden">
@@ -90,13 +90,13 @@ function CommentSection({ postId }: prop) {
             </div>
           </div>
         )}
-        {data && data.length === 0 ? (
+        {commentData && commentData.length === 0 ? (
           <p>This post has no comments</p>
         ) : (
           <div className="border-t py-4 mt-8 flex flex-col gap-8">
-            {data &&
-              data.map((item: Post, i: number) =>
-                loading ? (
+            {commentData &&
+              commentData.map((item: Comment, i: number) =>
+                loadingComment ? (
                   <Loading />
                 ) : (
                   <Comments item={item} postId={postId} key={i} />

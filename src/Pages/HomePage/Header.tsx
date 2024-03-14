@@ -51,7 +51,7 @@ function Header() {
             />
             <div className="flex items-center relative" onClick={toggleModal}>
               <img
-                className="sm:w-[2.5rem] sm:h-[2.5rem] w-[60px] h-[35px] object-cover rounded-full cursor-pointer"
+                className="w-[2.5rem] h-[2.5rem]  object-cover rounded-full cursor-pointer"
                 src={currentUserData?.userImg || profileImg}
                 alt="profile-img"
               />

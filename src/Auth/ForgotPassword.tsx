@@ -42,9 +42,9 @@ function ForgotPassword() {
         <>
           <Link
             to="/"
-            className="text-white md:text-black absolute m-5 font-bold"
+            className="text-white md:text-black absolute m-5 font-bold flex "
           >
-            <IoIosArrowBack  className="mx-2" />
+            <IoIosArrowBack  className="mx-2 self-center" />
             Back
           </Link>
           <div className="md:flex gap-20 md:my-2 md:w-[70%] md:mx-auto">
@@ -65,7 +65,7 @@ function ForgotPassword() {
               <h1 className="text-center text-3xl">Forgot Password</h1>
               <form
                 onSubmit={(e) => handleReset(e)}
-                className="flex flex-col mt-10  gap-10 p-10 border border-purple-500 rounded-md"
+                className="flex flex-col mt-10  gap-10 p-10 border mx-3 border-purple-500 rounded-md"
               >
                 <input
                   className="border-2 border-purple-500 rounded-md py-2 px-1"
@@ -79,7 +79,7 @@ function ForgotPassword() {
                   Reset Password
                 </button>
               </form>
-              <Link to={"/LoginPage"} className="self-center mt-5">
+              <Link to={"/LoginPage"} className="self-center m-5">
                 <button className="bg-purple-500 text-white rounded-md px-5 py-2  mx-auto">
                   Back to Login
                 </button>

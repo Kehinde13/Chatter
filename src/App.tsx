@@ -8,7 +8,6 @@ import AuthLayout from "./Auth/AuthLayout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPages from "./Pages/ErrorPage";
 import HomePage from "./Pages/HomePage/HomePage";
-import { Blog } from "./Context/Context";
 import { ToastContainer } from "react-toastify";
 import ProfilePage from "./Pages/HomePage/Profile/ProfilePage";
 import Feed from "./Pages/HomePage/Feed/Feed";
@@ -28,7 +27,7 @@ const Fallback = () => <Loading />
 
 
 function App() {
-  const { currentUser } = Blog();
+  
   
 
 
@@ -39,7 +38,7 @@ function App() {
       errorElement: <ErrorPages />
     },
     {
-      element: <ProtectedRoutes currentUser={currentUser} />,
+      element: <ProtectedRoutes />,
       errorElement: <ErrorPages />,
       children: [
         {

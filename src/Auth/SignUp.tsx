@@ -3,11 +3,12 @@ import { FaGoogle } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "./firebase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import Loading from "../components/Loading";
 import GoogleSignIn from "../hooks/GoogleSignIn";
+import { Blog } from "../Context/Context";
 
 interface FormState {
   firstName: string;
@@ -19,6 +20,7 @@ interface FormState {
 
 function SignUp() {
   const navigate = useNavigate();
+  const {currentUser} = Blog()
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState<FormState>({
     firstName: "",
@@ -76,6 +78,12 @@ function SignUp() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if(currentUser){
+      navigate("/HomePage")
+    }
+  },[currentUser, navigate])
 
   return (
     <div className="h-screen bg-white">

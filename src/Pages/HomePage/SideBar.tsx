@@ -23,7 +23,7 @@ function SideBar({ showSideBar, setShowSideBar }: SidebarProps) {
 
   return (
     <aside
-      className={`sticky h-screen overflow-y-scroll top-0  pb-4 flex flex-col sm:w-[20%] sm:ml-0 pr-10 sm:border-r-2
+      className={`sticky h-screen sm:overflow-y-scroll top-0  pb-4 flex flex-col sm:w-[20%] sm:ml-0 pr-10 sm:border-r-2
                    duration-500 ${
                      showSideBar ? "ml-1 w-full" : "ml-[-280px] border-r-0"
                    }`}

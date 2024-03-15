@@ -56,7 +56,7 @@ function EditProfileModal({ modal, setModal, getUserData }: Prop) {
       await updateDoc(docRef, {
         bio: form.bio,
         username: form.username,
-        userImg: profileImgUrl ? imageUrl : form.userImg.name,
+        userImg: profileImgUrl ? imageUrl : form.userImg,
         userId: getUserData.userId,
       });
       setLoading(false);

@@ -8,7 +8,7 @@ import GetRecentPost from "../hooks/GetRecentPost";
 import { User as FirebaseUser } from "firebase/auth";
 import { collection, doc, getDoc } from "firebase/firestore";
 
-interface User {
+export interface User {
   id: string;
   userId: string;
   username: string;
@@ -48,6 +48,7 @@ type BlogContextType = {
   setPublish: (publish: boolean) => void;
   authModel: boolean;
   setAuthModel: (authModel: boolean) => void;
+  loading: boolean
 };
 
 const BlogContext = createContext<BlogContextType>({
@@ -73,6 +74,7 @@ const BlogContext = createContext<BlogContextType>({
   setPublish: () => {},
   authModel: false,
   setAuthModel: () => {},
+  loading: false
 });
 
 type Props = {
@@ -121,6 +123,7 @@ function Context({ children }: Props) {
   return (
     <BlogContext.Provider
       value={{
+        loading,
         currentUser,
         setCurrentUser,
         users,

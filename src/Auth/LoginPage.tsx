@@ -36,6 +36,7 @@ function LoginPage() {
       navigate("/HomePage");
       toast.success("User has been logged in")
       setLoading(false)
+      
     } catch(error: unknown){
       if(error instanceof FirebaseError){
         toast.error(error.message)

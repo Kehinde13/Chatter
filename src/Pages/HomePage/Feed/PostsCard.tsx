@@ -13,7 +13,7 @@ type prop = {
 }
 
 const PostsCard = ({ post }: prop) => {
-  const { title, desc, created, postImg, id: postId, userId } = post;
+  const { title, desc, created, postImg, id: postId, userId, username } = post;
   const { currentUser } = Blog();
 
 
@@ -24,12 +24,12 @@ const PostsCard = ({ post }: prop) => {
       <div
         className="flex flex-col sm:flex-row gap-4 cursor-pointer ">
         <div className="flex-[2.5]">
-          <p className="pb-2 font-semibold capitalize">{/* {username} */}</p>
+          <p className="pb-2 font-semibold capitalize">{username}</p>
           <h2 className="text-xl font-bold line-clamp-2 leading-6 capitalize">
             {title} 
           </h2>
           <div
-            className="py-1 text-gray-500  line-clamp-2 leading-5"
+            className="py-1 text-gray-500 h-[400px] overflow-hidden leading-5"
             dangerouslySetInnerHTML={{ __html: desc }}
           />
         </div>

@@ -13,11 +13,12 @@ function HomePage() {
   const toggleSideBar = () => {
     setShowSideBar(!showSideBar);
   };
+  
 
   return (
     <div>
       <Header />
-      <div className="flex">
+      <div className="flex gap-6">
         <button
           className={`border p-1 py-1 fixed sm:hidden rounded-full top-64 z-50 ${
             showSideBar ? "right-0" : "left-0"

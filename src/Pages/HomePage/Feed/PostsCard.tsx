@@ -29,7 +29,7 @@ const PostsCard = ({ post }: prop) => {
             {title} 
           </h2>
           <div
-            className="py-1 text-gray-500 h-[400px] overflow-hidden leading-5"
+            className="py-1 text-gray-500 max-h-[400px] overflow-hidden leading-5"
             dangerouslySetInnerHTML={{ __html: desc }}
           />
         </div>

@@ -69,8 +69,8 @@ function SignUp() {
           userImg: "",
           bio: "",
         });
-        toast.success("Sign Up Successful");
-        navigate("/HomePage");
+        toast.success("Sign Up Successful, please login");
+        navigate("/Login");
         setLoading(false);
       }
     } catch (error) {
@@ -199,7 +199,7 @@ function SignUp() {
                 onClick={googleAuth}
                 className="bold md:py-2 md:px-10 mt-3 bg-purple-500 rounded-md w-full text-white  py-1 px-10"
               >
-                <div className="flex w-full gap-5 mx-auto">
+                <div className="flex w-full gap-5 mx-auto justify-around">
                 <FaGoogle
                   className="text-red-500 text-xl"
                 />

@@ -123,7 +123,7 @@ function LoginPage() {
                 onClick={googleAuth}
                 className="bold md:py-2 md:px-10 mt-3 py-1 px-12 bg-purple-500 rounded-md w-full text-white"
               >
-                <div className="mx-auto gap-5 flex w-full">
+                <div className="mx-auto gap-5 flex w-full justify-around">
                 <FaGoogle
                   className="text-red-500 self-center text-xl"
                 />

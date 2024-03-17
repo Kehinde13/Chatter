@@ -1,24 +1,14 @@
 import { Navigate, Outlet } from "react-router-dom";
-import Loading from "../components/Loading";
 import { Blog } from "../Context/Context";
 
-
-
-
-
 const ProtectedRoutes = () => {
-  const { currentUser, loading } = Blog();
+  const { currentUser } = Blog();
 
-  
-  return (
-    <>
-      {
-        loading ? 
-        <Loading /> :
-        currentUser ? <Outlet /> : <Navigate to={'/SignUp'} />
-      }
-    </>
-  );
+  if (currentUser) {
+    return <Outlet />;
+  } else {
+    return <Navigate to="/LoginPage" />;
+  }
 };
 
 export default ProtectedRoutes;

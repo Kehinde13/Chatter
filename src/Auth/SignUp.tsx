@@ -69,8 +69,8 @@ function SignUp() {
           userImg: "",
           bio: "",
         });
-        toast.success("Sign Up Successful, please login");
-        navigate("/Login");
+        toast.success("Sign Up Successful");
+        navigate("/HomePage");
         setLoading(false);
       }
     } catch (error) {

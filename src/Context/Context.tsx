@@ -109,7 +109,12 @@ function Context({ children }: Props) {
               ...(userSnapShot.data() as User),
             });
           } else {
-            console.log("user not found");
+            setCurrentUser({
+              ...user,
+              ...(userSnapShot.data() as User)
+            })
+            console.log(user);
+            
           }
         }
       } else {

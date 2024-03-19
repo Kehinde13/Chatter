@@ -89,7 +89,7 @@ function SinglePost() {
       <section className="w-[90%] mx-auto py-[3rem]">
         <h2 className="text-4xl font-extrabold capitalize">{title}</h2>
         <div className="flex items-center gap-2 py-[2rem]">
-          <Link to={`/HomePage/profile/${userId}`}>
+          <Link to={`/homepage/profile/${userId}`}>
             <img
               className="w-[3rem] h-[3rem] object-cover rounded-full cursor-pointer"
               src={userImg}

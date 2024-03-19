@@ -18,6 +18,11 @@ interface FormState {
   confirmPassword: string;
 }
 
+const authButton = {
+  width: "100%",
+  fontSize: "16px"
+}
+
 function SignUp() {
   const navigate = useNavigate();
   const {currentUser} = Blog()
@@ -70,7 +75,7 @@ function SignUp() {
           bio: "",
         });
         toast.success("Sign Up Successful");
-        navigate("/HomePage");
+        navigate("/homepage");
         setLoading(false);
       }
     } catch (error) {
@@ -81,7 +86,7 @@ function SignUp() {
 
   useEffect(() => {
     if(currentUser){
-      navigate("/HomePage")
+      navigate("/homepage")
     }
   },[currentUser, navigate])
 
@@ -117,13 +122,13 @@ function SignUp() {
             <div className="sm:w-[80%] p-5 mx-auto ">
               <div className="flex justify-between border-b-2 border-transparent pb-3 mb-3 w-full">
                 <Link
-                  to="/SignUp"
+                  to="/signup"
                   className=" border-b-[3px] border-purple-500 w-[50%] pb-3"
                 >
                   REGISTER
                 </Link>
                 <Link
-                  to="/LoginPage"
+                  to="/loginpage"
                   className=" border-b-[3px] w-[50%] pb-3 text-right"
                 >
                   LOGIN
@@ -191,19 +196,23 @@ function SignUp() {
                     className=" border border-gray-300 w-full py-2 rounded-md p-2 dark:text-black"
                   />
                 </div>
-                <button className="bold md:py-2 md:px-10 mt-3 p-1 bg-purple-500 rounded-md w-full text-white">
+                <button 
+                className="bn632-hover bn20"
+                style={authButton}
+                >
                   Sign Up
                 </button>
               </form>
               <button
                 onClick={googleAuth}
-                className="bold md:py-2 md:px-10 mt-3 bg-purple-500 rounded-md w-full text-white  py-1 px-10"
+                className="bn632-hover bn20"
+                style={authButton}
               >
-                <div className="flex w-full gap-5 mx-auto justify-around">
+                <div className="mx-auto flex w-full justify-around">
                 <FaGoogle
-                  className="text-red-500 text-xl"
+                  className="text-red-500 self-center text-xl ml-12"
                 />
-                <p>Sign Up with Google</p>
+                <p className="mr-12">Sign up with Google</p>
                 </div>
               </button>
             </div>

@@ -74,7 +74,7 @@ function Publish() {
         pageViews: 0,
       });
       toast.success('Post has been added');
-      navigate("/HomePage");
+      navigate("/homepage");
       setPreview({
         title: '',
         photo: '',
@@ -144,7 +144,7 @@ function Publish() {
           <TagsInput value={tags} onChange={setTags} />
           <button
             onClick={publishPost}
-            className="btn bg-purple-500 w-fit text-white rounded-full p-2"
+            className="bn632-hover bn20"
             disabled={loading}
           >
             {loading ? 'Publishing...' : 'Publish'}

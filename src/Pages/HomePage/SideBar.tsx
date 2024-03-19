@@ -23,9 +23,9 @@ function SideBar({ showSideBar, setShowSideBar }: SidebarProps) {
 
   return (
     <aside
-      className={`sticky h-screen sm:overflow-y-scroll top-0  pb-4 flex flex-col sm:w-[20%] sm:ml-0 pr-10 sm:border-r-2
+      className={`sticky h-screen sm:overflow-y-scroll top-0  pb-4 flex flex-col sm:w-[20%] sm:ml-3 pr-10 sm:pr-5 sm:border-r-2
                    duration-500 ${
-                     showSideBar ? "ml-1 w-full" : "ml-[-280px] border-r-0"
+                     showSideBar ? "ml-1 w-full" : "ml-[-300px] border-r-0"
                    }`}
     >
       <h1 className="font-bold text-lg ml-2">Following</h1>
@@ -40,7 +40,7 @@ function SideBar({ showSideBar, setShowSideBar }: SidebarProps) {
       <ul className="ml-5">
         {topics.map((topic, i) => (
           <li key={i} className="p-2">
-            <Link to={`/HomePage/FilteredPosts/${topic}`} onClick={handleClick}>
+            <Link to={`/homepage/filteredposts/${topic}`} onClick={handleClick}>
               {topic}
             </Link>
           </li>

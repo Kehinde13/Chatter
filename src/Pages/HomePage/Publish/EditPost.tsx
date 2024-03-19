@@ -23,7 +23,7 @@ function EditPost() {
         title,
         description,
       });
-      navigate('/HomePage');
+      navigate('/homepage');
       toast.success('Post has been updated');
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {

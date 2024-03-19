@@ -1,8 +1,6 @@
 import { readTime } from "../../../utils/helper.tsx";
 import moment from "moment/moment";
-/* import SavedPost from "./Actions/SavedPost"; */
 import { Blog } from "../../../Context/Context";
-/* import Actions from "./Actions/Actions"; */
 import { Link } from "react-router-dom";
 import Bookmark from "../Features/Bookmark.js";
 import Actions from "../Features/Actions.js";
@@ -20,7 +18,7 @@ const PostsCard = ({ post }: prop) => {
 
   return (
     <section className=" border-b my-2 pb-2">
-      <Link to={`/HomePage/SinglePost/${postId}`}>
+      <Link to={`/homepage/singlePost/${postId}`}>
       <div
         className="flex flex-col sm:flex-row gap-4 cursor-pointer ">
         <div className="flex-[2.5]">
@@ -29,7 +27,7 @@ const PostsCard = ({ post }: prop) => {
             {title} 
           </h2>
           <div
-            className="py-1 text-gray-500 max-h-[400px] overflow-hidden leading-5"
+            className="py-1 text-gray-500 max-h-[100px] overflow-hidden leading-5"
             dangerouslySetInnerHTML={{ __html: desc }}
           />
         </div>

@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
 
+const headerButton = {
+  width: '150px',
+  height: '45px',
+  fontSize: "16px"
+};
+
 function Header() {
   return (
     <div className="">
@@ -13,8 +19,8 @@ function Header() {
               Unleash the Power of Words, Connect with Like-minded Readers and
               Writers
             </p>
-            <Link to="SignUp">
-              <button className="bold px-3 py-1  bg-purple-500 rounded-md self-start">
+            <Link to="signup">
+              <button className="bn632-hover bn20 self-start" style={headerButton}>
                 Get Started
               </button>
             </Link>

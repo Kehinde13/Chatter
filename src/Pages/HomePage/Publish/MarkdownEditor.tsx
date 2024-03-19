@@ -11,7 +11,7 @@ function MarkdownEditor() {
   return (
     <div>
       <section className="w-full md:w-[90%] mx-auto py-[3rem] dark:text-black">
-        <h1 className="text-xl sm:text-3xl font-bold dark:text-purple-500">
+        <h1 className="text-xl sm:text-3xl font-bold">
           Markdown Editor
         </h1>
 

@@ -33,7 +33,7 @@ function GoogleSignIn() {
       }
       setGoogleLoading(false)
       toast.success("User have been Signed in");
-      navigate("/HomePage"); 
+      navigate("/homepage"); 
     } catch (error: unknown) {
       if(error instanceof FirebaseError){
         toast.error(error.message);

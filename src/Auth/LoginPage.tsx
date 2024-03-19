@@ -9,6 +9,11 @@ import Loading from "../components/Loading";
 import GoogleSignIn from "../hooks/GoogleSignIn";
 import { FirebaseError } from "firebase/app";
 
+const authButton = {
+  width: "100%",
+  fontSize: "16px"
+}
+
 function LoginPage() {
   const navigate = useNavigate()
   const [form, setForm] = useState({
@@ -33,7 +38,7 @@ function LoginPage() {
 
     try{
       await signInWithEmailAndPassword(auth, form.userEmail, form.password);
-      navigate("/HomePage");
+      navigate("/homepage");
       toast.success("User has been logged in")
       setLoading(false)
       
@@ -73,11 +78,11 @@ function LoginPage() {
         </div>
         <div className="sm:w-[80%] p-5 mx-auto sm:mt-20 ">
           <div className="flex justify-between border-b-2 border-transparent pb-3 mb-3 w-full">
-            <Link to="/SignUp" className=" border-b-[3px]  w-[50%] pb-5">
+            <Link to="/signup" className=" border-b-[3px]  w-[50%] pb-5">
               REGISTER
             </Link>
             <Link
-              to="/LoginPage"
+              to="/loginpage"
               className=" border-b-[3px] border-purple-500 w-[50%] pb-5 text-right"
             >
               LOGIN
@@ -109,25 +114,28 @@ function LoginPage() {
                   className=" border border-gray-300 w-full py-2 rounded-md p-2"
                   onChange={handleChange}
                 />
-                <Link to="/ForgotPassword">
+                <Link to="/forgotpassword">
                 <p className="text-red-500 text-sm my-3 text-right">Forgot Password</p>
                 </Link>
               </div>
               <button 
-              className={`bold md:py-2 md:px-10 p-1 bg-purple-500 rounded-md w-full text-white`}>
+              className='bn632-hover bn20'
+              style={authButton}
+              >
                 Login
               </button>
             </div>
           </form>
           <button
                 onClick={googleAuth}
-                className="bold md:py-2 md:px-10 mt-3 py-1 px-12 bg-purple-500 rounded-md w-full text-white"
+                className="bn632-hover bn20"
+                style={authButton}
               >
-                <div className="mx-auto gap-5 flex w-full justify-around">
+                <div className="mx-auto flex w-full justify-around">
                 <FaGoogle
-                  className="text-red-500 self-center text-xl"
+                  className="text-red-500 self-center text-xl ml-12"
                 />
-                <p>Sign In with Google</p>
+                <p className="mr-12">Sign In with Google</p>
                 </div>
           </button>
         </div>

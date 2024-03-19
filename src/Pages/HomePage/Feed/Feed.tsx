@@ -34,8 +34,8 @@ function Feed() {
           <h1 className="text-2xl sm:text-4xl font-bold">FEED</h1>
           <p>Explore different content you’d love </p>
         </div>
-        <Link to="TextEditor">
-          <button className="sm:py-2 sm:px-3 p-2  bg-purple-500 self-start text-white rounded-full">
+        <Link to="texteditor">
+          <button className="bn632-hover bn20">
             Write
           </button>
         </Link>

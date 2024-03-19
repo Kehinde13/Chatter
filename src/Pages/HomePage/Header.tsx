@@ -33,7 +33,7 @@ function Header() {
     <header>
       {userLoading && <Loading />}
       <div className="flex gap-2 justify-between mx-3 md:mx-5 items-center h-[70px] h-shadow-lg">
-        <Link to="/HomePage">
+        <Link to="/homepage">
           <img
             src={logo}
             className={`${searchBar ? "w-[80px]" : "w-[120px]"}`}

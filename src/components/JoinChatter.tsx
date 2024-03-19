@@ -4,6 +4,12 @@ import profile2 from "../assets/profile2.png";
 import profile3 from "../assets/profile3.png";
 import profile4 from "../assets/profile4.png";
 
+const buttonStyle = {
+  width: '150px',
+  height: '45px',
+  fontSize: "16px"
+};
+
 function JoinChetter() {
   return (
     <div className="w-full mt-10">
@@ -20,8 +26,8 @@ function JoinChetter() {
             <span className="font-bold text-xl">Adebobola Muhydeen, </span>
             Software developer at Apple
           </p>
-          <Link to="SignUp">
-            <button className="bold md:py-2 md:px-10 px-3 py-1   bg-purple-500 rounded-md self-start text-white">
+          <Link to="signup">
+            <button className="bn632-hover bn20 self-start" style={buttonStyle}>
               Join Chatter
             </button>
           </Link>
@@ -45,8 +51,8 @@ function JoinChetter() {
             Share people your great ideas, and also read write-ups based on your
             interests. connect with people of same interests and goals
           </p>
-          <Link to="SignUp">
-            <button className="bold md:py-2 md:px-10 px-3 py-1  bg-purple-500 rounded-md self-start text-white">
+          <Link to="signup">
+            <button className="bn632-hover bn20 self-start" style={buttonStyle}>
               Join Chatter
             </button>
           </Link>

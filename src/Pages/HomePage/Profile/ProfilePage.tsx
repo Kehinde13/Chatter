@@ -73,7 +73,8 @@ function ProfilePage() {
           currentUser?.uid === getUserData?.userId &&
           <button
           onClick={() => setModal(!modal)}
-          className="bg-purple-500 my-5 py-1 px-3 rounded-md text-white"
+          className="bn632-hover bn20"
+          style={{width: "120px", marginLeft: "-5px"}}
         >
           Edit Your profile
         </button>

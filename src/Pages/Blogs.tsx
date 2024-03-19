@@ -55,7 +55,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
 
   return (
     <section className="p-2 my-2 mx-auto sm:w-[70%]">
-      <Link to={`/HomePage/SinglePost/${postId}`}>
+      <Link to={`/homepage/singlepost/${postId}`}>
         <div className="flex flex-col sm:flex-row gap-4 cursor-pointer ">
           <div className="flex-[2.5]">
             <p className="pb-2 font-semibold capitalize">{username}</p>

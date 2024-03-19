@@ -30,7 +30,7 @@ const Follow = ({ showSideBar, setShowSideBar }: SidebarProps) => {
           const { username, bio, userImg, userId } = user;
           return (
             <div key={i} className="flex items-start gap-2 my-4">
-              <Link to={`/HomePage/profile/${userId}`}
+              <Link to={`/homepage/profile/${userId}`}
                 onClick={handleClick}
                 className="flex-1 flex items-center gap-2 cursor-pointer">
                 <img

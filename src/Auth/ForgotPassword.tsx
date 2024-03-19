@@ -28,7 +28,7 @@ function ForgotPassword() {
       .then(() => {
         toast.success("A reset password link has been sent to your email address")
         setLoading(false)
-        navigate('/LoginPage')
+        navigate('/loginpage')
       })
       .catch((err) => {
         toast.error(err.message)
@@ -79,7 +79,7 @@ function ForgotPassword() {
                   Reset Password
                 </button>
               </form>
-              <Link to={"/LoginPage"} className="self-center m-5">
+              <Link to={"/loginpage"} className="self-center m-5">
                 <button className="bg-purple-500 text-white rounded-md px-5 py-2  mx-auto">
                   Back to Login
                 </button>

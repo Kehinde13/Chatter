@@ -41,10 +41,10 @@ function NavBar({ modal, setModal, setModalText }: NavBarProps) {
           onClick={toggleDropdown}
         />
         <ul className="md:flex gap-10 hidden font-bold">
-          <Link to={"Contact"}>
+          <Link to={"contact"}>
             <li>Contact</li>
           </Link>
-          <Link to={"Blogs"}>
+          <Link to={"blogs"}>
             <li>Blogs</li>
           </Link>
           <ScrollLink
@@ -59,15 +59,13 @@ function NavBar({ modal, setModal, setModalText }: NavBarProps) {
         <div className="md:flex justify-between md:gap-10 gap-3 md:font-bold hidden">
           <button
             onClick={setLogin}
-            className="md:py-2 md:px-10 p-1 border border-purple-500 rounded-md
-                             hover:bg-purple-500 hover:text-white text-purple-500"
+            className="bn632-hover bn20"
           >
             Log in
           </button>
           <button
             onClick={setSignUp}
-            className="md:py-2 md:px-10 p-1 bg-purple-500 rounded-md text-white
-                       border-purple-500 hover:bg-transparent border hover:text-purple-500"
+            className="bn632-hover bn20"
           >
             Sign up
           </button>
@@ -80,10 +78,10 @@ function NavBar({ modal, setModal, setModalText }: NavBarProps) {
             onClick={toggleDropdown}
           />
           <ul className="flex flex-col gap-5 font-bold self-center text-center">
-            <Link to={"Contact"}>
+            <Link to={"contact"}>
               <li>Contact</li>
             </Link>
-            <Link to={"Blogs"}>
+            <Link to={"blogs"}>
               <li>Blogs</li>
             </Link>
 
@@ -99,15 +97,13 @@ function NavBar({ modal, setModal, setModalText }: NavBarProps) {
           </ul>
           <button
             onClick={setLogin}
-            className="px-5 py-2 border border-purple-500 rounded-md self-center mb-5
-                               hover:bg-purple-500 hover:text-white text-purple-500"
+            className="bn632-hover bn20 self-center"
           >
             Log in
           </button>
           <button
             onClick={setSignUp}
-            className="px-5 py-2 bg-purple-500 rounded-md text-white self-center
-                         border-purple-500 hover:bg-transparent border hover:text-purple-500"
+            className="bn632-hover bn20 self-center"
           >
             Sign up
           </button>

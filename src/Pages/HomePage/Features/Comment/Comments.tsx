@@ -128,7 +128,7 @@ function Comments({ item: comment, postId }: Props) {
             </button>
             <button
               onClick={handleEdit}
-              className="btn !text-white !p-2 !bg-purple-500 !rounded-full !text-xs">
+              className="bn632-hover bn20">
               {loading ? 'Updating...' : 'Update'}
             </button>
           </div>

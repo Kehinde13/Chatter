@@ -84,7 +84,7 @@ function CommentSection({ postId }: prop) {
               </button>
               <button
                 onClick={writeComment}
-                className="btn !text-xs p-2 !bg-purple-500 !text-white !rounded-full">
+                className="bn632-hover bn20">
                 Comment
               </button>
             </div>

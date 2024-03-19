@@ -10,6 +10,13 @@ interface FollowBtnProps {
   userId: string;
 }
 
+const followBtnStyle = {
+  marginLeft: '15px',
+  marginRight: '0px',
+  width: "70px",
+  height: '30px'
+}
+
 const FollowBtn = ({ userId }: FollowBtnProps) => {
   const [isFollowed, setIsFollowed] = useState<boolean>(false);
   const { currentUser } = Blog();
@@ -52,7 +59,8 @@ const FollowBtn = ({ userId }: FollowBtnProps) => {
     <>
       <button
         onClick={handleFollow}
-        className={`text-white bg-purple-500 p-1 rounded-md`}
+        className='bn632-hover bn20'
+        style={followBtnStyle}
       >
         {isFollowed ? "Unfollow" : "Follow"}
       </button>

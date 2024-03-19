@@ -16,6 +16,12 @@ type Props = {
   text: string;
 };
 
+const authButton = {
+  width: "70%",
+  fontSize: "16px",
+  margin: "auto"
+}
+
 function AuthModal({ modal, setModal, text }: Props) {
   const [loading, setLoading] = useState(false)
 
@@ -44,7 +50,7 @@ function AuthModal({ modal, setModal, text }: Props) {
       setLoading(false)
       setModal(!modal);
       toast.success("User have been Signed in");
-      navigate("/HomePage"); 
+      navigate("/homepage"); 
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
           toast.error(error.message);
@@ -65,28 +71,37 @@ function AuthModal({ modal, setModal, text }: Props) {
           loading ?
           <Loading /> :
           <div className="relative w-[80%] md:w-[50%] py-10 mx-auto mt-20 bg-white z-50 rounded-md border border-black">
-          <button className="absolute top-3 right-5">
+          <div className="absolute top-3 right-5 w-[10px] cursor-pointer">
           <MdOutlineCancel 
           className="text-xl"
               onClick={() => setModal(!modal)}
           />
-          </button>
+          </div>
           <div className="flex flex-col gap-5">
             <button 
               onClick={googleAuth}
-              className="border border-red-500 py-2 px-5 md:w-[50%] mx-auto rounded-md flex  justify-around">
+              className="bn632-hover bn20 flex justify-around"
+              style={authButton}>
               <FaGoogle 
-              className="text-red-500 text-2xl self-center"
+              className="text-red-500 sm:ml-24 text-2xl self-center"
               />
-              <p>{text} with Google</p>
+              <p 
+               className="sm:mr-24 self-center">
+                {text} with Google
+              </p>
             </button>
-            <Link to={text === 'Sign Up' ? "SignUp" : "LoginPage"}
+            <Link to={text === 'Sign Up' ? "signup" : "loginpage"}
             onClick={() => setModal(!modal)}
-            className="border border-blue-500 py-2 px-5 md:w-[50%] mx-auto rounded-md text-center flex justify-around">
+            className="bn632-hover bn20 flex justify-around"
+            style={authButton}
+            >
               <MdOutlineEmail 
-              className="text-blue-500 text-2xl self-center"
+              className="sm:ml-24 text-2xl self-center"
                />
-               <p>{text} with Email</p>
+               <p 
+               className="sm:mr-24 self-center">
+                {text} with Email
+              </p>
             </Link>
           </div>
           </div>

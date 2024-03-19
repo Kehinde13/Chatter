@@ -42,7 +42,7 @@ function App() {
       errorElement: <ErrorPages />,
       children: [
         {
-          path: "HomePage",
+          path: "homepage",
           element: <HomePage />,
           children: [
             {
@@ -54,27 +54,27 @@ function App() {
               element: <ProfilePage />
             },
             {
-              path: "TextEditor",
+              path: "texteditor",
               element: <TextEditor />
             },
             {
-              path: "Publish",
+              path: "publish",
               element: <Publish />
             },
             {
-              path: "SinglePost/:postId",
+              path: "singlepost/:postId",
               element: <SinglePost />
             }, 
             {
-              path: "EditPost/:postId",
+              path: "editPost/:postId",
               element: <EditPost />
             },
             {
-              path: "FilteredPosts/:tag",
+              path: "filteredPosts/:tag",
               element: <FilteredPosts/>
             },
             {
-              path: "Analytics/:postId",
+              path: "analytics/:postId",
               element: <Analytics />
             }
           ]
@@ -87,23 +87,23 @@ function App() {
       errorElement: <ErrorPages />,
       children: [
         {
-          path: "LoginPage",
+          path: "loginpage",
           element: <LoginPage />,
         },
         {
-          path: "SignUp",
+          path: "signup",
           element: <SignUp />,
         },
         {
-          path: "ForgotPassword",
+          path: "forgotpassword",
           element: <ForgotPassword />
         },
         {
-          path: "Contact",
+          path: "contact",
           element: <Contact />
         },
         {
-          path: "Blogs",
+          path: "blogs",
           element: <Blogs />
         }
       ],

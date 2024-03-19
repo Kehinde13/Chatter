@@ -45,20 +45,21 @@ const Write = () => {
         {!markdown ? (
           <button
             onClick={toggleMarkdown}
-            className="bg-purple-500 p-2 rounded-full text-white"
+            className="bn632-hover bn20"
+            style={{width: "120px"}}
           >
             Markdown Editor
           </button>
         ) : (
           <button
             onClick={toggleMarkdown}
-            className="bg-purple-500 p-2 rounded-full text-white"
+            className="bn632-hover bn20"
           >
             Text Editor
           </button>
         )}
-        <Link to="/HomePage/Publish">
-          <button className="bg-purple-500 p-2 rounded-full text-white">
+        <Link to="/homepage/publish">
+          <button className="bn632-hover bn20">
             Publish
           </button>
         </Link>

@@ -55,7 +55,7 @@ function Search({ searchBar, toggleSearchBar }: Props) {
                 <div
                   key={i}
                   onClick={() => {
-                    navigate(`/HomePage/SinglePost/${post.id}`);
+                    navigate(`/homepage/singlepost/${post.id}`);
                     setSearch("");
                   }}
                   className="p-2 border-b border-gray-300 hover:bg-gray-100 cursor-pointer"

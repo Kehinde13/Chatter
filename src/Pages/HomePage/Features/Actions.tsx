@@ -24,12 +24,12 @@ const Actions = ({ postId, title, desc }: ActionsProps) => {
   };
 
   const handleEdit = () => {
-    navigate(`/HomePage/EditPost/${postId}`);
+    navigate(`/homepage/editpost/${postId}`);
     setUpdateData({ title, description: desc });
   };
 
   const handleAnalytics = () => {
-    navigate(`/HomePage/Analytics/${postId}`);
+    navigate(`/homepage/analytics/${postId}`);
   };
 
   const handleRemove = async () => {
@@ -39,7 +39,7 @@ const Actions = ({ postId, title, desc }: ActionsProps) => {
 
       toast.success("Post has been removed");
       setShowDrop(false);
-      navigate("/HomePage");
+      navigate("/homepage");
     } catch (error: unknown) {
       if(error instanceof FirebaseError){
         toast.error(error.message);

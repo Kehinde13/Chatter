@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Follow from "./Features/Follow";
+import { useState } from "react";
 
 interface SidebarProps {
   showSideBar: boolean;
@@ -7,6 +8,15 @@ interface SidebarProps {
 }
 
 function SideBar({ showSideBar, setShowSideBar }: SidebarProps) {
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
   const topics = [
     "Programming",
     "Data Science",
@@ -23,10 +33,15 @@ function SideBar({ showSideBar, setShowSideBar }: SidebarProps) {
 
   return (
     <aside
-      className={`sticky h-screen sm:overflow-y-scroll top-0  pb-4 flex flex-col sm:w-[20%] sm:ml-3 pr-10 sm:pr-5 sm:border-r-2
+      className={`sticky h-screen  top-0  pb-4 flex flex-col sm:w-[20%] sm:ml-3 pr-10 sm:pr-5 sm:border-r-2
                    duration-500 ${
-                     showSideBar ? "ml-1 w-full" : "ml-[-300px] border-r-0"
-                   }`}
+                     showSideBar ? "ml-1 w-full" : "ml-[-320px] border-r-0"
+                   }
+                   ${isFocused ? 'focused' : ''}`}
+      id="focusSection"
+      tabIndex={0}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
     >
       <h1 className="font-bold text-lg ml-2">Following</h1>
 

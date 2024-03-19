@@ -18,7 +18,7 @@ function HomePage() {
   return (
     <div>
       <Header />
-      <div className="flex gap-3">
+      <div className="flex gap-5 sm:gap-0">
         <button
           className={`border p-1 py-1 fixed sm:hidden rounded-full top-64 z-50 ${
             showSideBar ? "right-0" : "left-0"

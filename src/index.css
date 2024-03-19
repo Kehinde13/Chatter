@@ -86,3 +86,11 @@ li {
   );
   box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
 }
+
+#focusSection {
+  overflow: hidden; 
+}
+
+#focusSection.focused {
+  overflow-y: scroll;
+}

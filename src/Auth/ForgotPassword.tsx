@@ -7,31 +7,33 @@ import { toast } from "react-toastify";
 import { auth } from "./firebase";
 
 function ForgotPassword() {
-  const navigate = useNavigate()
-  const [loading, setLoading] = useState<boolean>(false)
-  const [email, setEmail] = useState<string>("")
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
 
   const handelEmail = () => {
-    setEmail(email)
-  }
+    setEmail(email);
+  };
 
   const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true)
-    const userEmail = email
-    if(userEmail === ""){
-        toast.error("input Your Email")
-        setLoading(false)
-        return
+    setLoading(true);
+    const userEmail = email;
+    if (userEmail === "") {
+      toast.error("input Your Email");
+      setLoading(false);
+      return;
     }
     sendPasswordResetEmail(auth, userEmail)
       .then(() => {
-        toast.success("A reset password link has been sent to your email address")
-        setLoading(false)
-        navigate('/loginpage')
+        toast.success(
+          "A reset password link has been sent to your email address"
+        );
+        setLoading(false);
+        navigate("/loginpage");
       })
       .catch((err) => {
-        toast.error(err.message)
+        toast.error(err.message);
       });
   };
   return (
@@ -41,13 +43,13 @@ function ForgotPassword() {
       ) : (
         <>
           <Link
-            to="/"
-            className="text-white md:text-black absolute m-5 font-bold flex "
+            to="/loginpage"
+            className="text-white absolute m-5 font-bold flex "
           >
-            <IoIosArrowBack  className="mx-2 self-center" />
+            <IoIosArrowBack className="mx-2 self-center" />
             Back
           </Link>
-          <div className="md:flex gap-20 md:my-2 md:w-[70%] md:mx-auto">
+          <div className="md:flex gap-20 md:my-2 md:w-[100%] md:mx-auto">
             <div className="Auth bg-no-repeat bg-cover bg-center bg-blend-multiply h-screen w-full">
               <div className="header-overlay ">
                 <div className="w-[80%] text-white mx-auto">
@@ -61,29 +63,29 @@ function ForgotPassword() {
                 </div>
               </div>
             </div>
-            <div className="mt-10 w-full flex flex-col">
-              <h1 className="text-center text-3xl">Forgot Password</h1>
-              <form
-                onSubmit={(e) => handleReset(e)}
-                className="flex flex-col mt-10  gap-10 p-10 border mx-3 border-purple-500 rounded-md"
-              >
-                <input
-                  className="border-2 border-purple-500 rounded-md py-2 px-1"
-                  type="email"
-                  placeholder="Email"
-                  name="Email"
-                  value={email}
-                  onChange={handelEmail}
-                />
-                <button className="bg-purple-500 w-[150px] py-2 rounded-md mx-auto text-white">
-                  Reset Password
-                </button>
-              </form>
-              <Link to={"/loginpage"} className="self-center m-5">
-                <button className="bg-purple-500 text-white rounded-md px-5 py-2  mx-auto">
-                  Back to Login
-                </button>
-              </Link>
+            <div className="mt-20 w-full flex flex-col">
+              <div className="w-[70%] mx-auto">
+                <h1 className="text-center text-3xl">Forgot Password</h1>
+                <form
+                  onSubmit={(e) => handleReset(e)}
+                  className="flex flex-col mt-10  gap-10 p-10 border mx-3 border-purple-500 rounded-md"
+                >
+                  <input
+                    className="border-2 border-purple-500 rounded-md py-2 px-1"
+                    type="email"
+                    placeholder="Email"
+                    name="Email"
+                    value={email}
+                    onChange={handelEmail}
+                  />
+                  <button
+                    className="bn632-hover bn20 self-center"
+                    style={{ width: "300px" }}
+                  >
+                    Reset Password
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </>

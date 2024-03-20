@@ -2,50 +2,39 @@ import { Link } from "react-router-dom";
 import logo from "../assets/CHATTER.png";
 import { FaBars } from "react-icons/fa";
 import { MdOutlineCancel } from "react-icons/md";
-import { useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
 
-type NavBarProps = {
-  modal: boolean;
-  setModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setModalText: React.Dispatch<React.SetStateAction<string>>;
-};
+type prop = {
+  dropdown: boolean,
+  setDropdown: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-function NavBar({ modal, setModal, setModalText }: NavBarProps) {
-  const [dropdown, setDropdown] = useState<boolean>(false);
+function NavBar({dropdown, setDropdown}: prop) {
 
   const toggleDropdown = () => {
     setDropdown(!dropdown);
   };
-
-  const setSignUp = () => {
-    setModal(!modal);
-    setModalText("Sign Up");
-  };
-
-  const setLogin = () => {
-    setModal(!modal);
-    setModalText("Login");
-  };
+ 
 
   return (
-    <nav className=" top-0 z-30 ">
-      <div className="flex justify-between mx-3 md:mx-10 items-center h-[70px] shadow-inner">
+    <nav className="top-0">
+      <div className="flex justify-between mx-3 md:mx-10 items-center h-[50px] sm:h-[70px] ">
         <img
           src={logo}
           alt="logo"
-          className="w-[80px] sm:w-[150px] self-center"
+          className="w-[80px] sm:w-[100px] self-center"
         />
-        <FaBars
-          className="block md:hidden"
-          onClick={toggleDropdown}
-        />
+        <FaBars className="block md:hidden" onClick={toggleDropdown} />
         <ul className="md:flex gap-10 hidden font-bold">
           <Link to={"contact"}>
-            <li>Contact</li>
+            <li className="inline-block rounded-lg px-2 py-1 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900">
+              Contact
+            </li>
           </Link>
           <Link to={"blogs"}>
-            <li>Blogs</li>
+            <li className="inline-block rounded-lg px-2 py-1 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900">
+              Blogs
+            </li>
           </Link>
           <ScrollLink
             to="about"
@@ -53,26 +42,23 @@ function NavBar({ modal, setModal, setModalText }: NavBarProps) {
             duration={500}
             className="cursor-pointer"
           >
-            <li>About us</li>
+            <li className="inline-block rounded-lg px-2 py-1 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900">
+              About us
+            </li>
           </ScrollLink>
         </ul>
         <div className="md:flex justify-between md:gap-10 gap-3 md:font-bold hidden">
-          <button
-            onClick={setLogin}
-            className="bn632-hover bn20"
-          >
-            Log in
-          </button>
-          <button
-            onClick={setSignUp}
-            className="bn632-hover bn20"
-          >
-            Sign up
-          </button>
+          <Link to={'/loginpage'}
+           className="bn632-hover bn20">
+            <p className="mt-3">Log in</p>
+          </Link>
+          <Link to={'/signup'} className="bn632-hover bn20">
+          <p className="mt-3">Sign Up</p>
+          </Link>
         </div>
       </div>
       {dropdown && (
-        <div className="bg-white fixed inset-0 z-10 h-screen flex flex-col gap-5">
+        <div className="bg-white absolute inset-0 z-50 h-screen flex flex-col gap-5">
           <MdOutlineCancel
             className="self-end m-5 sm:hidden block"
             onClick={toggleDropdown}
@@ -95,18 +81,13 @@ function NavBar({ modal, setModal, setModalText }: NavBarProps) {
               <li>About us</li>
             </ScrollLink>
           </ul>
-          <button
-            onClick={setLogin}
-            className="bn632-hover bn20 self-center"
-          >
-            Log in
-          </button>
-          <button
-            onClick={setSignUp}
-            className="bn632-hover bn20 self-center"
-          >
-            Sign up
-          </button>
+          <Link to={"/loginpage"}
+          className="bn632-hover bn20 self-center">
+            <p className="mt-3">Log in</p>
+          </Link>
+          <Link to={'/signup'}  className="bn632-hover bn20 self-center">
+          <p className="mt-3">Sign Up</p>
+          </Link>
         </div>
       )}
     </nav>

@@ -10,7 +10,7 @@ function AboutUs() {
   }, []);
 
   return (
-    <div id="about" className="md:flex justify-between mx-10 md:mt-20">
+    <div id="about" className="md:flex justify-between mx-10 md:mt-20 text-center sm:text-left">
       <div className="md:w-[50%]">
         <h1 className="text-2xl md:text-4xl font-bold mt-5">About Chatter</h1>
         <p className="md:w-[80%] my-10">

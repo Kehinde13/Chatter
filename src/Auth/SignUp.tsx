@@ -91,21 +91,21 @@ function SignUp() {
   },[currentUser, navigate])
 
   return (
-    <div className="h-screen bg-white">
+    <div className="h-screen bg-white ">
       {loading || googleLoading ? (
         <Loading />
       ) : (
         <>
           <Link
             to="/"
-            className="text-white md:text-black absolute m-5 font-bold flex"
+            className="text-white absolute m-5 font-bold flex"
           >
             <IoIosArrowBack
               className="mx-2 self-center"
             />
             Back
           </Link>
-          <div className="md:flex gap-20 md:my-2 md:w-[70%] md:mx-auto">
+          <div className="md:flex gap-20 md:my-2 md:w-[100%] h-screen md:mx-auto">
             <div className="Auth bg-no-repeat bg-cover bg-center bg-blend-multiply h-screen w-full">
               <div className="header-overlay ">
                 <div className="w-[80%] text-white mx-auto">
@@ -119,7 +119,8 @@ function SignUp() {
                 </div>
               </div>
             </div>
-            <div className="sm:w-[80%] p-5 mx-auto ">
+            <div className="sm:w-[100%] p-5 mx-auto ">
+            <div className="sm:w-[70%] mx-auto">
               <div className="flex justify-between border-b-2 border-transparent pb-3 mb-3 w-full">
                 <Link
                   to="/signup"
@@ -138,7 +139,7 @@ function SignUp() {
                 Register as a Writer/Reader
               </h1>
               <form action="" onSubmit={handleSubmit}>
-                <div className="md:flex gap-2 my-5">
+                <div className="md:flex gap-2 my-5 w-full">
                   <div>
                     <label htmlFor="">First Name</label> <br />
                     <input
@@ -186,7 +187,7 @@ function SignUp() {
                   />
                 </div>
                 <div className="my-5">
-                  <label htmlFor="">confirm Password</label> <br />
+                  <label htmlFor="">Confirm Password</label> <br />
                   <input
                     type="password"
                     name="confirmPassword"
@@ -210,11 +211,12 @@ function SignUp() {
               >
                 <div className="mx-auto flex w-full justify-around">
                 <FaGoogle
-                  className="text-red-500 self-center text-xl ml-12"
+                  className="text-red-500 self-center text-xl ml-12 md:ml-24"
                 />
-                <p className="mr-12">Sign up with Google</p>
+                <p className="mr-12 md:mr-24">Sign up with Google</p>
                 </div>
               </button>
+            </div>  
             </div>
           </div>
         </>

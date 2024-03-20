@@ -1,6 +1,12 @@
-import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react' 
+import { BrowserRouter } from 'react-router-dom'
+import LoginPage from '../Auth/LoginPage'
 
 
-test('demo', () => {
-    expect(true).toBe(true)
-  })
+test("login", () => {
+  render (<BrowserRouter>
+           <LoginPage />
+        </BrowserRouter>) 
+        const linkElement = screen.getByText(/login test/i)
+        expect(linkElement).toBeInTheDocument()
+})

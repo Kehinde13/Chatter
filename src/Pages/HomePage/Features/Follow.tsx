@@ -5,11 +5,10 @@ import profilePic from '../../../assets/profile.jpg'
 import { useState } from "react";
 
 interface SidebarProps {
-  showSideBar: boolean;
   setShowSideBar: (showSideBar: boolean) => void; 
 }
 
-const Follow = ({ showSideBar, setShowSideBar }: SidebarProps) => {
+const Follow = ({ setShowSideBar }: SidebarProps) => {
   const { currentUser, users } = Blog();
   const [count, setCount] = useState<number | undefined>(5);
   /* const count = 5 */

@@ -32,7 +32,7 @@ function Header() {
   return (
     <header>
       {userLoading && <Loading />}
-      <div className="flex gap-2 justify-between mx-3 md:mx-5 items-center h-[70px] h-shadow-lg">
+      <div className="flex gap-2 justify-between px-2 items-center h-[70px] shadow-lg mb-5">
         <Link to="/homepage">
           <img
             src={logo}

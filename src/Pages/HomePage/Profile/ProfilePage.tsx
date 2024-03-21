@@ -40,7 +40,7 @@ function ProfilePage() {
 
   return (
     <div
-      className={`p-1 ml-[-10px] sm:ml-5 sm:block w-[80%] ${
+      className={`p-1 ml-[-10px] sm:ml-5 sm:block w-[80%] mt-10 ${
         showSideBar ? "hidden" : ""
       }`}
     >

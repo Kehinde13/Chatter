@@ -42,12 +42,12 @@ const PostsCard = ({ post }: prop) => {
         )}
       </div>
       </Link>
-      <div className="flex items-center justify-between w-full md:w-[70%] mt-[2rem] md:mt-0">
-        <p className="text-xs text-gray-600 ">
-          {readTime({ __html: desc })} min read .
-          {moment(created).format("MMM DD")}
+      <div className="flex items-center justify-between w-full md:w-[70%] mt-[2rem] border border-gray-300 rounded-md p-1">
+        <p className=" text-gray-600 p-1">
+          {readTime({ __html: desc })} min read, {" "}
+          <span className="font-bold">{moment(created).format("MMM DD")}</span>
         </p>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3  p-3">
           <Bookmark post={post} />
           {currentUser?.uid === userId && (
             <Actions postId={postId} title={title} desc={desc} />

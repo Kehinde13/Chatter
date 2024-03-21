@@ -43,7 +43,7 @@ function SideBar({ showSideBar, setShowSideBar }: SidebarProps) {
       onFocus={handleFocus}
       onBlur={handleBlur}
     >
-      <h1 className="font-bold text-lg ml-2">Following</h1>
+      <h1 className="font-bold text-lg ml-2 mt-2">Following</h1>
 
       <div className="ml-1">
         <Follow showSideBar={showSideBar} setShowSideBar={setShowSideBar}/>

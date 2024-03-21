@@ -14,7 +14,7 @@ import './Markdown.css';
 const md = new Remarkable();
 
 function Publish() {
-  const [showSideBar]: [boolean] = useOutletContext();
+  const [showSideBar = false]: [boolean] = useOutletContext() ?? [false];
   const { userId } = useParams();
   const { users, title, description, currentUser, markdownText, setDescription, setTitle } = Blog();
   const imgRef = useRef<HTMLInputElement>(null);
@@ -72,6 +72,7 @@ function Publish() {
         postImg: url,
         created: Date.now(),
         pageViews: 0,
+        username: currentUser?.displayName
       });
       toast.success('Post has been added');
       navigate("/homepage");

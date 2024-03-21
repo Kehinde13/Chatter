@@ -15,6 +15,7 @@ export interface Post {
   created: string,
   pageViews: number,
   comments?: Comment[],
+  username: string
 }
 
 function GetPosts(collectionName: string) {

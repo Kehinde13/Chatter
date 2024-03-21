@@ -11,7 +11,7 @@ function ForYou() {
         <Loading />
       ) : (
         posts &&
-        posts?.map((post: Post, i: number) => <PostsCard post={post} key={i} />)
+        posts?.map((post: Post, i: number) => <PostsCard data-testid="feeds" post={post} key={i} />)
       )}
     </section>
   );

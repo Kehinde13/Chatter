@@ -25,7 +25,7 @@ type UpdateData = {
 };
 
 
-type BlogContextType = {
+export interface BlogContextType {
   currentUser: UserAndFirebaseUser | null;
   setCurrentUser: (user: UserAndFirebaseUser | null) => void;
   users: User[];
@@ -49,7 +49,7 @@ type BlogContextType = {
   authModel: boolean;
   setAuthModel: (authModel: boolean) => void;
   loading: boolean
-};
+}
 
 const BlogContext = createContext<BlogContextType>({
   currentUser: null,

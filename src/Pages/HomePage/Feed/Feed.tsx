@@ -38,7 +38,7 @@ function Feed() {
           <h1 className="text-2xl sm:text-4xl font-bold">FEED</h1>
           <p>Explore different content you’d love </p>
         </div>
-        <Link to="texteditor">
+        <Link to="texteditor" >
           <button className="bn632-hover bn20">Write</button>
         </Link>
       </div>

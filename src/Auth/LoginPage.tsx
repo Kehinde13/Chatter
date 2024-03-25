@@ -115,7 +115,7 @@ function LoginPage() {
                         </p>
                       </Link>
                     </div>
-                    <button className="bn632-hover bn20" style={authButton}>
+                    <button className="bn632-hover bn20" style={authButton} data-testid="login">
                       Login
                     </button>
                   </div>

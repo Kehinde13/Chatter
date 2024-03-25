@@ -16,7 +16,7 @@ function HomePage() {
   
 
   return (
-    <div>
+    <div data-testid="homepage">
       <Header />
       <div className="flex gap-5 sm:gap-0">
         <button

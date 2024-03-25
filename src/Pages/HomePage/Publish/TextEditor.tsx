@@ -16,6 +16,7 @@ const Write = () => {
 
   return (
     <div
+      data-testid = "TextEditor"
       className={`sm:mx-auto mx-5 w-[80%] relative my-2 ${
         showSideBar ? "hidden" : " "
       }`}

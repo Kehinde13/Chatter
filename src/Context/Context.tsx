@@ -51,7 +51,7 @@ export interface BlogContextType {
   loading: boolean
 }
 
-const BlogContext = createContext<BlogContextType>({
+export const BlogContext = createContext<BlogContextType>({
   currentUser: null,
   setCurrentUser: () => {},
   users: [],

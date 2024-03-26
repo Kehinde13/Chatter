@@ -5,7 +5,7 @@ const ProtectedRoutes = () => {
   const { currentUser } = Blog();
 
   if (currentUser) {
-    return <Outlet />;
+    return <Outlet  />;
   } else {
     return <Navigate to="/LoginPage" />;
   }

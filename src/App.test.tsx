@@ -1,9 +1,11 @@
-import { fireEvent, render } from "@testing-library/react";
+import {  render } from "@testing-library/react";
 import LoginPage from "./Auth/LoginPage";
 import { BrowserRouter as Router } from "react-router-dom";
 import { secretEmail } from "./utils/helper";
-import HomePage from "./Pages/HomePage/HomePage";
-import Feed from "./Pages/HomePage/Feed/Feed";
+import { BlogContext } from "./Context/Context";
+import ForYou from "./Pages/HomePage/Feed/ForYou";
+
+
 
 describe("unit testing for chatter App", () => {
   test("renders login page correctly", () => {
@@ -23,18 +25,21 @@ describe("unit testing for chatter App", () => {
       expect(result).toEqual(expected)
   });
  
-  test("renders homepage", async () => {
-   const { getByText, getByPlaceholderText } = render(
-      <Router>
-        <Feed />
-      </Router>
-    )
+  test('renders Loading component when postLoading is true', () => {
+    const mockBlogContext = {
+      posts: [],
+      postLoading: true,
+    };
 
-    const Write = getByText(/Write/i);
-    fireEvent.click(Write)
+    const { getByTestId } = render(
+      <BlogContext.Provider value={mockBlogContext}>
+        <ForYou />
+      </BlogContext.Provider>
+    );
 
-    expect(await getByPlaceholderText(/Title/i)).toBeInTheDocument();
-
-  })
+    expect(getByTestId('loading')).toBeInTheDocument();
+  });
+ 
   
 });
+

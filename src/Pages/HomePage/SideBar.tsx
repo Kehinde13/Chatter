@@ -33,7 +33,7 @@ function SideBar({ showSideBar, setShowSideBar }: SidebarProps) {
 
   return (
     <aside
-      className={`sticky h-screen  top-0  pb-4 flex flex-col sm:w-[20%] sm:ml-3 pr-10 sm:pr-5 sm:border-r-2
+      className={`sticky h-screen scrollbar-hidden top-0  pb-4 flex flex-col sm:w-[20%] sm:ml-3 pr-10 sm:pr-5 sm:border-r-2
                    duration-500 ${
                      showSideBar ? "ml-1 w-full" : "ml-[-320px] border-r-0"
                    }

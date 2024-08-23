@@ -4,16 +4,14 @@ import AboutUs from '../components/AboutUs';
 import WhyChatter from '../components/WhyChatter';
 import JoinChetter from '../components/JoinChatter';
 import Footer from '../components/Footer';
-import { useState } from 'react';
 
 
 function LandingPage() {
-    const [dropdown, setDropdown] = useState<boolean>(false);
     
     return (
         <div>
-            <NavBar  dropdown={dropdown} setDropdown={setDropdown}/>
-            <Header dropdown={dropdown}/>
+            <NavBar/>
+            <Header />
             <AboutUs />
             <WhyChatter />
             <JoinChetter />

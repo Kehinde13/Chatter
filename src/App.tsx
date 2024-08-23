@@ -21,15 +21,14 @@ import Contact from "./Pages/Contact";
 import Blogs from "./Pages/Blogs";
 import Analytics from "./Pages/Analytics";
 import Loading from "./components/Loading";
+import { ThemeProvider } from "./components/shadcn/themeProvider"
+
 
 
 const Fallback = () => <Loading />
 
 
 function App() {
-  
-  
-
 
   const router = createBrowserRouter([
     {
@@ -115,10 +114,12 @@ function App() {
   ]);
 
   return (
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
     <Suspense fallback={<Fallback />}>
        <RouterProvider router={router}  />
        <ToastContainer />
     </Suspense>
+    </ThemeProvider>
   ) ;
   
 }

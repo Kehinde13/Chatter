@@ -9,6 +9,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import Loading from "../components/Loading";
 import GoogleSignIn from "../hooks/GoogleSignIn";
 import { Blog } from "../Context/Context";
+import { Button } from "../components/shadcn/button";
 
 interface FormState {
   firstName: string;
@@ -20,12 +21,12 @@ interface FormState {
 
 const authButton = {
   width: "100%",
-  fontSize: "16px"
-}
+  fontSize: "16px",
+};
 
 function SignUp() {
   const navigate = useNavigate();
-  const {currentUser} = Blog()
+  const { currentUser } = Blog();
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState<FormState>({
     firstName: "",
@@ -85,24 +86,19 @@ function SignUp() {
   };
 
   useEffect(() => {
-    if(currentUser){
-      navigate("/homepage")
+    if (currentUser) {
+      navigate("/homepage");
     }
-  },[currentUser, navigate])
+  }, [currentUser, navigate]);
 
   return (
-    <div className="h-screen bg-white ">
+    <div className="h-screen">
       {loading || googleLoading ? (
         <Loading />
       ) : (
         <>
-          <Link
-            to="/"
-            className="text-white absolute m-5 font-bold flex"
-          >
-            <IoIosArrowBack
-              className="mx-2 self-center"
-            />
+          <Link to="/" className="text-white absolute m-5 font-bold flex">
+            <IoIosArrowBack className="mx-2 self-center" />
             Back
           </Link>
           <div className="md:flex gap-20 md:my-2 md:w-[100%] h-screen md:mx-auto">
@@ -119,104 +115,98 @@ function SignUp() {
                 </div>
               </div>
             </div>
-            <div className="sm:w-[100%] p-5 mx-auto ">
-            <div className="sm:w-[70%] mx-auto">
-              <div className="flex justify-between border-b-2 border-transparent pb-3 mb-3 w-full">
-                <Link
-                  to="/signup"
-                  className=" border-b-[3px] border-purple-500 w-[50%] pb-3"
-                >
-                  REGISTER
-                </Link>
-                <Link
-                  to="/loginpage"
-                  className=" border-b-[3px] w-[50%] pb-3 text-right"
-                >
-                  LOGIN
-                </Link>
-              </div>
-              <h1 className="text-3xl font-bold">
-                Register as a Writer/Reader
-              </h1>
-              <form action="" onSubmit={handleSubmit}>
-                <div className="md:flex gap-2 my-5 w-full">
-                  <div>
-                    <label htmlFor="">First Name</label> <br />
-                    <input
-                      type="text"
-                      name="firstName"
-                      id="firstName"
-                      className="border border-gray-300 py-2 px-2 rounded-md w-full "
-                      placeholder="John"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="">Last Name</label> <br />
-                    <input
-                      type="text"
-                      name="lastName"
-                      id="lastName"
-                      className="border border-gray-300 p-2 rounded-md w-full"
-                      placeholder="Doe"
-                      onChange={handleChange}
-                    />
-                  </div>
+            <div className="sm:w-[100%] p-5 mx-auto mt-10">
+              <div className="sm:w-[70%] mx-auto">
+                <div className="flex justify-between border-b-2 border-transparent pb-3 mb-3 w-full">
+                  <Link
+                    to="/signup"
+                    className=" border-b-[3px] border-purple-500 w-[50%] pb-3"
+                  >
+                    REGISTER
+                  </Link>
+                  <Link
+                    to="/loginpage"
+                    className=" border-b-[3px] w-[50%] pb-3 text-right"
+                  >
+                    LOGIN
+                  </Link>
                 </div>
+                <h1 className="text-3xl font-bold">
+                  Register as a Writer/Reader
+                </h1>
+                <form action="" onSubmit={handleSubmit}>
+                  <div className="md:flex gap-2 my-5 w-full">
+                    <div>
+                      <label htmlFor="">First Name</label> <br />
+                      <input
+                        type="text"
+                        name="firstName"
+                        id="firstName"
+                        className="border border-gray-300 py-2 px-2 rounded-md w-full "
+                        placeholder="John"
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="">Last Name</label> <br />
+                      <input
+                        type="text"
+                        name="lastName"
+                        id="lastName"
+                        className="border border-gray-300 p-2 rounded-md w-full"
+                        placeholder="Doe"
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
 
-                <div>
-                  <label htmlFor="">Email Address</label> <br />
-                  <input
-                    type="email"
-                    name="Email"
-                    id="Email"
-                    placeholder="johndoe@gmail.com"
-                    onChange={handleChange}
-                    className=" border border-gray-300 w-full py-2 rounded-md p-2 dark:text-black"
-                  />
-                </div>
-                <div className="my-5">
-                  <label htmlFor="">Password</label> <br />
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="**********"
-                    onChange={handleChange}
-                    className=" border border-gray-300 w-full py-2 rounded-md p-2 dark:text-black"
-                  />
-                </div>
-                <div className="my-5">
-                  <label htmlFor="">Confirm Password</label> <br />
-                  <input
-                    type="password"
-                    name="confirmPassword"
-                    id="confirmPassword"
-                    placeholder="**********"
-                    onChange={handleChange}
-                    className=" border border-gray-300 w-full py-2 rounded-md p-2 dark:text-black"
-                  />
-                </div>
-                <button 
-                className="bn632-hover bn20"
-                style={authButton}
+                  <div>
+                    <label htmlFor="">Email Address</label> <br />
+                    <input
+                      type="email"
+                      name="Email"
+                      id="Email"
+                      placeholder="johndoe@gmail.com"
+                      onChange={handleChange}
+                      className=" border border-gray-300 w-full py-2 rounded-md p-2 dark:text-black"
+                    />
+                  </div>
+                  <div className="my-5">
+                    <label htmlFor="">Password</label> <br />
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="**********"
+                      onChange={handleChange}
+                      className=" border border-gray-300 w-full py-2 rounded-md p-2 dark:text-black"
+                    />
+                  </div>
+                  <div className="my-5">
+                    <label htmlFor="">Confirm Password</label> <br />
+                    <input
+                      type="password"
+                      name="confirmPassword"
+                      id="confirmPassword"
+                      placeholder="**********"
+                      onChange={handleChange}
+                      className=" border border-gray-300 w-full py-2 rounded-md p-2 dark:text-black"
+                    />
+                  </div>
+                  <Button className="bn632-hover bn20" style={authButton}>
+                    Sign Up
+                  </Button>
+                </form>
+                <Button
+                  onClick={googleAuth}
+                  className="bn632-hover bn20 mt-5"
+                  style={authButton}
                 >
-                  Sign Up
-                </button>
-              </form>
-              <button
-                onClick={googleAuth}
-                className="bn632-hover bn20"
-                style={authButton}
-              >
-                <div className="mx-auto flex w-full justify-around">
-                <FaGoogle
-                  className="text-red-500 self-center text-xl ml-12 md:ml-24"
-                />
-                <p className="mr-12 md:mr-24">Sign up with Google</p>
-                </div>
-              </button>
-            </div>  
+                  
+                    <FaGoogle className="text-red-500 mr-5" />
+                    <p className="">Sign up with Google</p>
+                </Button>
+              </div>
             </div>
           </div>
         </>

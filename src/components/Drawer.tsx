@@ -1,7 +1,6 @@
 import { Drawer, DrawerContent, DrawerTrigger } from "./shadcn/drawer";
 import { AlignJustifyIcon } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { Link as ScrollLink } from "react-scroll";
 import { Button } from "./shadcn/button";
 import { ModeToggle } from "./shadcn/mode-toggle";
 
@@ -16,21 +15,15 @@ export default function DrawerContainer() {
       </DrawerTrigger>
       <DrawerContent>
         <ul className="flex flex-col gap-5 font-bold self-center text-center">
+          <Link to={"/"}>
+            <li>Home</li>
+          </Link>
           <Link to={"contact"}>
             <li>Contact</li>
           </Link>
-          <Link to={"blogs"}>
-            <li>Blogs</li>
+          <Link to={"aboutpage"}>
+            <li>About</li>
           </Link>
-
-          <ScrollLink
-            to="about"
-            smooth={true}
-            duration={500}
-            className="cursor-pointer"
-          >
-            <li>About us</li>
-          </ScrollLink>
         </ul>
         <Button
           onClick={() => navigate("/loginpage")}

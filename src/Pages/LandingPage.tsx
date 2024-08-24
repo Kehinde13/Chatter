@@ -1,10 +1,6 @@
 import NavBar from '../components/NavBar';
-import Header from '../components/Header';
-/* import AboutUs from '../components/AboutUs';
-import WhyChatter from '../components/WhyChatter';
-import JoinChetter from '../components/JoinChatter'; */
 import Footer from '../components/Footer';
-import CardContainer from '../components/CardContainer';
+import { Outlet } from 'react-router-dom';
 
 
 function LandingPage() {
@@ -12,11 +8,7 @@ function LandingPage() {
     return (
         <div>
             <NavBar/>
-            <Header />
-            <CardContainer />
-            {/* <AboutUs />
-            <WhyChatter />
-            <JoinChetter /> */}
+            <Outlet />
             <Footer />
         </div>
     );

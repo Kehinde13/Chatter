@@ -4,6 +4,7 @@ import { Link as ScrollLink } from "react-scroll";
 import { ModeToggle } from "./shadcn/mode-toggle";
 import { Button } from "./shadcn/button";
 import DrawerContainer from "./Drawer";
+import Dropdown from "./DropdownMenu";
 
 function NavBar() {
   const navigate = useNavigate();
@@ -17,25 +18,28 @@ function NavBar() {
           className="w-[80px] sm:w-[100px] self-center"
         />
         <ul className="md:flex gap-10 hidden font-bold">
+          <Link to={"/"}>
+            <li className="inline-block rounded-lg px-2 py-1 text-sm hover:text-slate-300">
+              Home
+            </li>
+          </Link>
           <Link to={"contact"}>
             <li className="inline-block rounded-lg px-2 py-1 text-sm hover:text-slate-300">
               Contact
             </li>
           </Link>
-          <Link to={"blogs"}>
-            <li className="inline-block rounded-lg px-2 py-1 text-sm hover:text-slate-300">
-              Blogs
-            </li>
-          </Link>
+          <Dropdown />
           <ScrollLink
             to="about"
             smooth={true}
             duration={500}
             className="cursor-pointer"
           >
-            <li className="inline-block rounded-lg px-2 py-1 text-sm hover:text-slate-300">
-              About us
-            </li>
+            <Link to={"aboutpage"}>
+              <li className="inline-block rounded-lg px-2 py-1 text-sm hover:text-slate-300">
+                About us
+              </li>
+            </Link>
           </ScrollLink>
         </ul>
         <div className="md:flex justify-between md:gap-6 gap-3 md:font-bold hidden">

@@ -5,6 +5,7 @@ import Loading from "../components/Loading";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { toast } from "react-toastify";
 import { auth } from "./firebase";
+import { Button } from "../components/shadcn/button";
 
 function ForgotPassword() {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ function ForgotPassword() {
       });
   };
   return (
-    <div className="h-screen bg-white">
+    <div className="h-screen">
       {loading ? (
         <Loading />
       ) : (
@@ -78,12 +79,12 @@ function ForgotPassword() {
                     value={email}
                     onChange={handelEmail}
                   />
-                  <button
+                  <Button
                     className="bn632-hover bn20 self-center"
                     style={{ width: "300px" }}
                   >
                     Reset Password
-                  </button>
+                  </Button>
                 </form>
               </div>
             </div>

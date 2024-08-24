@@ -3,6 +3,7 @@ import profile1 from "../assets/Profile1.png";
 import profile2 from "../assets/profile2.png";
 import profile3 from "../assets/profile3.png";
 import profile4 from "../assets/profile4.png";
+import { Button } from "./shadcn/button";
 
 const buttonStyle = {
   width: "150px",
@@ -26,10 +27,10 @@ function JoinChetter() {
             <span className="font-bold text-xl">Adebobola Muhydeen, </span>
             Software developer at Apple
           </p>
-          <Link to="signup">
-            <button className="bn632-hover bn20 self-start" style={buttonStyle}>
+          <Link to="/signup">
+            <Button className="bn632-hover bn20 self-start" style={buttonStyle}>
               Join Chatter
-            </button>
+            </Button>
           </Link>
         </div>
       </div>
@@ -65,10 +66,10 @@ function JoinChetter() {
             into a symphony of ideas. Join Chatter Blog today and let your words
             resonate.
           </p>
-          <Link to="signup">
-            <button className="bn632-hover bn20 self-start" style={buttonStyle}>
+          <Link to="/signup">
+            <Button className="bn632-hover bn20 self-start" style={buttonStyle}>
               Join Chatter
-            </button>
+            </Button>
           </Link>
         </div>
       </div>

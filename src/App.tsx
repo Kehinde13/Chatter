@@ -22,6 +22,8 @@ import Blogs from "./Pages/Blogs";
 import Analytics from "./Pages/Analytics";
 import Loading from "./components/Loading";
 import { ThemeProvider } from "./components/shadcn/themeProvider"
+import AboutPage from "./Pages/AboutPage";
+import LandingPageContent from "./Pages/LandingPageContent";
 
 
 
@@ -34,7 +36,25 @@ function App() {
     {
       path: '/',
       element: <LandingPage />,
-      errorElement: <ErrorPages />
+      errorElement: <ErrorPages />,
+      children: [
+        {
+          element: <LandingPageContent />,
+          index: true
+        },
+        {
+          path: "aboutpage",
+          element: <AboutPage />
+        }, 
+        {
+          path: "contact",
+          element: <Contact />
+        },
+        {
+          path: "blogs",
+          element: <Blogs />
+        }
+      ]
     },
     {
       element: <ProtectedRoutes />,
@@ -97,14 +117,6 @@ function App() {
           path: "forgotpassword",
           element: <ForgotPassword />
         },
-        {
-          path: "contact",
-          element: <Contact />
-        },
-        {
-          path: "blogs",
-          element: <Blogs />
-        }
       ],
     },
     {

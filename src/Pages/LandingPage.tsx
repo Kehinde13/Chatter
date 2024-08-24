@@ -1,9 +1,10 @@
 import NavBar from '../components/NavBar';
 import Header from '../components/Header';
-import AboutUs from '../components/AboutUs';
+/* import AboutUs from '../components/AboutUs';
 import WhyChatter from '../components/WhyChatter';
-import JoinChetter from '../components/JoinChatter';
+import JoinChetter from '../components/JoinChatter'; */
 import Footer from '../components/Footer';
+import CardContainer from '../components/CardContainer';
 
 
 function LandingPage() {
@@ -12,9 +13,10 @@ function LandingPage() {
         <div>
             <NavBar/>
             <Header />
-            <AboutUs />
+            <CardContainer />
+            {/* <AboutUs />
             <WhyChatter />
-            <JoinChetter />
+            <JoinChetter /> */}
             <Footer />
         </div>
     );

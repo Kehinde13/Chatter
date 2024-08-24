@@ -3,13 +3,15 @@ import { AlignJustifyIcon } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import { Button } from "./shadcn/button";
+import { ModeToggle } from "./shadcn/mode-toggle";
 
 export default function DrawerContainer() {
   const navigate = useNavigate();
 
   return (
     <Drawer>
-      <DrawerTrigger className="md:hidden">
+      <DrawerTrigger className="md:hidden flex gap-3 items-center">
+        <ModeToggle />
         <AlignJustifyIcon />
       </DrawerTrigger>
       <DrawerContent>

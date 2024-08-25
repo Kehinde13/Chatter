@@ -28,7 +28,7 @@ function Search({ searchBar, toggleSearchBar }: Props) {
     <div className="relative">
       <div
         className={`sm:flex sm:mb-0 items-center gap-2 bg-gray-100 px-2 rounded-full relative z-10 sm:w-[300px]
-     duration-300  ${searchBar ? "flex " : "mb-[200px] w-[20%]"}`}
+                    duration-300  ${searchBar ? "flex " : "mb-[200px] w-[20%]"}`}
       >
         <button className="text-xl text-gray-400">
           <FaMagnifyingGlass />

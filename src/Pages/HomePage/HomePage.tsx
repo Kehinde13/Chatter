@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Header from "./Header";
+import Header from "./Navbar";
 import SideBar from "./SideBar";
 import { useState } from "react";
 import { FaAngleLeft } from "react-icons/fa6";

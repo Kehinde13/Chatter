@@ -1,11 +1,10 @@
 import { useState } from "react";
 import ReactQuill from "react-quill";
 import { Blog } from "../../../Context/Context";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MarkdownEditor from "./MarkdownEditor";
 
 const Write = () => {
-  const [showSideBar]: [boolean] = useOutletContext();
   const { title, setTitle, description, setDescription } = Blog();
   const [markdown, setMarkdown] = useState<boolean>(false);
 
@@ -17,9 +16,7 @@ const Write = () => {
   return (
     <div
       data-testid = "TextEditor"
-      className={`sm:mx-auto mx-5 w-[80%] relative my-2 ${
-        showSideBar ? "hidden" : " "
-      }`}
+      className="sm:mx-auto mx-5 w-[80%] relative my-2"
     >
       {markdown ? (
         <MarkdownEditor />

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
-import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Blog } from '../../../Context/Context';
 import { doc, updateDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
@@ -8,7 +8,6 @@ import { db } from '../../../Auth/firebase';
 import { FirebaseError } from 'firebase/app';
 
 function EditPost() {
-  const [showSideBar]: [boolean] = useOutletContext();
   const { updateData, title, setTitle, description, setDescription } = Blog();
   const [loading, setLoading] = useState<boolean>(false);
   const { pathname } = useLocation();
@@ -42,7 +41,7 @@ function EditPost() {
   }, [setDescription, setTitle, updateData]);
 
   return (
-    <div className={`sm:mx-3 w-[80%] ${showSideBar ? 'hidden' : ''}`}>
+    <div className="sm:mx-3 w-[80%]">
       <section>
         <input
           type="text"

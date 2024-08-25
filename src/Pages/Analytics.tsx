@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useOutletContext } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import GetSinglePost from "../hooks/GetSinglePost";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../Auth/firebase";
@@ -12,7 +12,6 @@ interface PostData {
 }
 
 function Analytics() {
-  const [showSideBar]: [boolean] = useOutletContext();
   const [loading, setLoading] = useState<boolean>(false);
   const [postData, setPostData] = useState<PostData>({
     postViews: "",
@@ -49,9 +48,7 @@ function Analytics() {
 
   return (
     <div
-      className={`p-1 ml-[-10px] sm:ml-5 sm:block w-[80%] ${
-        showSideBar ? "hidden" : ""
-      }`}
+      className="p-1 ml-[-10px] sm:ml-5 sm:block w-[80%]"
     >
       {loading ? (
         <Loading />

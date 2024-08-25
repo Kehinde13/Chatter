@@ -1,8 +1,10 @@
-import { Link, useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ForYou from "./ForYou";
 import Recent from "./Recent";
 import { useState } from "react";
 import Trending from "./Trending";
+import { Button } from "../../../components/shadcn/button";
+import { SquarePen } from "lucide-react";
 
 interface Panel {
   title: string;
@@ -10,7 +12,6 @@ interface Panel {
 }
 
 function Feed() {
-  const [showSideBar]: [boolean] = useOutletContext();
   const panels: Panel[] = [
     {
       title: "For You",
@@ -29,17 +30,17 @@ function Feed() {
 
   return (
     <div
-      className={`w-[80%] sm:px-16 py-10 sm:block ${
-        showSideBar ? "hidden" : ""
-      }`}
+      className="w-[80%] sm:px-16 py-10 sm:block"
     >
-      <div className="flex justify-between border border-gray-300 rounded-md p-3">
+      <div className="flex justify-between">
         <div className="flex flex-col gap-10">
           <h1 className="text-2xl sm:text-4xl font-bold">FEED</h1>
-          <p>Explore different content you’d love </p>
         </div>
         <Link to="texteditor" >
-          <button className="bn632-hover bn20">Write</button>
+          <Button className="bn632-hover bn20 flex gap-2">
+             Write
+            <SquarePen />
+          </Button>
         </Link>
       </div>
       <div className="border mt-2 border-gray-300 rounded-md p-3">

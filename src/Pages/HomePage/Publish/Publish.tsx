@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import ReactQuill from 'react-quill';
 import TagsInput from 'react-tagsinput';
-import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Blog } from '../../../Context/Context';
 import { addDoc, collection } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
@@ -14,7 +14,6 @@ import './Markdown.css';
 const md = new Remarkable();
 
 function Publish() {
-  const [showSideBar = false]: [boolean] = useOutletContext() ?? [false];
   const { userId } = useParams();
   const { users, title, description, currentUser, markdownText, setDescription, setTitle } = Blog();
   const imgRef = useRef<HTMLInputElement>(null);
@@ -93,7 +92,7 @@ function Publish() {
 
   const getUserData = users.find((user: any) => user.id === userId);
   return (
-    <div className={`sm:mx-3 w-[80%] ${showSideBar ? 'hidden' : ''}`}>
+    <div className="sm:mx-3 w-[80%]">
       <div className="mt-10 flex flex-col md:flex-row gap-10">
         <div className="flex-[1]">
           <h1 className="text-2xl bold capitalize">Story Preview</h1>

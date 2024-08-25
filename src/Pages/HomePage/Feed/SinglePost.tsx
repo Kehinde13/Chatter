@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useOutletContext, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Blog } from '../../../Context/Context';
 import { collection, doc, getDoc, increment, updateDoc } from 'firebase/firestore';
 import { db } from '../../../Auth/firebase';
@@ -19,7 +19,6 @@ import { Post } from '../../../hooks/GetPosts';
 type PostData = User & Post
 
 function SinglePost() {
-  const [showSideBar]: [boolean] = useOutletContext();
   const { postId } = useParams<{ postId: string }>();
   const [post, setPost] = useState<PostData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -85,7 +84,7 @@ function SinglePost() {
   const { title, desc, postImg, username, created, userImg, userId } = post;
 
   return (
-    <div className={`p-1 ml-[-10px] sm:ml-5 sm:block w-[80%] ${showSideBar ? 'hidden' : ''}`}>
+    <div className="p-1 ml-[-10px] sm:ml-5 sm:block w-[80%]">
       <section className="w-[90%] mx-auto py-[3rem]">
         <h2 className="text-4xl font-extrabold capitalize">{title}</h2>
         <div className="flex items-center gap-2 py-[2rem]">

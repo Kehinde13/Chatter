@@ -5,7 +5,7 @@ import profileImg from "../../../assets/profile.jpg";
 import About from "./About";
 import Lists from "./Lists";
 import Stories from "./Stories";
-import { useOutletContext, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import EditProfileModal from "./EditProfileModal";
 import GetSinglePost from "../../../hooks/GetSinglePost";
 import { User } from "../../../hooks/GetUsers";
@@ -31,7 +31,6 @@ function ProfilePage() {
   ];
   const [currentPanel, setCurrentPanel] = useState<object>(panels[0]);
   const [modal, setModal] = useState<boolean>(false);
-  const [showSideBar]: [boolean] = useOutletContext();
   const getUserData = users.find((user: User) => user.id === userId);
   const { data: following } = GetSinglePost("users", userId!, "following");
   const { data: followers } =GetSinglePost("users", userId!, "followers");
@@ -40,9 +39,7 @@ function ProfilePage() {
 
   return (
     <div
-      className={`p-1 ml-[-10px] sm:ml-5 sm:block w-[80%] mt-10 ${
-        showSideBar ? "hidden" : ""
-      }`}
+      className="p-1 ml-[-10px] sm:ml-5 sm:block w-[80%] mt-10"
     >
       <EditProfileModal
         modal={modal}

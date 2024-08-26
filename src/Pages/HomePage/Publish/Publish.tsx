@@ -10,6 +10,7 @@ import { db, storage } from '../../../Auth/firebase';
 import { FirebaseError } from 'firebase/app';
 import { Remarkable } from 'remarkable';
 import './Markdown.css';
+import { Button } from '../../../components/shadcn/button';
 
 const md = new Remarkable();
 
@@ -92,15 +93,15 @@ function Publish() {
 
   const getUserData = users.find((user: any) => user.id === userId);
   return (
-    <div className="sm:mx-3 w-[80%]">
+    <div className="sm:mx-3 w-[90%] col-span-6 mx-auto">
       <div className="mt-10 flex flex-col md:flex-row gap-10">
         <div className="flex-[1]">
           <h1 className="text-2xl bold capitalize">Story Preview</h1>
           <div
             style={{ backgroundImage: `url(${newPostImage})` }}
             onClick={SubmitImage}
-            className="w-full h-[200px] object-cover bg-gray-100 my-3 grid 
-                place-items-center cursor-pointer bg-cover bg-no-repeat dark:text-black"
+            className="w-full h-[200px] object-cover bg-gray-100 dark:bg-slate-800 my-3 grid 
+                place-items-center cursor-pointer bg-cover bg-no-repeat"
           >
             {!newPostImage && 'Add Image'}
           </div>
@@ -116,7 +117,7 @@ function Publish() {
           <input
             type="text"
             placeholder="Title"
-            className="outline-none w-full border-b border-gray-300 py-2 text-4xl dark:text-black p-2"
+            className="outline-none w-full border-b py-2 text-4xl dark:bg-slate-800 p-2"
             value={preview.title}
             onChange={(e) => setPreview({ ...preview, title: e.target.value })}
           />
@@ -141,14 +142,14 @@ function Publish() {
             <span className="font-bold capitalize">{getUserData?.username}</span>
           </h3>
           <p>Add up to 5 Tags that relate to your story</p>
-          <TagsInput value={tags} onChange={setTags} />
-          <button
+          <TagsInput value={tags} onChange={setTags}  className='dark:bg-slate-800 p-2 rounded-md'/>
+          <Button
             onClick={publishPost}
             className="bn632-hover bn20"
             disabled={loading}
           >
             {loading ? 'Publishing...' : 'Publish'}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

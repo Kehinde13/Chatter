@@ -3,7 +3,6 @@ import DropDown from '../../../components/Dropdown';
 import { FaTwitter } from 'react-icons/fa';
 import { FaFacebookSquare, FaRegCopy } from 'react-icons/fa';
 import { FaLinkedin } from 'react-icons/fa';
-import { CiShare1 } from 'react-icons/ci';
 import {
   FacebookShareButton,
   LinkedinShareButton,
@@ -11,6 +10,7 @@ import {
 } from 'react-share';
 import { toast } from 'react-toastify';
 import { FirebaseError } from 'firebase/app';
+import { Share2 } from 'lucide-react';
 
 interface ButtonProps {
   click: () => void;
@@ -38,7 +38,7 @@ function SharePost() {
   return (
     <div className="relative">
       <button onClick={() => setShowDrop(!showDrop)}>
-        <CiShare1 className='text-xl'/>
+        <Share2 className='text-xl'/>
       </button>
       <DropDown showDrop={showDrop} setShowDrop={setShowDrop} size="w-[12rem]">
         <Button click={copyLink} title="Copy Link" icon={<FaRegCopy />} />

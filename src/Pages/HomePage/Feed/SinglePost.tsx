@@ -84,9 +84,8 @@ function SinglePost() {
   const { title, desc, postImg, username, created, userImg, userId } = post;
 
   return (
-    <div className="p-1 ml-[-10px] sm:ml-5 sm:block w-[80%]">
+    <div className="p-1 sm:ml-5 w-[80%] col-span-6">
       <section className="w-[90%] mx-auto py-[3rem]">
-        <h2 className="text-4xl font-extrabold capitalize">{title}</h2>
         <div className="flex items-center gap-2 py-[2rem]">
           <Link to={`/homepage/profile/${userId}`}>
             <img
@@ -105,7 +104,12 @@ function SinglePost() {
             </p>
           </div>
         </div>
-        <div className="flex items-center justify-between border-b border-t border-gray-200 py-[0.5rem]">
+        <h2 className="text-4xl font-extrabold capitalize">{title}</h2>
+        <div className="mt-5">
+          {postImg && <img className="w-full h-[400px] object-cover" src={postImg} alt="post-img" />}
+          <div className="mt-6" dangerouslySetInnerHTML={{ __html: desc }} />
+        </div>
+        <div className="flex items-center justify-between py-[0.5rem]">
           <div className="flex items-center gap-5">
             <Like postId={postId ?? ""} post={post} />
             <SharePost />
@@ -114,10 +118,6 @@ function SinglePost() {
             {post && <Bookmark post={post} />}
             {currentUser && currentUser?.uid === post?.userId && <Actions postId={postId ?? ""} title={title} desc={desc} />}
           </div>
-        </div>
-        <div className="mt-[3rem]">
-          {postImg && <img className="w-full h-[400px] object-cover" src={postImg} alt="post-img" />}
-          <div className="mt-6" dangerouslySetInnerHTML={{ __html: desc }} />
         </div>
         <CommentSection postId={postId ?? ""} />
       </section>

@@ -3,6 +3,7 @@ import ReactQuill from "react-quill";
 import { Blog } from "../../../Context/Context";
 import { Link } from "react-router-dom";
 import MarkdownEditor from "./MarkdownEditor";
+import { Button } from "../../../components/shadcn/button";
 
 const Write = () => {
   const { title, setTitle, description, setDescription } = Blog();
@@ -16,18 +17,18 @@ const Write = () => {
   return (
     <div
       data-testid = "TextEditor"
-      className="sm:mx-auto mx-5 w-[80%] relative my-2"
+      className="mx-auto relative my-2 col-span-6 w-[80%]"
     >
       {markdown ? (
         <MarkdownEditor />
       ) : (
-        <section className="w-full md:w-[90%] mx-auto py-[3rem]">
+        <section className=" py-5">
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             type="text"
             placeholder="Title"
-            className="text-4xl outline-none w-full border border-purple-500 p-2 rounded-md"
+            className="text-4xl outline-none w-full border dark:bg-slate-800 border-purple-500 p-2 rounded-md"
           />
           <ReactQuill
             theme="snow"
@@ -41,25 +42,25 @@ const Write = () => {
 
       <div className="flex justify-between w-full md:w-[90%] mx-auto">
         {!markdown ? (
-          <button
+          <Button
             onClick={toggleMarkdown}
             className="bn632-hover bn20"
             style={{width: "120px"}}
           >
             Markdown Editor
-          </button>
+          </Button>
         ) : (
-          <button
+          <Button
             onClick={toggleMarkdown}
             className="bn632-hover bn20"
           >
             Text Editor
-          </button>
+          </Button>
         )}
         <Link to="/homepage/publish">
-          <button className="bn632-hover bn20">
+          <Button className="bn632-hover bn20">
             Publish
-          </button>
+          </Button>
         </Link>
       </div>
     </div>

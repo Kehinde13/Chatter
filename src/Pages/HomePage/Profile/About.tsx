@@ -1,3 +1,4 @@
+import { Button } from "../../../components/shadcn/button";
 import { Blog } from "../../../Context/Context";
 import { User } from "../../../hooks/GetUsers";
 
@@ -16,12 +17,12 @@ const About = ({ getUserData, setModal }: props) => {
       </p>
       <div className="text-right">
         {currentUser?.uid === getUserData.userId && (
-          <button
+          <Button
             onClick={() => setModal(true)}
             className="bn632-hover bn20"
           >
             Edit
-          </button>
+          </Button>
         )}
       </div>
     </div>

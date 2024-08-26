@@ -49,7 +49,7 @@ export function UserDropdownMenu({ userImg }: DropdownMenuProps) {
         <img
           src={userImg || profileImg}
           alt="user profile img"
-          className="w-[7rem] h-[3rem] md:w-[4rem] md:h-[4rem]  object-cover rounded-full self-center"
+          className="w-[7rem] h-[3rem] md:w-[3rem] md:h-[3rem]  object-cover rounded-full self-center"
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">

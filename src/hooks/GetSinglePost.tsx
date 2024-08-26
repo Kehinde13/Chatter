@@ -1,18 +1,10 @@
 import { collection, onSnapshot, query } from "firebase/firestore";
 import  { useEffect, useState } from "react";
 import { db } from "../Auth/firebase";
+import { Post } from "./GetPosts";
 
 
-interface Post {
-  id: string;
-  userId: string,
-  title: string,
-  desc: string,
-  tags: string[],
-  postImg: string,
-  created: string,
-  pageViews: number,
-}
+
 
 const GetSinglePost = (collectionName: string, id: string, subCol: string) => {
   const [data, setData] = useState<Post[]>([]);

@@ -25,7 +25,7 @@ function SideBar() {
 
   return (
     <aside
-      className={`sticky h-screen scrollbar-hidden top-0  pb-4 md:flex flex-col sm:w-[20%] sm:ml-3 pr-10 sm:pr-5 sm:border-r-2
+      className={`sticky h-screen scrollbar-hidden top-0 col-span-2 pb-4 md:flex flex-col ml-3 pr-5 border-r-2
                    duration-500 hidden 
                    ${isFocused ? 'focused' : ''}`}
       id="focusSection"

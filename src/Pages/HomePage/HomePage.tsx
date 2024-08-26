@@ -13,7 +13,7 @@ function HomePage() {
   return (
     <div data-testid="homepage">
       <Header />
-      <div className="flex gap-5 sm:gap-0">
+      <div className="md:grid grid-cols-8">
         <SideBar />
         <Outlet context={[ 
           description,

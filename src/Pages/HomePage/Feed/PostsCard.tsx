@@ -29,7 +29,7 @@ const PostsCard = ({ post }: prop) => {
               <img
                 src={userImg ? userImg : profileImg}
                 alt=""
-                className="rounded-full w-8"
+                className="rounded-full w-10 h-10"
               />
               <p className="pb-2 font-semibold capitalize mt-2">
                 {username ? username : "user"}

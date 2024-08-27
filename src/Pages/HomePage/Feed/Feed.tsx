@@ -11,7 +11,7 @@ function Feed() {
     <div
       className="py-5 px-5 col-span-6"
     >
-      <div className="flex justify-between">
+      <div className="flex justify-between md:w-[60%]">
         <div className="flex flex-col gap-10">
           <h1 className="text-2xl sm:text-4xl font-bold">FEED</h1>
         </div>

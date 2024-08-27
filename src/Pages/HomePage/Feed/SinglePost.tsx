@@ -4,7 +4,6 @@ import { Blog } from '../../../Context/Context';
 import { collection, doc, getDoc, increment, updateDoc } from 'firebase/firestore';
 import { db } from '../../../Auth/firebase';
 import { toast } from 'react-toastify';
-import FollowBtn from '../Features/FollowBtn';
 import moment from 'moment';
 import Loading from '../../../components/Loading';
 import { readTime } from '../../../utils/helper';
@@ -97,7 +96,6 @@ function SinglePost() {
           <div>
             <div className="capitalize flex gap-5">
               <span className="self-center bold">{username}</span>
-              {currentUser && currentUser?.uid !== userId && <FollowBtn userId={userId} />}
             </div>
             <p className="text-sm text-gray-500">
               {readTime({__html:desc})} min read . <span className="ml-1">{moment(created).fromNow()}</span>

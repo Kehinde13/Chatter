@@ -14,6 +14,11 @@ import { Button } from '../../../components/shadcn/button';
 
 const md = new Remarkable();
 
+interface Preview {
+  title: string;
+  photo: string | File | null;
+}
+
 function Publish() {
   const { userId } = useParams();
   const { users, title, description, currentUser, markdownText, setDescription, setTitle } = Blog();
@@ -21,7 +26,7 @@ function Publish() {
   const [tags, setTags] = useState<string[]>([]);
   const [newPostImage, setNewPostImage] = useState<string>('');
   const [desc, setDesc] = useState<string>('');
-  const [preview, setPreview] = useState({
+  const [preview, setPreview] = useState<Preview>({
     title: '',
     photo: '',
   });
@@ -58,7 +63,7 @@ function Publish() {
       const collections = collection(db, 'posts');
 
       let url = '';
-      if (newPostImage) {
+      if (newPostImage && preview.photo instanceof File) {
         const storageRef = ref(storage, `image/${preview.photo.name}`);
         await uploadBytes(storageRef, preview.photo);
         url = await getDownloadURL(storageRef);
@@ -72,7 +77,8 @@ function Publish() {
         postImg: url,
         created: Date.now(),
         pageViews: 0,
-        username: currentUser?.displayName
+        username: currentUser?.username,
+        userImg: currentUser?.userImg
       });
       toast.success('Post has been added');
       navigate("/homepage");
@@ -107,8 +113,9 @@ function Publish() {
           </div>
           <input
             onChange={(e) => {
-              setNewPostImage(URL.createObjectURL(e.target.files[0]));
-              setPreview({ ...preview, photo: e.target.files[0] });
+              const Img = e.target.files![0]
+              setNewPostImage(URL.createObjectURL(Img));
+              setPreview({ ...preview, photo: Img });
             }}
             ref={imgRef}
             type="file"

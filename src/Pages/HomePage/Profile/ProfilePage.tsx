@@ -11,6 +11,11 @@ import GetSinglePost from "../../../hooks/GetSinglePost";
 import { User } from "../../../hooks/GetUsers";
 import { Button } from "../../../components/shadcn/button";
 
+type Panel = {
+  title: string;
+  component: React.ComponentType<any>;
+};
+
 function ProfilePage() {
   const { currentUser, users } = Blog();
   const { userId } = useParams();
@@ -28,7 +33,7 @@ function ProfilePage() {
       component: About,
     },
   ];
-  const [currentPanel, setCurrentPanel] = useState<object>(panels[0]);
+  const [currentPanel, setCurrentPanel] = useState<Panel>(panels[0]);
   const [modal, setModal] = useState<boolean>(false);
   const getUserData = users.find((user: User) => user.id === userId);
   const { data: following } = GetSinglePost("users", userId!, "following");
@@ -39,7 +44,7 @@ function ProfilePage() {
       <EditProfileModal
         modal={modal}
         setModal={setModal}
-        getUserData={getUserData}
+        getUserData={getUserData!}
       />
       <>
         <div className="flex gap-5">
@@ -67,7 +72,8 @@ function ProfilePage() {
           >
             Edit Your profile
           </Button>
-        )}
+        ) 
+      }
       </>
       <div className="flex items-center gap-5 my-3 md:my-5 md:w-[700px] text-center font-bold">
         {panels.map((item, index) => (

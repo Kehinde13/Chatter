@@ -25,9 +25,9 @@ function FilteredPosts() {
     const filteredData = posts.filter((post: Post) => post.tags.includes(tag));
   
     return (
-      <section className="sm:mx-3 w-[80%]">
+      <section className="mx-auto col-span-6 w-[90%]">
         <div>
-          <h3 className="text-3xl pb-6 border-b border-purple-500 mb-[3rem] ">
+          <h3 className="text-3xl p-3 mb-[3rem] ">
             {filteredData.length
               ? "Your Filtered Posts "
               : "There are no post with this tag"}

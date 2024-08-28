@@ -83,8 +83,8 @@ function SinglePost() {
   const { title, desc, postImg, username, created, userImg, userId } = post;
 
   return (
-    <div className="p-1 sm:ml-5 w-[80%] col-span-6">
-      <section className="w-[90%] mx-auto py-[3rem]">
+    <div className="p-1 col-span-6">
+      <section className="w-[90%] mx-auto">
         <div className="flex items-center gap-2 py-[2rem]">
           <Link to={`/homepage/profile/${userId}`}>
             <img
@@ -102,9 +102,9 @@ function SinglePost() {
             </p>
           </div>
         </div>
-        <h2 className="text-4xl font-extrabold capitalize">{title}</h2>
-        <div className="mt-5">
-          {postImg && <img className="w-full h-[400px] object-cover" src={postImg} alt="post-img" />}
+        <h2 className="md:text-4xl text-2xl font-extrabold capitalize">{title}</h2>
+        <div className="mt-5 w-full mx-auto">
+          {postImg && <img className="w-full  object-cover" src={postImg} alt="post-img" />}
           <div className="mt-6" dangerouslySetInnerHTML={{ __html: desc }} />
         </div>
         <div className="flex items-center justify-between py-[0.5rem]">

@@ -51,8 +51,8 @@ function App() {
           element: <Contact />
         },
         {
-          path: "blogs",
-          element: <Blogs />
+          path: "singlepost/:postId",
+          element: <SinglePost />
         }
       ]
     },

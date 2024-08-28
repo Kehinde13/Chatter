@@ -94,7 +94,7 @@ function CommentSection({ postId }: prop) {
           </div>
         )}
         {commentData && commentData.length === 0 ? (
-          <p>This post has no comments</p>
+          <p className="text-center">This post has no comments</p>
         ) : (
           <div className="border-t py-4 mt-8 flex flex-col gap-8">
             {commentData &&

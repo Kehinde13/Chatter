@@ -18,7 +18,6 @@ import ForgotPassword from "./Auth/ForgotPassword";
 import EditPost from "./Pages/HomePage/Publish/EditPost";
 import FilteredPosts from "./Pages/HomePage/FilteredPosts";
 import Contact from "./Pages/Contact";
-import Blogs from "./Pages/Blogs";
 import Analytics from "./Pages/Analytics";
 import Loading from "./components/Loading";
 import { ThemeProvider } from "./components/shadcn/themeProvider"

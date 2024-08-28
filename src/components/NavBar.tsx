@@ -10,7 +10,7 @@ function NavBar() {
   const navigate = useNavigate();
 
   return (
-    <nav className="top-0 md:block flex justify-between px-2">
+    <nav className="top-0 md:block flex justify-between px-2 shadow-lg">
       <div className="flex justify-between mx-3 md:mx-10 items-center h-[50px] sm:h-[70px]">
         <img
           src={logo}

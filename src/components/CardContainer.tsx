@@ -3,7 +3,7 @@ import { Post } from "../hooks/GetPosts";
 import Card from "./Card";
 
 const CardContainer = () => {
-   const { posts } = Blog();
+  const { posts } = Blog();
   const getTrending = posts && posts?.sort((a: Post, b: Post) => b.pageViews - a.pageViews);
   const recentPost = getTrending.slice(0, 6)
      
@@ -12,7 +12,7 @@ const CardContainer = () => {
       <h1 className="text-2xl md:text-3xl my-5 md:my-10 mx-2 font-bold">Recent Blog Posts</h1>
       <div className="flex flex-col md:flex-row gap-10 justify-between flex-wrap">
         {
-        recentPost?.map((post: Post, i: number) => <Card post={post} key={i} />)
+        recentPost?.map((post: Post, i: number) => <Card post={post} key={i} size="w-[30%]" />)
       } 
       </div>
     </div>

@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom';
 
 type Prop = {
   post: Post
+  size: string
 }
 
-const Card = ({post}: Prop) => {
+const Card = ({post, size}: Prop) => {
   const {
     title,
     desc,
@@ -18,7 +19,7 @@ const Card = ({post}: Prop) => {
     userImg,
   } = post;
   return (
-    <Link to={`singlePost/${postId}`} className='w-[100%] md:w-[30%] flex flex-col gap-3 '>
+    <Link to={`singlePost/${postId}`} className={`w-[100%] md:${size} flex flex-col gap-3 mb-2`}>
         <img src={postImg} alt="story Image" className='rounded-lg w-full h-[200px]'/>  
         <h1 className='text-xl font-bold'>{title}</h1>
         <div className="py-1 text-gray-500 max-h-[100px] text-sm overflow-hidden leading-5"

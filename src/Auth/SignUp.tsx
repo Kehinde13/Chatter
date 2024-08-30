@@ -188,7 +188,7 @@ function SignUp() {
                       type="password"
                       name="confirmPassword"
                       id="confirmPassword"
-                      placeholder="**********"
+                      placeholder="confirmPassword"
                       onChange={handleChange}
                       className=" border border-gray-300 w-full py-2 rounded-md p-2 dark:text-black"
                     />

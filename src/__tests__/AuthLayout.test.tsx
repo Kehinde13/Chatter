@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import AuthLayout from "../Auth/AuthLayout";
 import { Blog } from "../Context/Context"; // Mock the Blog context
-/* import Loading from "../components/Loading";  */
 
 jest.mock("../Context/Context");  // Mock the entire Context module
 jest.mock("../components/Loading", () => () => <div>Loading...</div>);
@@ -42,6 +41,10 @@ describe("AuthLayout", () => {
     renderComponent();
 
     // Outlet content is usually populated by the route, so for simplicity, we check the presence of div
-    expect(screen.getByRole("region")).toBeInTheDocument();
+    expect(screen.getByTestId("outlet")).toBeInTheDocument();
+
+
   });
 });
+
+

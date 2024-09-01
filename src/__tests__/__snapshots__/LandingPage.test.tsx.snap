@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LandingPage matches snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div>
+      Mocked NavBar
+    </div>
+    <div>
+      Mocked Footer
+    </div>
+  </div>
+</DocumentFragment>
+`;

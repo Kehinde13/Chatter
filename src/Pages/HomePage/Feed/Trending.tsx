@@ -18,7 +18,7 @@ function Trending() {
     setIsFocused(false);
   };
   return (
-    <div className={`col-span-2 hidden md:block px-2 ${isFocused ? 'focused' : ''}`}
+    <div className={`col-span-2 hidden md:block px-2 sticky scrollbar-hidden ${isFocused ? 'focused' : ''}`}
     id="focusSection"
     tabIndex={0}
     onFocus={handleFocus}

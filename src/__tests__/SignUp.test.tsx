@@ -146,14 +146,4 @@ describe("SignUp", () => {
       expect(toast.error).toHaveBeenCalledWith("Firebase error");
     });
   });
-
-  /* it("should redirect to /homepage if user is already logged in", () => {
-    mockBlog.mockReturnValue({
-      currentUser: { uid: "123" },
-    });
-
-    renderComponent();
-
-    expect(window.location.pathname).toBe("/homepage");
-  }); */
 });

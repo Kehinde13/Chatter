@@ -5,6 +5,7 @@ import GetSinglePost from "../../../hooks/GetSinglePost";
 import { db } from "../../../Auth/firebase";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
+import { Button } from "../../../components/shadcn/button";
 
 interface FollowBtnProps {
   userId: string;
@@ -14,7 +15,8 @@ const followBtnStyle = {
   marginLeft: '15px',
   marginRight: '0px',
   width: "70px",
-  height: '30px'
+  height: '30px',
+  alignSelf: "center"
 }
 
 const FollowBtn = ({ userId }: FollowBtnProps) => {
@@ -57,13 +59,13 @@ const FollowBtn = ({ userId }: FollowBtnProps) => {
 
   return (
     <>
-      <button
+      <Button
         onClick={handleFollow}
         className='bn632-hover bn20'
         style={followBtnStyle}
       >
         {isFollowed ? "Unfollow" : "Follow"}
-      </button>
+      </Button>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import PostsCard from './Feed/PostsCard';
 import Loading from '../../components/Loading';
-import { useOutletContext, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Blog } from '../../Context/Context';
 import { Post } from '../../hooks/GetPosts';
 
@@ -9,11 +9,10 @@ import { Post } from '../../hooks/GetPosts';
 function FilteredPosts() {
     const { tag } = useParams<{ tag?: string  }>();
     const { posts, postLoading } = Blog();
-    const [showSideBar]: [boolean]= useOutletContext()
 
     if (!tag) {
       return (
-        <section className={`sm:mx-3 w-[80%] ${showSideBar ? "hidden" : " "}`}>
+        <section className="sm:mx-3 w-[80%]">
           <div>
             <h3 className="text-3xl pb-6 border-b border-purple-500 mb-[3rem] ">
               There are no tag specified
@@ -26,9 +25,9 @@ function FilteredPosts() {
     const filteredData = posts.filter((post: Post) => post.tags.includes(tag));
   
     return (
-      <section className={`sm:mx-3 w-[80%] ${showSideBar ? "hidden" : " "}`}>
+      <section className="mx-auto col-span-6 w-[90%]">
         <div>
-          <h3 className="text-3xl pb-6 border-b border-purple-500 mb-[3rem] ">
+          <h3 className="text-3xl p-3 mb-[3rem] ">
             {filteredData.length
               ? "Your Filtered Posts "
               : "There are no post with this tag"}

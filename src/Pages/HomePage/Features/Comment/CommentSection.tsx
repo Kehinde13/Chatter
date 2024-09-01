@@ -8,6 +8,7 @@ import Loading from "../../../../components/Loading";
 import Comments, { Comment } from "./Comments";
 import { FirebaseError } from "firebase/app";
 import GetComments from "../../../../hooks/GetComments";
+import { Button } from "../../../../components/shadcn/button";
 
 type prop = {
   postId: string
@@ -77,21 +78,23 @@ function CommentSection({ postId }: prop) {
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="Add a comment....."
-              className="w-full outline-none resize-none text-sm border px-2 pt-4"></textarea>
+              className="w-full outline-none resize-none text-sm border px-2 pt-4 dark:bg-slate-800 rounded-md">
+
+              </textarea>
             <div className="flex items-center justify-end gap-4 mt-[1rem]">
               <button onClick={() => setComment("")} className="text-sm">
                 Cancel
               </button>
-              <button
+              <Button
                 onClick={writeComment}
                 className="bn632-hover bn20">
                 Comment
-              </button>
+              </Button>
             </div>
           </div>
         )}
         {commentData && commentData.length === 0 ? (
-          <p>This post has no comments</p>
+          <p className="text-center">This post has no comments</p>
         ) : (
           <div className="border-t py-4 mt-8 flex flex-col gap-8">
             {commentData &&

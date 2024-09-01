@@ -27,8 +27,8 @@ function Search({ searchBar, toggleSearchBar }: Props) {
   return (
     <div className="relative">
       <div
-        className={`sm:flex sm:mb-0 items-center gap-2 bg-gray-100 px-2 rounded-full relative z-10 sm:w-[300px]
-     duration-300  ${searchBar ? "flex " : "mb-[200px] w-[20%]"}`}
+        className={`sm:flex sm:mb-0 items-center gap-2 bg-gray-100 dark:bg-slate-800 px-2 rounded-full relative z-10 sm:w-[300px]
+                    duration-300  ${searchBar ? "flex " : "mb-[200px] w-[20%]"}`}
       >
         <button className="text-xl text-gray-400">
           <FaMagnifyingGlass />
@@ -48,7 +48,7 @@ function Search({ searchBar, toggleSearchBar }: Props) {
         )}
       </div>
       {search !== "" && (
-        <div className="absolute right-0 left-0 top-full bg-white shadow rounded-md">
+        <div className="absolute right-0 left-0 top-full bg-white dark:bg-slate-800 shadow rounded-md">
           {searchData && searchData.length > 0 ? (
             <>
               {searchData.map((post: Post, i: number) => (

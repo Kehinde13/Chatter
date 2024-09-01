@@ -8,6 +8,7 @@ import { auth } from "./firebase";
 import Loading from "../components/Loading";
 import GoogleSignIn from "../hooks/GoogleSignIn";
 import { FirebaseError } from "firebase/app";
+import { Button } from "../components/shadcn/button";
 
 const authButton = {
   width: "100%",
@@ -49,7 +50,7 @@ function LoginPage() {
     }
   };
   return (
-    <div className="h-screen bg-white" data-testid={"loading-component"}>
+    <div className="h-screen" data-testid={"loading-component"}>
       {loading || googleLoading ? (
         <Loading />
       ) : (
@@ -115,21 +116,19 @@ function LoginPage() {
                         </p>
                       </Link>
                     </div>
-                    <button className="bn632-hover bn20" style={authButton} data-testid="login">
+                    <Button className="bn632-hover bn20" style={authButton} data-testid="login">
                       Login
-                    </button>
+                    </Button>
                   </div>
                 </form>
-                <button
+                <Button
                   onClick={googleAuth}
                   className="bn632-hover bn20"
                   style={authButton}
                 >
-                  <div className="mx-auto flex w-full justify-around">
-                    <FaGoogle className="text-red-500 self-center text-xl ml-12" />
-                    <p className="mr-12">Sign In with Google</p>
-                  </div>
-                </button>
+                  <FaGoogle className="text-red-500 mr-5" />
+                  <p className="mr-12">Sign In with Google</p>
+                </Button>
               </div>
             </div>
           </div>

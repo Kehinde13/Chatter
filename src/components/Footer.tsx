@@ -3,7 +3,7 @@ import logo from "../assets/CHATTER.png";
 function Footer() {
   return (
     <div className="w-full mt-10 text-center sm:text-left">
-      <div className="bg-[#FFEDCC80] flex md:flex-row flex-col justify-around p-10 md:p-20">
+      <div className="bg-[#FFEDCC80] dark:bg-[#020817] bro flex md:flex-row flex-col justify-around p-10 md:p-20">
         <img
           src={logo}
           alt="logo"

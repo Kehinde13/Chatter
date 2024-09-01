@@ -14,7 +14,7 @@ function AuthLayout() {
   }
 
   return (
-    <div className="p-0 mt-[-8px]">
+    <div className="p-0 mt-[-8px]" data-testid="outlet">
       <Outlet />
     </div>
   );

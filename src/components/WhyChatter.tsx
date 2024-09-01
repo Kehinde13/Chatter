@@ -16,7 +16,7 @@ function WhyChatter() {
         </p>
       </div>
       <div className="flex flex-col md:flex-row md:mx-20 justify-around gap-5">
-        <div className="md:w-[50%] border border-gray-300 p-5 flex flex-col gap-5 hover:bg-purple-200 rounded-md">
+        <div className="md:w-[50%] border border-gray-300 p-5 flex flex-col gap-5 rounded-md">
           <img src={Group1} alt=""  className="self-center"/>
           <h1 className="font-bold text-xl">Analytics</h1>
           <p>
@@ -24,7 +24,7 @@ function WhyChatter() {
             analyze the performance of your articles over a period of time
           </p>
         </div>
-        <div className="md:w-[50%] border border-gray-300 p-5 flex flex-col gap-5 hover:bg-purple-200 rounded-md">
+        <div className="md:w-[50%] border border-gray-300 p-5 flex flex-col gap-5 rounded-md">
           <img src={Group2} alt="" className="self-center"/>
           <h1 className="font-bold text-xl">Social interactions</h1>
           <p>
@@ -32,7 +32,7 @@ function WhyChatter() {
             engage in discussions
           </p>
         </div>
-        <div className="md:w-[50%] border border-gray-300 p-5 flex flex-col gap-5 hover:bg-purple-200 rounded-md">
+        <div className="md:w-[50%] border border-gray-300 p-5 flex flex-col gap-5 rounded-md">
           <img src={Group3} alt="" className="self-center"/>
           <h1 className="font-bold text-xl">Content creation</h1>
           <p>

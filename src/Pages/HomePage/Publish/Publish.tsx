@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import ReactQuill from 'react-quill';
 import TagsInput from 'react-tagsinput';
-import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Blog } from '../../../Context/Context';
 import { addDoc, collection } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
@@ -10,18 +10,23 @@ import { db, storage } from '../../../Auth/firebase';
 import { FirebaseError } from 'firebase/app';
 import { Remarkable } from 'remarkable';
 import './Markdown.css';
+import { Button } from '../../../components/shadcn/button';
 
 const md = new Remarkable();
 
+interface Preview {
+  title: string;
+  photo: string | File | null;
+}
+
 function Publish() {
-  const [showSideBar = false]: [boolean] = useOutletContext() ?? [false];
   const { userId } = useParams();
   const { users, title, description, currentUser, markdownText, setDescription, setTitle } = Blog();
   const imgRef = useRef<HTMLInputElement>(null);
   const [tags, setTags] = useState<string[]>([]);
   const [newPostImage, setNewPostImage] = useState<string>('');
   const [desc, setDesc] = useState<string>('');
-  const [preview, setPreview] = useState({
+  const [preview, setPreview] = useState<Preview>({
     title: '',
     photo: '',
   });
@@ -58,7 +63,7 @@ function Publish() {
       const collections = collection(db, 'posts');
 
       let url = '';
-      if (newPostImage) {
+      if (newPostImage && preview.photo instanceof File) {
         const storageRef = ref(storage, `image/${preview.photo.name}`);
         await uploadBytes(storageRef, preview.photo);
         url = await getDownloadURL(storageRef);
@@ -72,7 +77,8 @@ function Publish() {
         postImg: url,
         created: Date.now(),
         pageViews: 0,
-        username: currentUser?.displayName
+        username: currentUser?.username,
+        userImg: currentUser?.userImg
       });
       toast.success('Post has been added');
       navigate("/homepage");
@@ -93,22 +99,23 @@ function Publish() {
 
   const getUserData = users.find((user: any) => user.id === userId);
   return (
-    <div className={`sm:mx-3 w-[80%] ${showSideBar ? 'hidden' : ''}`}>
+    <div className="sm:mx-3 w-[90%] col-span-6 mx-auto">
       <div className="mt-10 flex flex-col md:flex-row gap-10">
         <div className="flex-[1]">
           <h1 className="text-2xl bold capitalize">Story Preview</h1>
           <div
             style={{ backgroundImage: `url(${newPostImage})` }}
             onClick={SubmitImage}
-            className="w-full h-[200px] object-cover bg-gray-100 my-3 grid 
-                place-items-center cursor-pointer bg-cover bg-no-repeat dark:text-black"
+            className="w-full h-[200px] object-cover bg-gray-100 dark:bg-slate-800 my-3 grid 
+                place-items-center cursor-pointer bg-cover bg-no-repeat"
           >
             {!newPostImage && 'Add Image'}
           </div>
           <input
             onChange={(e) => {
-              setNewPostImage(URL.createObjectURL(e.target.files[0]));
-              setPreview({ ...preview, photo: e.target.files[0] });
+              const Img = e.target.files![0]
+              setNewPostImage(URL.createObjectURL(Img));
+              setPreview({ ...preview, photo: Img });
             }}
             ref={imgRef}
             type="file"
@@ -117,7 +124,7 @@ function Publish() {
           <input
             type="text"
             placeholder="Title"
-            className="outline-none w-full border-b border-gray-300 py-2 text-4xl dark:text-black p-2"
+            className="outline-none w-full border-b py-2 text-4xl dark:bg-slate-800 p-2"
             value={preview.title}
             onChange={(e) => setPreview({ ...preview, title: e.target.value })}
           />
@@ -142,14 +149,14 @@ function Publish() {
             <span className="font-bold capitalize">{getUserData?.username}</span>
           </h3>
           <p>Add up to 5 Tags that relate to your story</p>
-          <TagsInput value={tags} onChange={setTags} />
-          <button
+          <TagsInput value={tags} onChange={setTags}  className='dark:bg-slate-800 p-2 rounded-md'/>
+          <Button
             onClick={publishPost}
             className="bn632-hover bn20"
             disabled={loading}
           >
             {loading ? 'Publishing...' : 'Publish'}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

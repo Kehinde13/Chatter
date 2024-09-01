@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../../Auth/firebase';
 import { toast } from 'react-toastify';
@@ -6,6 +6,7 @@ import moment from 'moment';
 import DropDown from '../../../../components/Dropdown';
 import { Blog } from '../../../../Context/Context';
 import { FirebaseError } from 'firebase/app';
+import { Button } from "../../../../components/shadcn/button";
 
 export interface Comment {
   userId: string;
@@ -99,9 +100,13 @@ function Comments({ item: comment, postId }: Props) {
                     <button onClick={() => setDrop(!drop)} className="text-2xl hover:opacity-70">
                       ...
                     </button>
-                    <DropDown showDrop={drop} setShowDrop={setDrop} size="w-[10rem]">
-                      <Button click={editCommentText} title="Edit this response" />
-                      <Button click={removeComment} title="Delete" />
+                    <DropDown showDrop={drop} setShowDrop={setDrop} size="w-[150px]">
+                      <button onClick={editCommentText} title="Edit this response" className='p-1'>
+                        Edit Comment
+                      </button>
+                      <button onClick={removeComment} title="Delete" className='text-red-500 hover:bg-red-300'>
+                        Delete Comment
+                      </button>
                     </DropDown>
                   </>
                 )}
@@ -116,21 +121,21 @@ function Comments({ item: comment, postId }: Props) {
           </p>
         </>
       ) : (
-        <div className="bg-white shadows p-4">
+        <div className="bg-white dark:bg-slate-600 rounded-md shadows p-4">
           <textarea
             value={editComment}
             onChange={(e) => setEditComment(e.target.value)}
             placeholder="Write your update text..."
-            className="w-full resize-none outline-none text-sm"></textarea>
+            className="w-full resize-none outline-none text-sm dark:bg-slate-800 rounded-md p-2"></textarea>
           <div className="flex items-center justify-end gap-2">
             <button onClick={() => setIsEdit(false)} className="w-fit text-sm">
               Cancel
             </button>
-            <button
+            <Button
               onClick={handleEdit}
               className="bn632-hover bn20">
               {loading ? 'Updating...' : 'Update'}
-            </button>
+            </Button>
           </div>
         </div>
       )}
@@ -140,15 +145,15 @@ function Comments({ item: comment, postId }: Props) {
 
 export default Comments;
 
-interface ButtonProps {
+/*interface ButtonProps {
   click: () => void;
   title: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ click, title }) => {
+ const Button: React.FC<ButtonProps> = ({ click, title }) => {
   return (
     <button onClick={click} className="p-2 hover:bg-gray-200 text-black/80 w-full text-sm text-left">
       {title}
     </button>
   );
-};
+}; */

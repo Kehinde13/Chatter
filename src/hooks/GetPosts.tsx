@@ -16,6 +16,7 @@ export interface Post {
   pageViews: number,
   comments?: Comment[],
   username: string
+  userImg: string,
 }
 
 function GetPosts(collectionName: string) {

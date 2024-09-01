@@ -29,7 +29,7 @@ const DropDown: React.FC<DropDownProps> = ({
       {showDrop && (
         <div
           ref={dropRef}
-          className={`shadows flex flex-col absolute right-0 top-[2rem] bg-white ${size}`}
+          className={`shadows flex flex-col absolute right-0 top-[2rem] rounded-md bg-slate-100 dark:bg-slate-800 ${size}`}
         >
           {children}
         </div>

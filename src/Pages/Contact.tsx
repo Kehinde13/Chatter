@@ -1,11 +1,8 @@
-import { Link } from "react-router-dom";
+
 
 function Contact() {
   return (
     <>
-      <Link to={"/"} className="mt-10">
-        <button className="py-2 px-5 bg-purple-500 text-white rounded-md m-5">Back</button>
-      </Link>
       <div className="w-full flex flex-col justify-center items-center p-4">
         <form
           method="POST"
